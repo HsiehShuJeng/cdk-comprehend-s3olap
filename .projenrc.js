@@ -1,4 +1,5 @@
 const { AwsCdkConstructLibrary, NpmAccess, ProjectType } = require('projen');
+
 const project = new AwsCdkConstructLibrary({
   author: 'scott.hsieh',
   authorName: 'Shu-Jeng Hsieh',
@@ -9,21 +10,22 @@ const project = new AwsCdkConstructLibrary({
     'object-lambda',
     'pii',
     's3',
-    'scott.hsieh'
+    'scott.hsieh',
   ],
 
   catalog: {
-    announce: true
+    announce: true,
   },
 
-  cdkVersion: '1.110.0',
+  cdkVersion: '1.110.1',
   defaultReleaseBranch: 'main',
   name: 'cdk-comprehend-s3olap',
   repositoryUrl: 'git@scott:HsiehShuJeng/cdk-comprehend-s3olap.git',
   projectType: ProjectType.LIB,
 
   cdkDependencies: [
-    '@aws-cdk/aws-s3',
+    '@aws-cdk/core',
+    '@aws-cdk/aws-s3'
   ],
   cdkAssert: true,
   npmAccess: NpmAccess.PUBLIC,
