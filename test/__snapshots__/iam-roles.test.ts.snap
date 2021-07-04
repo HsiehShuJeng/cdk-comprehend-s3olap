@@ -1,0 +1,132 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`IAM roles test 1`] = `
+Object {
+  "Resources": Object {
+    "GeneralRoleIamRoleD3D7532B": Object {
+      "Properties": Object {
+        "AssumeRolePolicyDocument": Object {
+          "Statement": Array [
+            Object {
+              "Action": "sts:AssumeRole",
+              "Effect": "Allow",
+              "Principal": Object {
+                "AWS": Object {
+                  "Fn::Join": Array [
+                    "",
+                    Array [
+                      "arn:",
+                      Object {
+                        "Ref": "AWS::Partition",
+                      },
+                      ":iam::",
+                      Object {
+                        "Ref": "AWS::AccountId",
+                      },
+                      ":root",
+                    ],
+                  ],
+                },
+              },
+            },
+          ],
+          "Version": "2012-10-17",
+        },
+        "Policies": Array [
+          Object {
+            "PolicyDocument": Object {
+              "Statement": Array [
+                Object {
+                  "Action": "s3:ListBucket",
+                  "Effect": "Allow",
+                  "Resource": "*",
+                  "Sid": "AllowListingObjects",
+                },
+                Object {
+                  "Action": Array [
+                    "s3:GetAccessPointForObjectLambda",
+                    "s3:GetAccessPointConfigurationForObjectLambda",
+                    "s3:ListAccessPointsForObjectLambda",
+                    "s3:ListAllMyBuckets",
+                    "s3:ListAccessPoints",
+                    "s3:GetAccessPoint",
+                    "s3:GetAccountPublicAccessBlock",
+                    "s3:GetBucketPublicAccessBlock",
+                    "s3:GetBucketPolicyStatus",
+                    "s3:GetBucketAcl",
+                    "s3:GetAccessPointPolicyStatus",
+                  ],
+                  "Effect": "Allow",
+                  "Resource": "*",
+                  "Sid": "AllowListingBucketsAndAccessPoints",
+                },
+                Object {
+                  "Action": Array [
+                    "s3-object-lambda:Get*",
+                    "s3-object-lambda:List*",
+                  ],
+                  "Effect": "Allow",
+                  "Resource": Object {
+                    "Fn::Join": Array [
+                      "",
+                      Array [
+                        "arn:",
+                        Object {
+                          "Ref": "AWS::Partition",
+                        },
+                        ":s3-object-lambda:",
+                        Object {
+                          "Ref": "AWS::Region",
+                        },
+                        ":",
+                        Object {
+                          "Ref": "AWS::AccountId",
+                        },
+                        ":accesspoint/accessctl-s3olap-survey-results-unknown-pii",
+                      ],
+                    ],
+                  },
+                  "Sid": "AllowObjectLambdaAccess",
+                },
+                Object {
+                  "Action": Array [
+                    "s3:Get*",
+                    "s3:List*",
+                  ],
+                  "Condition": Object {
+                    "ForAnyValue:StringEquals": Object {
+                      "aws:CalledVia": Array [
+                        "s3-object-lambda.amazonaws.com",
+                      ],
+                    },
+                  },
+                  "Effect": "Allow",
+                  "Resource": "*",
+                  "Sid": "AllowStandardAccessPointAccess",
+                },
+                Object {
+                  "Action": "lambda:InvokeFunction",
+                  "Condition": Object {
+                    "ForAnyValue:StringEquals": Object {
+                      "aws:CalledVia": Array [
+                        "s3-object-lambda.amazonaws.com",
+                      ],
+                    },
+                  },
+                  "Effect": "Allow",
+                  "Resource": "*",
+                  "Sid": "AllowLambdaInvocation",
+                },
+              ],
+              "Version": "2012-10-17",
+            },
+            "PolicyName": "general-role-s3olap-policy",
+          },
+        ],
+        "RoleName": "GeneralRole",
+      },
+      "Type": "AWS::IAM::Role",
+    },
+  },
+}
+`;

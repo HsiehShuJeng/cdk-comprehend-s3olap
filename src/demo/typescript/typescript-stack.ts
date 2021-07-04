@@ -1,15 +1,12 @@
 #!/usr/bin/env node
 import * as cdk from '@aws-cdk/core';
-import { ServerlessApp } from '../../cdk-comprehend-s3olap';
+import { AccessConrtolLambda } from '../../comprehend-lambdas';
 
 class TypescriptStack extends cdk.Stack {
   constructor(scope: cdk.Construct, id: string, props?: cdk.StackProps) {
     super(scope, id, props);
 
-    new ServerlessApp(this, 'LambdaFunction', {
-      applicationId: 'arn:aws:serverlessrepo:us-east-1:839782855223:applications/ComprehendPiiRedactionS3ObjectLambda',
-      semanticVersion: '1.0.2',
-    });
+    new AccessConrtolLambda(this, 'AccessControlLambda', {});
   }
 }
 

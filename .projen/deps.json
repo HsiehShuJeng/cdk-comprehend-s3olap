@@ -2,7 +2,7 @@
   "dependencies": [
     {
       "name": "@aws-cdk/assert",
-      "version": "^1.110.1",
+      "version": "^1.111.0",
       "type": "build"
     },
     {
@@ -90,13 +90,28 @@
       "type": "build"
     },
     {
+      "name": "@aws-cdk/aws-iam",
+      "version": "^1.111.0",
+      "type": "peer"
+    },
+    {
       "name": "@aws-cdk/aws-s3",
-      "version": "^1.110.1",
+      "version": "^1.111.0",
+      "type": "peer"
+    },
+    {
+      "name": "@aws-cdk/aws-s3objectlambda",
+      "version": "^1.111.0",
+      "type": "peer"
+    },
+    {
+      "name": "@aws-cdk/aws-sam",
+      "version": "^1.111.0",
       "type": "peer"
     },
     {
       "name": "@aws-cdk/core",
-      "version": "^1.110.1",
+      "version": "^1.111.0",
       "type": "peer"
     },
     {
@@ -105,13 +120,28 @@
       "type": "peer"
     },
     {
+      "name": "@aws-cdk/aws-iam",
+      "version": "^1.111.0",
+      "type": "runtime"
+    },
+    {
       "name": "@aws-cdk/aws-s3",
-      "version": "^1.110.1",
+      "version": "^1.111.0",
+      "type": "runtime"
+    },
+    {
+      "name": "@aws-cdk/aws-s3objectlambda",
+      "version": "^1.111.0",
+      "type": "runtime"
+    },
+    {
+      "name": "@aws-cdk/aws-sam",
+      "version": "^1.111.0",
       "type": "runtime"
     },
     {
       "name": "@aws-cdk/core",
-      "version": "^1.110.1",
+      "version": "^1.111.0",
       "type": "runtime"
     }
   ],

@@ -17,7 +17,7 @@ const project = new AwsCdkConstructLibrary({
     announce: true,
   },
 
-  cdkVersion: '1.110.1',
+  cdkVersion: '1.111.0',
   defaultReleaseBranch: 'main',
   name: 'cdk-comprehend-s3olap',
   repositoryUrl: 'git@scott:HsiehShuJeng/cdk-comprehend-s3olap.git',
@@ -25,7 +25,10 @@ const project = new AwsCdkConstructLibrary({
 
   cdkDependencies: [
     '@aws-cdk/core',
-    '@aws-cdk/aws-s3'
+    '@aws-cdk/aws-iam',
+    '@aws-cdk/aws-sam',
+    '@aws-cdk/aws-s3',
+    '@aws-cdk/aws-s3objectlambda',
   ],
   cdkAssert: true,
   npmAccess: NpmAccess.PUBLIC,
@@ -62,4 +65,37 @@ const project = new AwsCdkConstructLibrary({
     packageId: 'Comprehend.S3olap',
   },
 });
+project.eslint.addOverride({
+  files: ['*.ts'],
+  rules: { '@typescript-eslint/no-require-imports': 0 },
+});
+const mavenExclusions = ['public.pem', 'private.pem'];
+const pythonDemoExclustions = [
+  '*.swp',
+  'package-lock.json',
+  '__pycache__',
+  '.pytest_cache',
+  '.env',
+  '.venv',
+  '*.egg-info',
+];
+const javaDemoExclustions = [
+  '.classpath.txt',
+  'target/',
+  '.classpath',
+  '.project',
+  '.idea',
+  '.settings',
+  '.vscode/',
+  '*.iml',
+];
+const commonExclusions = ['cdk.context.json', 'yarn-error.log', 'cdk.out', '.cdk.staging', '.DS_Store'];
+project.npmignore.exclude(...commonExclusions);
+project.gitignore.exclude(...commonExclusions);
+project.npmignore.exclude(...mavenExclusions);
+project.gitignore.exclude(...mavenExclusions);
+project.npmignore.exclude(...pythonDemoExclustions);
+project.gitignore.exclude(...pythonDemoExclustions);
+project.npmignore.exclude(...javaDemoExclustions);
+project.gitignore.exclude(...javaDemoExclustions);
 project.synth();
