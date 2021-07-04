@@ -89,19 +89,6 @@ export class AccessConrtolLambda extends cdk.Construct {
    * @attribute
    */
   public readonly stackName: string;
-  // readonly semanticVersion: string;
-  // readonly confidenceThreshold: string;
-  // readonly containsPiiEntitiesThreadCount: string;
-  // readonly defaultLanguageCode: string;
-  // readonly documentMaxSize: string;
-  // readonly documentMaxSizeContainsPiiEntities: string;
-  // readonly isPartialObjectSupported: string;
-  // readonly logLevel: string;
-  // readonly maxCharsOverlap: string;
-  // readonly piiEntityTypes: string;
-  // readonly publishCloudWatchMetrics: string;
-  // readonly subsegmentOverlappingTokens: string;
-  // readonly unsupportedFileHandling: string;
   /**
    * The entity of the serverless application.
    */
