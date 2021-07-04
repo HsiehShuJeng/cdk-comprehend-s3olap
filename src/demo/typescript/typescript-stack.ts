@@ -1,12 +1,12 @@
 #!/usr/bin/env node
 import * as cdk from '@aws-cdk/core';
-import { AccessConrtolLambda } from '../../comprehend-lambdas';
+import { ComprehendS3olab } from '../../cdk-comprehend-s3olap';
 
 class TypescriptStack extends cdk.Stack {
   constructor(scope: cdk.Construct, id: string, props?: cdk.StackProps) {
     super(scope, id, props);
 
-    new AccessConrtolLambda(this, 'AccessControlLambda', {});
+    new ComprehendS3olab(this, 'ComprehendS3olab', {});
   }
 }
 
