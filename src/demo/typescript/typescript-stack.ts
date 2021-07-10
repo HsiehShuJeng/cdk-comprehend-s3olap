@@ -7,8 +7,8 @@ class TypescriptStack extends cdk.Stack {
     super(scope, id, props);
     const s3olab = new ComprehendS3olab(this, 'ComprehendS3olab', {});
 
-    new cdk.CfnOutput(this, 'OLambdaArn', { value: s3olab.piiAccessConrtolLambdaArn });
-    // new cdk.CfnOutput(this, 'OS3ObjectLambdaArn', { value: s3olab.s3objectLambdaAccessControlArn });
+    new cdk.CfnOutput(this, 'OPiiAccessControlLambdaArn', { value: s3olab.piiAccessConrtolLambdaArn });
+    new cdk.CfnOutput(this, 'OS3ObjectLambdaArn', { value: s3olab.s3objectLambdaAccessControlArn });
   }
 }
 

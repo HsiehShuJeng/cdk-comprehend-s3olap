@@ -41,6 +41,18 @@
     "@aws-cdk/core" "1.112.0"
     constructs "^3.3.69"
 
+"@aws-cdk/aws-certificatemanager@1.112.0":
+  version "1.112.0"
+  resolved "https://registry.yarnpkg.com/@aws-cdk/aws-certificatemanager/-/aws-certificatemanager-1.112.0.tgz#b9cbb9ee40c450ce96865af30a9b0e4ae8a038b4"
+  integrity sha512-A7wsmAt3B2I8XRVNIDnV6+fK8FMublF54C80K+kbVCNvvVffp827/KFiyb89PmHGP3EJFpAZldn1ivKdzzYcDg==
+  dependencies:
+    "@aws-cdk/aws-cloudwatch" "1.112.0"
+    "@aws-cdk/aws-iam" "1.112.0"
+    "@aws-cdk/aws-lambda" "1.112.0"
+    "@aws-cdk/aws-route53" "1.112.0"
+    "@aws-cdk/core" "1.112.0"
+    constructs "^3.3.69"
+
 "@aws-cdk/aws-cloudformation@1.112.0":
   version "1.112.0"
   resolved "https://registry.yarnpkg.com/@aws-cdk/aws-cloudformation/-/aws-cloudformation-1.112.0.tgz#da9683e97e7e3e6b4f614819aa0ea3c2a3bf6b91"
@@ -52,6 +64,22 @@
     "@aws-cdk/aws-sns" "1.112.0"
     "@aws-cdk/core" "1.112.0"
     "@aws-cdk/cx-api" "1.112.0"
+    constructs "^3.3.69"
+
+"@aws-cdk/aws-cloudfront@1.112.0":
+  version "1.112.0"
+  resolved "https://registry.yarnpkg.com/@aws-cdk/aws-cloudfront/-/aws-cloudfront-1.112.0.tgz#f6264604b3982e6261f3cee36fb41a1ea4e40b31"
+  integrity sha512-OqpV9PrkoLsuryo4l+lp7ivh5VV5tJjV+wbC7QYH8fkVqUUdM2LIrQUVCTJe0nO40yhzDVK7YbaR4FyE4MzNVA==
+  dependencies:
+    "@aws-cdk/aws-certificatemanager" "1.112.0"
+    "@aws-cdk/aws-cloudwatch" "1.112.0"
+    "@aws-cdk/aws-ec2" "1.112.0"
+    "@aws-cdk/aws-iam" "1.112.0"
+    "@aws-cdk/aws-kms" "1.112.0"
+    "@aws-cdk/aws-lambda" "1.112.0"
+    "@aws-cdk/aws-s3" "1.112.0"
+    "@aws-cdk/aws-ssm" "1.112.0"
+    "@aws-cdk/core" "1.112.0"
     constructs "^3.3.69"
 
 "@aws-cdk/aws-cloudwatch@1.112.0":
@@ -207,6 +235,19 @@
     "@aws-cdk/core" "1.112.0"
     constructs "^3.3.69"
 
+"@aws-cdk/aws-route53@1.112.0":
+  version "1.112.0"
+  resolved "https://registry.yarnpkg.com/@aws-cdk/aws-route53/-/aws-route53-1.112.0.tgz#ca93df4408b68bdc487d1b55ed11334085d46379"
+  integrity sha512-+UwcqkKiTqdihMLi+vzQYNnYl5oHt9rm/9JfzbZu60APK03w8enPtcwwSTicFsJAgcnUEIXKIHUp6dMR30Xbbg==
+  dependencies:
+    "@aws-cdk/aws-ec2" "1.112.0"
+    "@aws-cdk/aws-iam" "1.112.0"
+    "@aws-cdk/aws-logs" "1.112.0"
+    "@aws-cdk/cloud-assembly-schema" "1.112.0"
+    "@aws-cdk/core" "1.112.0"
+    "@aws-cdk/custom-resources" "1.112.0"
+    constructs "^3.3.69"
+
 "@aws-cdk/aws-s3-assets@1.112.0":
   version "1.112.0"
   resolved "https://registry.yarnpkg.com/@aws-cdk/aws-s3-assets/-/aws-s3-assets-1.112.0.tgz#da389b64fad841759f3934245f1d8c1d4a21da04"
@@ -218,6 +259,21 @@
     "@aws-cdk/aws-s3" "1.112.0"
     "@aws-cdk/core" "1.112.0"
     "@aws-cdk/cx-api" "1.112.0"
+    constructs "^3.3.69"
+
+"@aws-cdk/aws-s3-deployment@^1.112.0":
+  version "1.112.0"
+  resolved "https://registry.yarnpkg.com/@aws-cdk/aws-s3-deployment/-/aws-s3-deployment-1.112.0.tgz#348a92b4502a31fe7575e98e4f02d90c9c693024"
+  integrity sha512-FxS8uNPRmK3dFHxBboDz8IQYMt5jWMa+ZhqzXFnU6ndIlzi3UeLgYOvDJzD8Hd4fo2Da+eYaZNoPiA//hGSO2A==
+  dependencies:
+    "@aws-cdk/aws-cloudfront" "1.112.0"
+    "@aws-cdk/aws-ec2" "1.112.0"
+    "@aws-cdk/aws-iam" "1.112.0"
+    "@aws-cdk/aws-lambda" "1.112.0"
+    "@aws-cdk/aws-s3" "1.112.0"
+    "@aws-cdk/aws-s3-assets" "1.112.0"
+    "@aws-cdk/core" "1.112.0"
+    "@aws-cdk/lambda-layer-awscli" "1.112.0"
     constructs "^3.3.69"
 
 "@aws-cdk/aws-s3@1.112.0", "@aws-cdk/aws-s3@^1.112.0":
@@ -333,7 +389,7 @@
     ignore "^5.1.8"
     minimatch "^3.0.4"
 
-"@aws-cdk/custom-resources@^1.112.0":
+"@aws-cdk/custom-resources@1.112.0", "@aws-cdk/custom-resources@^1.112.0":
   version "1.112.0"
   resolved "https://registry.yarnpkg.com/@aws-cdk/custom-resources/-/custom-resources-1.112.0.tgz#e519c48023a09e0a849f568a7e38102771fbb7a0"
   integrity sha512-c2j+UwRa9MCuQ+/oyA4xwfrGkkbVVFOi2LMqfZgxbSOW6KKz1e9WukGvRfel9EBfxeZxDkBbrCRKc8537lA2mg==
@@ -354,6 +410,15 @@
   dependencies:
     "@aws-cdk/cloud-assembly-schema" "1.112.0"
     semver "^7.3.5"
+
+"@aws-cdk/lambda-layer-awscli@1.112.0":
+  version "1.112.0"
+  resolved "https://registry.yarnpkg.com/@aws-cdk/lambda-layer-awscli/-/lambda-layer-awscli-1.112.0.tgz#1c7d0b04c26fefc7d066761f08bd88c2e1716569"
+  integrity sha512-QtB0NucAH+A7hVIg77daadx0Z6gg8trqRSvBWBE/79+OMg+X3Uy/l4Z58JJ5iKZ1wU9b03MnHLvC4efpjc58Yw==
+  dependencies:
+    "@aws-cdk/aws-lambda" "1.112.0"
+    "@aws-cdk/core" "1.112.0"
+    constructs "^3.3.69"
 
 "@aws-cdk/region-info@1.112.0":
   version "1.112.0"

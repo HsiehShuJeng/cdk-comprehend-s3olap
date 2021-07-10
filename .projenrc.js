@@ -34,6 +34,7 @@ const project = new AwsCdkConstructLibrary({
     '@aws-cdk/aws-logs',
     '@aws-cdk/aws-sam',
     '@aws-cdk/aws-s3',
+    '@aws-cdk/aws-s3-deployment',
     '@aws-cdk/aws-s3objectlambda',
   ],
   cdkAssert: true,

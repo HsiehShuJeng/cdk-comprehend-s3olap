@@ -5,6 +5,7 @@ import { Runtime } from '@aws-cdk/aws-lambda';
 import * as lambda from '@aws-cdk/aws-lambda-nodejs';
 import * as logs from '@aws-cdk/aws-logs';
 import * as s3 from '@aws-cdk/aws-s3';
+import * as s3delpoy from '@aws-cdk/aws-s3-deployment';
 import * as s3objectlambda from '@aws-cdk/aws-s3objectlambda';
 import * as cdk from '@aws-cdk/core';
 import * as cr from '@aws-cdk/custom-resources';
@@ -25,6 +26,16 @@ export interface ComprehendS3olabProps extends AccessConrtolLambdaProps, General
    * @default 'accessctl-s3-ap-survey-results-unknown-pii'
    */
   readonly accessControlAccessPointName?: string;
+  /**
+   * The parameters needed for the `ComprehendPiiAccessControlS3ObjectLambda` function.
+   * 
+   */
+  readonly accessControlLambdaConfig?: AccessConrtolLambdaProps;
+  /**
+   * The manageable properties for the IAM role used to access the `survey-results.txt` data.
+   * 
+   */
+  readonly generalRoleConfig?: GeneralRoleProps;
 }
 
 /**
@@ -34,17 +45,17 @@ export class ComprehendS3olab extends cdk.Construct {
   /**
    * The ARN of the S3 Object Lambda for access control.
    */
-  readonly s3objectLambdaAccessControlArn: string;
+  public readonly s3objectLambdaAccessControlArn: string;
   /**
    * The ARN of the Lambda function combined with Amazon Comprehend
    */
-  readonly piiAccessConrtolLambdaArn: string;
+  public readonly piiAccessConrtolLambdaArn: string;
   constructor(scope: cdk.Construct, id: string, props: ComprehendS3olabProps) {
     super(scope, id);
     // IAM role
-    const policyName = props.policyName ?? 'general-role-s3olap-policy';
-    const objectLambdaAccessPointName = props.objectLambdaAccessPointName ?? 'accessctl-s3olap-survey-results-unknown-pii';
-    const iamRoleName = props.iamRoleName ?? 'GeneralRole';
+    const policyName = props.generalRoleConfig?.policyName ?? 'general-role-s3olap-policy';
+    const objectLambdaAccessPointName = props.generalRoleConfig?.objectLambdaAccessPointName ?? 'accessctl-s3olap-survey-results-unknown-pii';
+    const iamRoleName = props.generalRoleConfig?.policyName ?? 'GeneralRole';
     // s3 bucekt and its access point
     const s3BucketPrefix = props.s3BucketPrefix ?? this.generateS3Prefix(6);
     const accessControlAccessPointName = props.accessControlAccessPointName ?? 'accessctl-s3-ap-survey-results-unknown-pii';
@@ -109,78 +120,31 @@ export class ComprehendS3olab extends cdk.Construct {
         resources: [`${surveyBucket.bucketArn}/*`],
       },
     ));
+
+    const surveyFilePath = path.join(__dirname, 'files/access_control');
+    if (fs.existsSync(surveyFilePath)) {
+      new s3delpoy.BucketDeployment(this, 'DeploySurveyResultFiles', {
+        sources: [s3delpoy.Source.asset(surveyFilePath)],
+        destinationBucket: surveyBucket,
+      });
+    }
+
     surveyBucket.node.addDependency(accessControlLambda);
     surveyBucket.node.addDependency(generalRole);
 
-    // Get the Lambda ARN of the function
-    // const onEvent = new lambda.NodejsFunction(this, 'LambdaArnExpert', {
-    //   description: 'A Lambda function that gets the ARN of `Comprehend-S3olap-AccessC-PiiAccessControlFunction`',
-    //   entry: fs.existsSync(path.join(__dirname, 'resources/lambda-arn-helper.ts')) ? path.join(__dirname, 'resources/lambda-arn-helper.ts') : path.join(__dirname, 'resources/lambda-arn-helper.js'),
-    //   handler: 'lambdaHandler',
-    //   runtime: Runtime.NODEJS_12_X,
-    //   bundling: {
-    //     minify: true,
-    //     sourceMap: true,
-    //     externalModules: ['aws-sdk'],
-    //   },
-    // });
-    // const customResourceRole = new iam.Role(this, 'CustomResourceRole', {
-    //   assumedBy: new iam.ServicePrincipal('lambda.amazonaws.com'),
-    //   description: 'An execution role to find out the ARN of the access control Lambda.',
-    //   managedPolicies: [
-    //     iam.ManagedPolicy.fromAwsManagedPolicyName(
-    //       'service-role/AWSLambdaBasicExecutionRole',
-    //     ),
-    //     iam.ManagedPolicy.fromAwsManagedPolicyName('AWSXRayDaemonWriteAccess'),
-    //   ],
-    //   inlinePolicies: {
-    //     ComprehendS3ObjectLambdaCustomResourcePolicy: new iam.PolicyDocument({
-    //       assignSids: true,
-    //       statements: [
-    //         new iam.PolicyStatement({
-    //           sid: 'ListLambdaPermissions',
-    //           effect: iam.Effect.ALLOW,
-    //           actions: ['lambda:ListFunctions'],
-    //           resources: ['*'],
-    //         }),
-    //         new iam.PolicyStatement({
-    //           sid: 'GetLambdaFunctionsPermissions',
-    //           effect: iam.Effect.ALLOW,
-    //           actions: ['lambda:GetFunction'],
-    //           resources: [`arn:${cdk.Aws.PARTITION}:lambda:${cdk.Aws.REGION}:${cdk.Aws.ACCOUNT_ID}:function:*`],
-    //         }),
-    //       ],
-    //     }),
-    //   },
-    // });
-    // const provider = new cr.Provider(this, 'Provider', {
-    //   onEventHandler: onEvent,
-    //   logRetention: logs.RetentionDays.ONE_MONTH,
-    //   role: customResourceRole,
-    // });
-    // const lambdaArnSearchUnit = new cdk.CustomResource(this, 'lambdaArnSearchUnit', {
-    //   serviceToken: provider.serviceToken,
-    //   properties: {
-    //     'LambdaFixedName': 'Comprehend-S3olap-AccessC-PiiAccessControlFunction'
-    //   }
-    // });
-    // lambdaArnSearchUnit.node.addDependency(accessControlLambda);
     const lambdaArnCaptor = new LambdaArnCaptorCustomResource(this, 'LambdaArnCaptor', {
-      partialLambdaName: 'Prod-DataBrew-Recipe-Deployer',
+      partialLambdaName: 'PiiAccessControlFunction',
     });
-    this.piiAccessConrtolLambdaArn = lambdaArnCaptor.lambdaArn;
     lambdaArnCaptor.node.addDependency(accessControlLambda);
-
-
+    this.piiAccessConrtolLambdaArn = lambdaArnCaptor.lambdaArn;
     const surveyAccessPoint = new s3.CfnAccessPoint(this, 'AccessControlAccessPoint', {
       bucket: surveyBucket.bucketName,
-      name: `${accessControlAccessPointName}-${this.generateS3Prefix(6)}`,
-    });
-
-    const accessControlObjectLambda = new s3objectlambda.CfnAccessPoint(this, 'LambdaAccessPoint', {
       name: accessControlAccessPointName,
+    });
+    const accessControlObjectLambda = new s3objectlambda.CfnAccessPoint(this, 'LambdaAccessPoint', {
+      name: objectLambdaAccessPointName,
       objectLambdaConfiguration: {
-        supportingAccessPoint: surveyAccessPoint.name!,
+        supportingAccessPoint: `arn:${cdk.Aws.PARTITION}:s3:${cdk.Aws.REGION}:${cdk.Aws.ACCOUNT_ID}:accesspoint/${surveyAccessPoint.name!}`,
         transformationConfigurations: [
           {
             actions: ['GetObject'],
