@@ -129,9 +129,5 @@ export class AccessConrtolLambda extends cdk.Construct {
       },
     });
     this.stackName = cdk.Token.asString(this.samApplication.ref);
-    for (var child of this.samApplication.node.children) {
-      console.log(child.node.id);
-      console.log(child.node.path);
-    }
   }
 }

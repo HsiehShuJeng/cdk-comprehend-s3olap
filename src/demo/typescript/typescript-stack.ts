@@ -5,8 +5,10 @@ import { ComprehendS3olab } from '../../cdk-comprehend-s3olap';
 class TypescriptStack extends cdk.Stack {
   constructor(scope: cdk.Construct, id: string, props?: cdk.StackProps) {
     super(scope, id, props);
+    const s3olab = new ComprehendS3olab(this, 'ComprehendS3olab', {});
 
-    new ComprehendS3olab(this, 'ComprehendS3olab', {});
+    new cdk.CfnOutput(this, 'OLambdaArn', { value: s3olab.piiAccessConrtolLambdaArn });
+    // new cdk.CfnOutput(this, 'OS3ObjectLambdaArn', { value: s3olab.s3objectLambdaAccessControlArn });
   }
 }
 

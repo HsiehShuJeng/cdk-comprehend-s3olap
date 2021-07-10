@@ -17,15 +17,21 @@ const project = new AwsCdkConstructLibrary({
     announce: true,
   },
 
-  cdkVersion: '1.111.0',
+  cdkVersion: '1.112.0',
   defaultReleaseBranch: 'main',
   name: 'cdk-comprehend-s3olap',
   repositoryUrl: 'git@scott:HsiehShuJeng/cdk-comprehend-s3olap.git',
   projectType: ProjectType.LIB,
 
+  devDeps: ['esbuild'],
+  bundledDeps: ['aws-sdk', 'cfn-response'],
   cdkDependencies: [
     '@aws-cdk/core',
+    '@aws-cdk/custom-resources',
     '@aws-cdk/aws-iam',
+    '@aws-cdk/aws-lambda',
+    '@aws-cdk/aws-lambda-nodejs',
+    '@aws-cdk/aws-logs',
     '@aws-cdk/aws-sam',
     '@aws-cdk/aws-s3',
     '@aws-cdk/aws-s3objectlambda',
@@ -34,6 +40,7 @@ const project = new AwsCdkConstructLibrary({
   npmAccess: NpmAccess.PUBLIC,
 
   eslint: true,
+  tsconfig: { compilerOptions: { lib: ['es2018', 'dom'] } }, //check https://bityl.co/7fHf
   projenUpgradeSecret: 'PROJEN_UPGRADE_SECRET',
   autoApproveOptions: {
     secret: 'GITHUB_TOKEN',
