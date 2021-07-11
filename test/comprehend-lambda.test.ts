@@ -8,7 +8,6 @@ test('Comprehend Lambda test', () => {
   const stack = new cdk.Stack(app, 'ker-ker');
   new AccessConrtolLambda(stack, 'AccessControlLambda', {});
 
-
   expect(SynthUtils.toCloudFormation(stack)).toMatchSnapshot();
   expect(SynthUtils.toCloudFormation(stack)).toCountResources('AWS::Serverless::Application', 1);
   expect(SynthUtils.toCloudFormation(stack)).toHaveResource('AWS::Serverless::Application', {
