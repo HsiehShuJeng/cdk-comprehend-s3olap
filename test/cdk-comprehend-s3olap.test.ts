@@ -531,133 +531,133 @@ test('IAM role test', () => {
     },
   });
   expect(SynthUtils.toCloudFormation(stack)).toHaveResource('AWS::S3::BucketPolicy', {
-    Bucket: {
-      Ref: 'ComprehendS3olabTranscriptBucket53AA37B3',
+    "Bucket": {
+      "Ref": "ComprehendS3olabTranscriptBucket53AA37B3"
     },
-    PolicyDocument: {
-      Statement: [
+    "PolicyDocument": {
+      "Statement": [
         {
-          Action: [
-            's3:GetBucket*',
-            's3:List*',
-            's3:DeleteObject*',
+          "Action": [
+            "s3:GetBucket*",
+            "s3:List*",
+            "s3:DeleteObject*"
           ],
-          Effect: 'Allow',
-          Principal: {
-            AWS: {
-              'Fn::GetAtt': [
-                'CustomS3AutoDeleteObjectsCustomResourceProviderRole3B1BD092',
-                'Arn',
-              ],
-            },
+          "Effect": "Allow",
+          "Principal": {
+            "AWS": {
+              "Fn::GetAtt": [
+                "CustomS3AutoDeleteObjectsCustomResourceProviderRole3B1BD092",
+                "Arn"
+              ]
+            }
           },
-          Resource: [
+          "Resource": [
             {
-              'Fn::GetAtt': [
-                'ComprehendS3olabTranscriptBucket53AA37B3',
-                'Arn',
-              ],
+              "Fn::GetAtt": [
+                "ComprehendS3olabTranscriptBucket53AA37B3",
+                "Arn"
+              ]
             },
             {
-              'Fn::Join': [
-                '',
+              "Fn::Join": [
+                "",
                 [
                   {
-                    'Fn::GetAtt': [
-                      'ComprehendS3olabTranscriptBucket53AA37B3',
-                      'Arn',
-                    ],
+                    "Fn::GetAtt": [
+                      "ComprehendS3olabTranscriptBucket53AA37B3",
+                      "Arn"
+                    ]
                   },
-                  '/*',
-                ],
-              ],
-            },
-          ],
+                  "/*"
+                ]
+              ]
+            }
+          ]
         },
         {
-          Action: 's3:GetObject',
-          Condition: {
-            StringEquals: {
-              's3:DataAccessPointAccount': {
-                Ref: 'AWS::AccountId',
-              },
-            },
+          "Action": "s3:GetObject",
+          "Condition": {
+            "StringEquals": {
+              "s3:DataAccessPointAccount": {
+                "Ref": "AWS::AccountId"
+              }
+            }
           },
-          Effect: 'Allow',
-          Principal: {
-            AWS: {
-              'Fn::Join': [
-                '',
+          "Effect": "Allow",
+          "Principal": {
+            "AWS": {
+              "Fn::Join": [
+                "",
                 [
-                  'arn:',
+                  "arn:",
                   {
-                    Ref: 'AWS::Partition',
+                    "Ref": "AWS::Partition"
                   },
-                  ':iam::',
+                  ":iam::",
                   {
-                    Ref: 'AWS::AccountId',
+                    "Ref": "AWS::AccountId"
                   },
-                  ':root',
-                ],
-              ],
-            },
+                  ":root"
+                ]
+              ]
+            }
           },
-          Resource: {
-            'Fn::Join': [
-              '',
+          "Resource": {
+            "Fn::Join": [
+              "",
               [
                 {
-                  'Fn::GetAtt': [
-                    'ComprehendS3olabSurveyResultBucketAED4B852',
-                    'Arn',
-                  ],
+                  "Fn::GetAtt": [
+                    "ComprehendS3olabTranscriptBucket53AA37B3",
+                    "Arn"
+                  ]
                 },
-                '/*',
-              ],
-            ],
+                "/*"
+              ]
+            ]
           },
-          Sid: 'AWSBucketGetPolicy',
+          "Sid": "AWSBucketGetPolicy"
         },
         {
-          Action: 's3:PutObject',
-          Effect: 'Allow',
-          Principal: {
-            AWS: {
-              'Fn::Join': [
-                '',
+          "Action": "s3:PutObject",
+          "Effect": "Allow",
+          "Principal": {
+            "AWS": {
+              "Fn::Join": [
+                "",
                 [
-                  'arn:',
+                  "arn:",
                   {
-                    Ref: 'AWS::Partition',
+                    "Ref": "AWS::Partition"
                   },
-                  ':iam::',
+                  ":iam::",
                   {
-                    Ref: 'AWS::AccountId',
+                    "Ref": "AWS::AccountId"
                   },
-                  ':root',
-                ],
-              ],
-            },
+                  ":root"
+                ]
+              ]
+            }
           },
-          Resource: {
-            'Fn::Join': [
-              '',
+          "Resource": {
+            "Fn::Join": [
+              "",
               [
                 {
-                  'Fn::GetAtt': [
-                    'ComprehendS3olabTranscriptBucket53AA37B3',
-                    'Arn',
-                  ],
+                  "Fn::GetAtt": [
+                    "ComprehendS3olabTranscriptBucket53AA37B3",
+                    "Arn"
+                  ]
                 },
-                '/*',
-              ],
-            ],
+                "/*"
+              ]
+            ]
           },
-          Sid: 'AWSBucketPutPolicy',
-        },
+          "Sid": "AWSBucketPutPolicy"
+        }
       ],
-      Version: '2012-10-17',
-    },
+      "Version": "2012-10-17"
+    }
   });
 
   expect(SynthUtils.toCloudFormation(stack)).toCountResources('AWS::S3::AccessPoint', 4);

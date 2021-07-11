@@ -5,6 +5,9 @@
 Name|Description
 ----|-----------
 [AccessConrtolLambda](#cdk-comprehend-s3olap-accessconrtollambda)|*No description*
+[AdminRole](#cdk-comprehend-s3olap-adminrole)|*No description*
+[BillingRole](#cdk-comprehend-s3olap-billingrole)|*No description*
+[CustSupportRole](#cdk-comprehend-s3olap-custsupportrole)|*No description*
 [GeneralRole](#cdk-comprehend-s3olap-generalrole)|The role that you are going to assume (switch role).
 [RedactionLambda](#cdk-comprehend-s3olap-redactionlambda)|*No description*
 
@@ -14,6 +17,9 @@ Name|Description
 Name|Description
 ----|-----------
 [AccessConrtolLambdaProps](#cdk-comprehend-s3olap-accessconrtollambdaprops)|*No description*
+[AdminRoleProps](#cdk-comprehend-s3olap-adminroleprops)|*No description*
+[BillingRoleProps](#cdk-comprehend-s3olap-billingroleprops)|*No description*
+[CustSupportRoleProps](#cdk-comprehend-s3olap-custsupportroleprops)|*No description*
 [GeneralRoleProps](#cdk-comprehend-s3olap-generalroleprops)|*No description*
 [RedactionLambdaProps](#cdk-comprehend-s3olap-redactionlambdaprops)|*No description*
 
@@ -60,6 +66,114 @@ new AccessConrtolLambda(scope: Construct, id: string, props: AccessConrtolLambda
 Name | Type | Description 
 -----|------|-------------
 **stackName** | <code>string</code> | The name of the underlying resoure in the serverless application.
+
+
+
+## class AdminRole  <a id="cdk-comprehend-s3olap-adminrole"></a>
+
+
+
+__Implements__: [IConstruct](#constructs-iconstruct), [IConstruct](#aws-cdk-core-iconstruct), [IConstruct](#constructs-iconstruct), [IDependable](#aws-cdk-core-idependable)
+__Extends__: [Construct](#aws-cdk-core-construct)
+
+### Initializer
+
+
+
+
+```ts
+new AdminRole(scope: Construct, id: string, props?: AdminRoleProps)
+```
+
+* **scope** (<code>[Construct](#aws-cdk-core-construct)</code>)  *No description*
+* **id** (<code>string</code>)  *No description*
+* **props** (<code>[AdminRoleProps](#cdk-comprehend-s3olap-adminroleprops)</code>)  *No description*
+  * **iamRoleName** (<code>string</code>)  The name of the IAM role. __*Default*__: 'RedactionAdminRole'
+  * **objectLambdaAccessPointName** (<code>string</code>)  The name of the object Lambda access point, which will be the same as the S3 acceess point for the S3 bucket in the demostration. __*Default*__: 'admin-s3olap-call-transcripts-known-pii'
+  * **policyName** (<code>string</code>)  The name of the IAM policy for the IAM role. __*Default*__: 'admin-role-s3olap-policy'
+
+
+
+### Properties
+
+
+Name | Type | Description 
+-----|------|-------------
+**roleArn** | <code>string</code> | The ARN of the IAM role.
+**roleId** | <code>string</code> | The unique string identifying the role.
+**roleName** | <code>string</code> | The name of the IAM role.
+
+
+
+## class BillingRole  <a id="cdk-comprehend-s3olap-billingrole"></a>
+
+
+
+__Implements__: [IConstruct](#constructs-iconstruct), [IConstruct](#aws-cdk-core-iconstruct), [IConstruct](#constructs-iconstruct), [IDependable](#aws-cdk-core-idependable)
+__Extends__: [Construct](#aws-cdk-core-construct)
+
+### Initializer
+
+
+
+
+```ts
+new BillingRole(scope: Construct, id: string, props?: AdminRoleProps)
+```
+
+* **scope** (<code>[Construct](#aws-cdk-core-construct)</code>)  *No description*
+* **id** (<code>string</code>)  *No description*
+* **props** (<code>[AdminRoleProps](#cdk-comprehend-s3olap-adminroleprops)</code>)  *No description*
+  * **iamRoleName** (<code>string</code>)  The name of the IAM role. __*Default*__: 'RedactionAdminRole'
+  * **objectLambdaAccessPointName** (<code>string</code>)  The name of the object Lambda access point, which will be the same as the S3 acceess point for the S3 bucket in the demostration. __*Default*__: 'admin-s3olap-call-transcripts-known-pii'
+  * **policyName** (<code>string</code>)  The name of the IAM policy for the IAM role. __*Default*__: 'admin-role-s3olap-policy'
+
+
+
+### Properties
+
+
+Name | Type | Description 
+-----|------|-------------
+**roleArn** | <code>string</code> | The ARN of the IAM role.
+**roleId** | <code>string</code> | The unique string identifying the role.
+**roleName** | <code>string</code> | The name of the IAM role.
+
+
+
+## class CustSupportRole  <a id="cdk-comprehend-s3olap-custsupportrole"></a>
+
+
+
+__Implements__: [IConstruct](#constructs-iconstruct), [IConstruct](#aws-cdk-core-iconstruct), [IConstruct](#constructs-iconstruct), [IDependable](#aws-cdk-core-idependable)
+__Extends__: [Construct](#aws-cdk-core-construct)
+
+### Initializer
+
+
+
+
+```ts
+new CustSupportRole(scope: Construct, id: string, props?: AdminRoleProps)
+```
+
+* **scope** (<code>[Construct](#aws-cdk-core-construct)</code>)  *No description*
+* **id** (<code>string</code>)  *No description*
+* **props** (<code>[AdminRoleProps](#cdk-comprehend-s3olap-adminroleprops)</code>)  *No description*
+  * **iamRoleName** (<code>string</code>)  The name of the IAM role. __*Default*__: 'RedactionAdminRole'
+  * **objectLambdaAccessPointName** (<code>string</code>)  The name of the object Lambda access point, which will be the same as the S3 acceess point for the S3 bucket in the demostration. __*Default*__: 'admin-s3olap-call-transcripts-known-pii'
+  * **policyName** (<code>string</code>)  The name of the IAM policy for the IAM role. __*Default*__: 'admin-role-s3olap-policy'
+
+
+
+### Properties
+
+
+Name | Type | Description 
+-----|------|-------------
+**roleArn** | <code>string</code> | The ARN of the IAM role.
+**roleId** | <code>string</code> | The unique string identifying the role.
+**roleName** | <code>string</code> | The name of the IAM role.
 
 
 
@@ -171,6 +285,51 @@ Name | Type | Description
 **semanticVersion**? | <code>string</code> | The version of the serverless application.<br/>__*Default*__: '1.0.2'
 **subsegmentOverlappingTokens**? | <code>string</code> | Number of tokens/words to overlap among segments of a document in case chunking is needed because of maximum document size limit.<br/>__*Default*__: '20'
 **unsupportedFileHandling**? | <code>string</code> | Handling logic for Unsupported files.<br/>__*Default*__: 'FAIL'
+
+
+
+## struct AdminRoleProps  <a id="cdk-comprehend-s3olap-adminroleprops"></a>
+
+
+
+
+
+
+Name | Type | Description 
+-----|------|-------------
+**iamRoleName**? | <code>string</code> | The name of the IAM role.<br/>__*Default*__: 'RedactionAdminRole'
+**objectLambdaAccessPointName**? | <code>string</code> | The name of the object Lambda access point, which will be the same as the S3 acceess point for the S3 bucket in the demostration.<br/>__*Default*__: 'admin-s3olap-call-transcripts-known-pii'
+**policyName**? | <code>string</code> | The name of the IAM policy for the IAM role.<br/>__*Default*__: 'admin-role-s3olap-policy'
+
+
+
+## struct BillingRoleProps  <a id="cdk-comprehend-s3olap-billingroleprops"></a>
+
+
+
+
+
+
+Name | Type | Description 
+-----|------|-------------
+**iamRoleName**? | <code>string</code> | The name of the IAM role.<br/>__*Default*__: 'RedactionBillingRole'
+**objectLambdaAccessPointName**? | <code>string</code> | The name of the object Lambda access point, which will be the same as the S3 acceess point for the S3 bucket in the demostration.<br/>__*Default*__: 'billing-s3olap-call-transcripts-known-pii'
+**policyName**? | <code>string</code> | The name of the IAM policy for the IAM role.<br/>__*Default*__: 'billing-role-s3olap-policy'
+
+
+
+## struct CustSupportRoleProps  <a id="cdk-comprehend-s3olap-custsupportroleprops"></a>
+
+
+
+
+
+
+Name | Type | Description 
+-----|------|-------------
+**iamRoleName**? | <code>string</code> | The name of the IAM role.<br/>__*Default*__: 'RedactionCustSupportRole'
+**objectLambdaAccessPointName**? | <code>string</code> | The name of the object Lambda access point, which will be the same as the S3 acceess point for the S3 bucket in the demostration.<br/>__*Default*__: 'custsupport-s3olap-call-transcripts-known-pii'
+**policyName**? | <code>string</code> | The name of the IAM policy for the IAM role.<br/>__*Default*__: 'customersupport-role-s3olap-policy'
 
 
 

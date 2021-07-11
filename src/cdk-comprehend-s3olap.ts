@@ -248,7 +248,7 @@ export class ComprehendS3olab extends cdk.Construct {
         principals: [new iam.AccountRootPrincipal()],
         actions: ['s3:GetObject'],
         effect: iam.Effect.ALLOW,
-        resources: [`${surveyBucket.bucketArn}/*`],
+        resources: [`${transcriptBucket.bucketArn}/*`],
         conditions: { ['StringEquals']: { 's3:DataAccessPointAccount': cdk.Aws.ACCOUNT_ID } },
       },
     ));
