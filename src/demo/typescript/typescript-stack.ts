@@ -21,7 +21,13 @@ class TypescriptStack extends cdk.Stack {
     });
 
     new cdk.CfnOutput(this, 'OPiiAccessControlLambdaArn', { value: s3olab.piiAccessConrtolLambdaArn });
-    new cdk.CfnOutput(this, 'OS3ObjectLambdaArn', { value: s3olab.s3objectLambdaAccessControlArn });
+    new cdk.CfnOutput(this, 'OAdminLambdaArn', { value: s3olab.adminLambdaArn });
+    new cdk.CfnOutput(this, 'OBillingLambdaArn', { value: s3olab.billingLambdaArn });
+    new cdk.CfnOutput(this, 'OCustomerSupportLambdaArn', { value: s3olab.customerSupportLambdaArn });
+    new cdk.CfnOutput(this, 'OS3ObjectLambdaGeneralArn', { value: s3olab.s3objectLambdaAccessControlArn });
+    new cdk.CfnOutput(this, 'OS3ObjectLambdaAdminArn', { value: s3olab.s3objectLambdaAdminArn });
+    new cdk.CfnOutput(this, 'OS3ObjectLambdaBillingArn', { value: s3olab.s3objectLambdaBillingArn });
+    new cdk.CfnOutput(this, 'OS3ObjectLambdaCustomerSupportArn', { value: s3olab.customerSupportLambdaArn });
   }
 }
 
