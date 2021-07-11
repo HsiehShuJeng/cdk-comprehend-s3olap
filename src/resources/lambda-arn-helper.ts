@@ -25,7 +25,8 @@ const checkLambdaArn = async (event: any): Promise<any> => {
   const props = event.ResourceProperties;
   console.log(props);
   const lambdaFixedName = props.LambdaFixedName;
-  const physicalId = 'ComprehendLambda' + lambdaFixedName;
+  const genre = props.Genre;
+  const physicalId = 'ComprehendLambda' + lambdaFixedName + (Math.floor(Math.random() * 1000000) + 1).toString();
   try {
     var lambda = new AWS.Lambda({ apiVersion: '2015-03-31' });
     let params = {};
@@ -33,9 +34,16 @@ const checkLambdaArn = async (event: any): Promise<any> => {
     const result = await lambda.listFunctions(params).promise();
     for (var lambdaFunction of result.Functions) {
       var funcName = lambdaFunction.FunctionName;
-      if (funcName.includes(lambdaFixedName)) {
+      if (funcName.includes(lambdaFixedName) && lambdaFixedName === 'PiiAccessControlFunction') {
         functionArn = lambdaFunction.FunctionArn;
         break;
+      }
+      if (funcName.includes(lambdaFixedName) && lambdaFixedName === 'PiiRedactionFunction') {
+        const tagResult = lambda.listTags({ Resource: lambdaFunction.FunctionArn });
+        if (tagResult.Tags.Genre === genre) {
+          functionArn = lambdaFunction.FunctionArn;
+          break;
+        }
       }
     };
     return {

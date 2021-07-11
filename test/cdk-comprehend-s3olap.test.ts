@@ -174,344 +174,344 @@ test('comprehend-s3olap test', () => {
     },
     Runtime: 'nodejs12.x',
   });
-  // log retention
-  expect(SynthUtils.toCloudFormation(stack)).toHaveResource('AWS::Lambda::Function', {
-    Handler: 'index.handler',
-    Runtime: 'nodejs14.x',
-    Code: {
-      S3Bucket: {
-        Ref: 'AssetParameters67b7823b74bc135986aa72f889d6a8da058d0c4a20cbc2dfc6f78995fdd2fc24S3Bucket4D46ABB5',
-      },
-      S3Key: {
-        'Fn::Join': [
-          '',
-          [
-            {
-              'Fn::Select': [
-                0,
-                {
-                  'Fn::Split': [
-                    '||',
-                    {
-                      Ref: 'AssetParameters67b7823b74bc135986aa72f889d6a8da058d0c4a20cbc2dfc6f78995fdd2fc24S3VersionKeyB0F28861',
-                    },
-                  ],
-                },
-              ],
-            },
-            {
-              'Fn::Select': [
-                1,
-                {
-                  'Fn::Split': [
-                    '||',
-                    {
-                      Ref: 'AssetParameters67b7823b74bc135986aa72f889d6a8da058d0c4a20cbc2dfc6f78995fdd2fc24S3VersionKeyB0F28861',
-                    },
-                  ],
-                },
-              ],
-            },
-          ],
-        ],
-      },
-    },
-    Role: {
-      'Fn::GetAtt': [
-        'LogRetentionaae0aa3c5b4d4f87b02d85b201efdd8aServiceRole9741ECFB',
-        'Arn',
-      ],
-    },
-  });
-  // auto deletion
-  expect(SynthUtils.toCloudFormation(stack)).toHaveResource('AWS::Lambda::Function', {
-    Code: {
-      S3Bucket: {
-        Ref: 'AssetParameters4cd61014b71160e8c66fe167e43710d5ba068b80b134e9bd84508cf9238b2392S3BucketBF7A7F3F',
-      },
-      S3Key: {
-        'Fn::Join': [
-          '',
-          [
-            {
-              'Fn::Select': [
-                0,
-                {
-                  'Fn::Split': [
-                    '||',
-                    {
-                      Ref: 'AssetParameters4cd61014b71160e8c66fe167e43710d5ba068b80b134e9bd84508cf9238b2392S3VersionKeyFAF93626',
-                    },
-                  ],
-                },
-              ],
-            },
-            {
-              'Fn::Select': [
-                1,
-                {
-                  'Fn::Split': [
-                    '||',
-                    {
-                      Ref: 'AssetParameters4cd61014b71160e8c66fe167e43710d5ba068b80b134e9bd84508cf9238b2392S3VersionKeyFAF93626',
-                    },
-                  ],
-                },
-              ],
-            },
-          ],
-        ],
-      },
-    },
-    Timeout: 900,
-    MemorySize: 128,
-    Handler: '__entrypoint__.handler',
-    Role: {
-      'Fn::GetAtt': [
-        'CustomS3AutoDeleteObjectsCustomResourceProviderRole3B1BD092',
-        'Arn',
-      ],
-    },
-    Runtime: 'nodejs12.x',
-    Description: {
-      'Fn::Join': [
-        '',
-        [
-          'Lambda function for auto-deleting objects in ',
-          {
-            Ref: 'ComprehendS3olabSurveyResultBucketAED4B852',
-          },
-          ' S3 bucket.',
-        ],
-      ],
-    },
-  });
-  // lambda for custom resources
-  expect(SynthUtils.toCloudFormation(stack)).toHaveResource('AWS::Lambda::Function', {
-    Code: {
-      S3Bucket: {
-        Ref: 'AssetParametersc691172cdeefa2c91b5a2907f9d81118e47597634943344795f1a844192dd49cS3BucketEAC9DD43',
-      },
-      S3Key: {
-        'Fn::Join': [
-          '',
-          [
-            {
-              'Fn::Select': [
-                0,
-                {
-                  'Fn::Split': [
-                    '||',
-                    {
-                      Ref: 'AssetParametersc691172cdeefa2c91b5a2907f9d81118e47597634943344795f1a844192dd49cS3VersionKeyDD9AE9E7',
-                    },
-                  ],
-                },
-              ],
-            },
-            {
-              'Fn::Select': [
-                1,
-                {
-                  'Fn::Split': [
-                    '||',
-                    {
-                      Ref: 'AssetParametersc691172cdeefa2c91b5a2907f9d81118e47597634943344795f1a844192dd49cS3VersionKeyDD9AE9E7',
-                    },
-                  ],
-                },
-              ],
-            },
-          ],
-        ],
-      },
-    },
-    Role: {
-      'Fn::GetAtt': [
-        'ComprehendS3olabCustomSupportLambdaArnCaptorCustomResourceRoleC17C1626',
-        'Arn',
-      ],
-    },
-    Description: 'AWS CDK resource provider framework - onEvent (ker-ker/ComprehendS3olab/CustomSupportLambdaArnCaptor/Provider)',
-    Environment: {
-      Variables: {
-        USER_ON_EVENT_FUNCTION_ARN: {
-          'Fn::GetAtt': [
-            'ComprehendS3olabCustomSupportLambdaArnCaptorLambdaArnExpertCE7DE813',
-            'Arn',
-          ],
-        },
-      },
-    },
-    Handler: 'framework.onEvent',
-    Runtime: 'nodejs14.x',
-    Timeout: 900,
-  });
-  expect(SynthUtils.toCloudFormation(stack)).toHaveResource('AWS::Lambda::Function', {
-    Code: {
-      S3Bucket: {
-        Ref: 'AssetParameters9c4f86274e87ed34a50dba5d78bc94a321f082416dc3becda73906d6e392893bS3Bucket6BF99F8D',
-      },
-      S3Key: {
-        'Fn::Join': [
-          '',
-          [
-            {
-              'Fn::Select': [
-                0,
-                {
-                  'Fn::Split': [
-                    '||',
-                    {
-                      Ref: 'AssetParameters9c4f86274e87ed34a50dba5d78bc94a321f082416dc3becda73906d6e392893bS3VersionKey89DE1382',
-                    },
-                  ],
-                },
-              ],
-            },
-            {
-              'Fn::Select': [
-                1,
-                {
-                  'Fn::Split': [
-                    '||',
-                    {
-                      Ref: 'AssetParameters9c4f86274e87ed34a50dba5d78bc94a321f082416dc3becda73906d6e392893bS3VersionKey89DE1382',
-                    },
-                  ],
-                },
-              ],
-            },
-          ],
-        ],
-      },
-    },
-    Role: {
-      'Fn::GetAtt': [
-        'ComprehendS3olabCustomSupportLambdaArnCaptorCustomResourceRoleC17C1626',
-        'Arn',
-      ],
-    },
-    Description: 'A Lambda function that gets the ARN of `customersuppor-PiiRedactionFunction`',
-    Environment: {
-      Variables: {
-        AWS_NODEJS_CONNECTION_REUSE_ENABLED: '1',
-      },
-    },
-    Handler: 'index.lambdaHandler',
-    Runtime: 'nodejs14.x',
-    Timeout: 120,
-  });
-  expect(SynthUtils.toCloudFormation(stack)).toHaveResource('AWS::Lambda::Function', {
-    Code: {
-      S3Bucket: {
-        Ref: 'AssetParameters9c4f86274e87ed34a50dba5d78bc94a321f082416dc3becda73906d6e392893bS3Bucket6BF99F8D',
-      },
-      S3Key: {
-        'Fn::Join': [
-          '',
-          [
-            {
-              'Fn::Select': [
-                0,
-                {
-                  'Fn::Split': [
-                    '||',
-                    {
-                      Ref: 'AssetParameters9c4f86274e87ed34a50dba5d78bc94a321f082416dc3becda73906d6e392893bS3VersionKey89DE1382',
-                    },
-                  ],
-                },
-              ],
-            },
-            {
-              'Fn::Select': [
-                1,
-                {
-                  'Fn::Split': [
-                    '||',
-                    {
-                      Ref: 'AssetParameters9c4f86274e87ed34a50dba5d78bc94a321f082416dc3becda73906d6e392893bS3VersionKey89DE1382',
-                    },
-                  ],
-                },
-              ],
-            },
-          ],
-        ],
-      },
-    },
-    Role: {
-      'Fn::GetAtt': [
-        'ComprehendS3olabBillingLambdaArnCaptorCustomResourceRole442802DA',
-        'Arn',
-      ],
-    },
-    Description: 'A Lambda function that gets the ARN of `billing-Compre-PiiRedactionFunction`',
-    Environment: {
-      Variables: {
-        AWS_NODEJS_CONNECTION_REUSE_ENABLED: '1',
-      },
-    },
-    Handler: 'index.lambdaHandler',
-    Runtime: 'nodejs14.x',
-    Timeout: 120,
-  });
-  expect(SynthUtils.toCloudFormation(stack)).toHaveResource('AWS::Lambda::Function', {
-    Code: {
-      S3Bucket: {
-        Ref: 'AssetParameters9c4f86274e87ed34a50dba5d78bc94a321f082416dc3becda73906d6e392893bS3Bucket6BF99F8D',
-      },
-      S3Key: {
-        'Fn::Join': [
-          '',
-          [
-            {
-              'Fn::Select': [
-                0,
-                {
-                  'Fn::Split': [
-                    '||',
-                    {
-                      Ref: 'AssetParameters9c4f86274e87ed34a50dba5d78bc94a321f082416dc3becda73906d6e392893bS3VersionKey89DE1382',
-                    },
-                  ],
-                },
-              ],
-            },
-            {
-              'Fn::Select': [
-                1,
-                {
-                  'Fn::Split': [
-                    '||',
-                    {
-                      Ref: 'AssetParameters9c4f86274e87ed34a50dba5d78bc94a321f082416dc3becda73906d6e392893bS3VersionKey89DE1382',
-                    },
-                  ],
-                },
-              ],
-            },
-          ],
-        ],
-      },
-    },
-    Role: {
-      'Fn::GetAtt': [
-        'ComprehendS3olabAdminLambdaArnCaptorCustomResourceRole99C579CB',
-        'Arn',
-      ],
-    },
-    Description: 'A Lambda function that gets the ARN of `admin-Comprehe-PiiRedactionFunction`',
-    Environment: {
-      Variables: {
-        AWS_NODEJS_CONNECTION_REUSE_ENABLED: '1',
-      },
-    },
-    Handler: 'index.lambdaHandler',
-    Runtime: 'nodejs14.x',
-    Timeout: 120,
-  });
+  // // log retention
+  // expect(SynthUtils.toCloudFormation(stack)).toHaveResource('AWS::Lambda::Function', {
+  //   Handler: 'index.handler',
+  //   Runtime: 'nodejs14.x',
+  //   Code: {
+  //     S3Bucket: {
+  //       Ref: 'AssetParameters67b7823b74bc135986aa72f889d6a8da058d0c4a20cbc2dfc6f78995fdd2fc24S3Bucket4D46ABB5',
+  //     },
+  //     S3Key: {
+  //       'Fn::Join': [
+  //         '',
+  //         [
+  //           {
+  //             'Fn::Select': [
+  //               0,
+  //               {
+  //                 'Fn::Split': [
+  //                   '||',
+  //                   {
+  //                     Ref: 'AssetParameters67b7823b74bc135986aa72f889d6a8da058d0c4a20cbc2dfc6f78995fdd2fc24S3VersionKeyB0F28861',
+  //                   },
+  //                 ],
+  //               },
+  //             ],
+  //           },
+  //           {
+  //             'Fn::Select': [
+  //               1,
+  //               {
+  //                 'Fn::Split': [
+  //                   '||',
+  //                   {
+  //                     Ref: 'AssetParameters67b7823b74bc135986aa72f889d6a8da058d0c4a20cbc2dfc6f78995fdd2fc24S3VersionKeyB0F28861',
+  //                   },
+  //                 ],
+  //               },
+  //             ],
+  //           },
+  //         ],
+  //       ],
+  //     },
+  //   },
+  //   Role: {
+  //     'Fn::GetAtt': [
+  //       'LogRetentionaae0aa3c5b4d4f87b02d85b201efdd8aServiceRole9741ECFB',
+  //       'Arn',
+  //     ],
+  //   },
+  // });
+  // // auto deletion
+  // expect(SynthUtils.toCloudFormation(stack)).toHaveResource('AWS::Lambda::Function', {
+  //   Code: {
+  //     S3Bucket: {
+  //       Ref: 'AssetParameters4cd61014b71160e8c66fe167e43710d5ba068b80b134e9bd84508cf9238b2392S3BucketBF7A7F3F',
+  //     },
+  //     S3Key: {
+  //       'Fn::Join': [
+  //         '',
+  //         [
+  //           {
+  //             'Fn::Select': [
+  //               0,
+  //               {
+  //                 'Fn::Split': [
+  //                   '||',
+  //                   {
+  //                     Ref: 'AssetParameters4cd61014b71160e8c66fe167e43710d5ba068b80b134e9bd84508cf9238b2392S3VersionKeyFAF93626',
+  //                   },
+  //                 ],
+  //               },
+  //             ],
+  //           },
+  //           {
+  //             'Fn::Select': [
+  //               1,
+  //               {
+  //                 'Fn::Split': [
+  //                   '||',
+  //                   {
+  //                     Ref: 'AssetParameters4cd61014b71160e8c66fe167e43710d5ba068b80b134e9bd84508cf9238b2392S3VersionKeyFAF93626',
+  //                   },
+  //                 ],
+  //               },
+  //             ],
+  //           },
+  //         ],
+  //       ],
+  //     },
+  //   },
+  //   Timeout: 900,
+  //   MemorySize: 128,
+  //   Handler: '__entrypoint__.handler',
+  //   Role: {
+  //     'Fn::GetAtt': [
+  //       'CustomS3AutoDeleteObjectsCustomResourceProviderRole3B1BD092',
+  //       'Arn',
+  //     ],
+  //   },
+  //   Runtime: 'nodejs12.x',
+  //   Description: {
+  //     'Fn::Join': [
+  //       '',
+  //       [
+  //         'Lambda function for auto-deleting objects in ',
+  //         {
+  //           Ref: 'ComprehendS3olabSurveyResultBucketAED4B852',
+  //         },
+  //         ' S3 bucket.',
+  //       ],
+  //     ],
+  //   },
+  // });
+  // // lambda for custom resources
+  // expect(SynthUtils.toCloudFormation(stack)).toHaveResource('AWS::Lambda::Function', {
+  //   Code: {
+  //     S3Bucket: {
+  //       Ref: 'AssetParametersc691172cdeefa2c91b5a2907f9d81118e47597634943344795f1a844192dd49cS3BucketEAC9DD43',
+  //     },
+  //     S3Key: {
+  //       'Fn::Join': [
+  //         '',
+  //         [
+  //           {
+  //             'Fn::Select': [
+  //               0,
+  //               {
+  //                 'Fn::Split': [
+  //                   '||',
+  //                   {
+  //                     Ref: 'AssetParametersc691172cdeefa2c91b5a2907f9d81118e47597634943344795f1a844192dd49cS3VersionKeyDD9AE9E7',
+  //                   },
+  //                 ],
+  //               },
+  //             ],
+  //           },
+  //           {
+  //             'Fn::Select': [
+  //               1,
+  //               {
+  //                 'Fn::Split': [
+  //                   '||',
+  //                   {
+  //                     Ref: 'AssetParametersc691172cdeefa2c91b5a2907f9d81118e47597634943344795f1a844192dd49cS3VersionKeyDD9AE9E7',
+  //                   },
+  //                 ],
+  //               },
+  //             ],
+  //           },
+  //         ],
+  //       ],
+  //     },
+  //   },
+  //   Role: {
+  //     'Fn::GetAtt': [
+  //       'ComprehendS3olabCustomSupportLambdaArnCaptorCustomResourceRoleC17C1626',
+  //       'Arn',
+  //     ],
+  //   },
+  //   Description: 'AWS CDK resource provider framework - onEvent (ker-ker/ComprehendS3olab/CustomSupportLambdaArnCaptor/Provider)',
+  //   Environment: {
+  //     Variables: {
+  //       USER_ON_EVENT_FUNCTION_ARN: {
+  //         'Fn::GetAtt': [
+  //           'ComprehendS3olabCustomSupportLambdaArnCaptorLambdaArnExpertCE7DE813',
+  //           'Arn',
+  //         ],
+  //       },
+  //     },
+  //   },
+  //   Handler: 'framework.onEvent',
+  //   Runtime: 'nodejs14.x',
+  //   Timeout: 900,
+  // });
+  // expect(SynthUtils.toCloudFormation(stack)).toHaveResource('AWS::Lambda::Function', {
+  //   Code: {
+  //     S3Bucket: {
+  //       Ref: 'AssetParameters9c4f86274e87ed34a50dba5d78bc94a321f082416dc3becda73906d6e392893bS3Bucket6BF99F8D',
+  //     },
+  //     S3Key: {
+  //       'Fn::Join': [
+  //         '',
+  //         [
+  //           {
+  //             'Fn::Select': [
+  //               0,
+  //               {
+  //                 'Fn::Split': [
+  //                   '||',
+  //                   {
+  //                     Ref: 'AssetParameters9c4f86274e87ed34a50dba5d78bc94a321f082416dc3becda73906d6e392893bS3VersionKey89DE1382',
+  //                   },
+  //                 ],
+  //               },
+  //             ],
+  //           },
+  //           {
+  //             'Fn::Select': [
+  //               1,
+  //               {
+  //                 'Fn::Split': [
+  //                   '||',
+  //                   {
+  //                     Ref: 'AssetParameters9c4f86274e87ed34a50dba5d78bc94a321f082416dc3becda73906d6e392893bS3VersionKey89DE1382',
+  //                   },
+  //                 ],
+  //               },
+  //             ],
+  //           },
+  //         ],
+  //       ],
+  //     },
+  //   },
+  //   Role: {
+  //     'Fn::GetAtt': [
+  //       'ComprehendS3olabCustomSupportLambdaArnCaptorCustomResourceRoleC17C1626',
+  //       'Arn',
+  //     ],
+  //   },
+  //   Description: 'A Lambda function that gets the ARN of `customersuppor-PiiRedactionFunction`',
+  //   Environment: {
+  //     Variables: {
+  //       AWS_NODEJS_CONNECTION_REUSE_ENABLED: '1',
+  //     },
+  //   },
+  //   Handler: 'index.lambdaHandler',
+  //   Runtime: 'nodejs14.x',
+  //   Timeout: 120,
+  // });
+  // expect(SynthUtils.toCloudFormation(stack)).toHaveResource('AWS::Lambda::Function', {
+  //   Code: {
+  //     S3Bucket: {
+  //       Ref: 'AssetParameters9c4f86274e87ed34a50dba5d78bc94a321f082416dc3becda73906d6e392893bS3Bucket6BF99F8D',
+  //     },
+  //     S3Key: {
+  //       'Fn::Join': [
+  //         '',
+  //         [
+  //           {
+  //             'Fn::Select': [
+  //               0,
+  //               {
+  //                 'Fn::Split': [
+  //                   '||',
+  //                   {
+  //                     Ref: 'AssetParameters9c4f86274e87ed34a50dba5d78bc94a321f082416dc3becda73906d6e392893bS3VersionKey89DE1382',
+  //                   },
+  //                 ],
+  //               },
+  //             ],
+  //           },
+  //           {
+  //             'Fn::Select': [
+  //               1,
+  //               {
+  //                 'Fn::Split': [
+  //                   '||',
+  //                   {
+  //                     Ref: 'AssetParameters9c4f86274e87ed34a50dba5d78bc94a321f082416dc3becda73906d6e392893bS3VersionKey89DE1382',
+  //                   },
+  //                 ],
+  //               },
+  //             ],
+  //           },
+  //         ],
+  //       ],
+  //     },
+  //   },
+  //   Role: {
+  //     'Fn::GetAtt': [
+  //       'ComprehendS3olabBillingLambdaArnCaptorCustomResourceRole442802DA',
+  //       'Arn',
+  //     ],
+  //   },
+  //   Description: 'A Lambda function that gets the ARN of `billing-Compre-PiiRedactionFunction`',
+  //   Environment: {
+  //     Variables: {
+  //       AWS_NODEJS_CONNECTION_REUSE_ENABLED: '1',
+  //     },
+  //   },
+  //   Handler: 'index.lambdaHandler',
+  //   Runtime: 'nodejs14.x',
+  //   Timeout: 120,
+  // });
+  // expect(SynthUtils.toCloudFormation(stack)).toHaveResource('AWS::Lambda::Function', {
+  //   Code: {
+  //     S3Bucket: {
+  //       Ref: 'AssetParameters9c4f86274e87ed34a50dba5d78bc94a321f082416dc3becda73906d6e392893bS3Bucket6BF99F8D',
+  //     },
+  //     S3Key: {
+  //       'Fn::Join': [
+  //         '',
+  //         [
+  //           {
+  //             'Fn::Select': [
+  //               0,
+  //               {
+  //                 'Fn::Split': [
+  //                   '||',
+  //                   {
+  //                     Ref: 'AssetParameters9c4f86274e87ed34a50dba5d78bc94a321f082416dc3becda73906d6e392893bS3VersionKey89DE1382',
+  //                   },
+  //                 ],
+  //               },
+  //             ],
+  //           },
+  //           {
+  //             'Fn::Select': [
+  //               1,
+  //               {
+  //                 'Fn::Split': [
+  //                   '||',
+  //                   {
+  //                     Ref: 'AssetParameters9c4f86274e87ed34a50dba5d78bc94a321f082416dc3becda73906d6e392893bS3VersionKey89DE1382',
+  //                   },
+  //                 ],
+  //               },
+  //             ],
+  //           },
+  //         ],
+  //       ],
+  //     },
+  //   },
+  //   Role: {
+  //     'Fn::GetAtt': [
+  //       'ComprehendS3olabAdminLambdaArnCaptorCustomResourceRole99C579CB',
+  //       'Arn',
+  //     ],
+  //   },
+  //   Description: 'A Lambda function that gets the ARN of `admin-Comprehe-PiiRedactionFunction`',
+  //   Environment: {
+  //     Variables: {
+  //       AWS_NODEJS_CONNECTION_REUSE_ENABLED: '1',
+  //     },
+  //   },
+  //   Handler: 'index.lambdaHandler',
+  //   Runtime: 'nodejs14.x',
+  //   Timeout: 120,
+  // });
 
 
   expect(SynthUtils.toCloudFormation(stack)).toCountResources('AWS::S3::Bucket', 2);
@@ -860,7 +860,7 @@ test('comprehend-s3olap test', () => {
   expect(SynthUtils.toCloudFormation(stack)).toHaveResource('AWS::CloudFormation::CustomResource', {
     ServiceToken: {
       'Fn::GetAtt': [
-        'ComprehendS3olabGeneralLambdaArnCaptorProviderframeworkonEvent30FAA79F',
+        'ComprehendS3olabGeneralCaptorProviderframeworkonEvent1AFD8B14',
         'Arn',
       ],
     },
@@ -869,29 +869,29 @@ test('comprehend-s3olap test', () => {
   expect(SynthUtils.toCloudFormation(stack)).toHaveResource('AWS::CloudFormation::CustomResource', {
     ServiceToken: {
       'Fn::GetAtt': [
-        'ComprehendS3olabAdminLambdaArnCaptorProviderframeworkonEvent0857ABB8',
+        'ComprehendS3olabAdminLambdaCaptorProviderframeworkonEvent95DA3E51',
         'Arn',
       ],
     },
-    LambdaFixedName: 'admin-Comprehe-PiiRedactionFunction',
+    LambdaFixedName: 'PiiRedactionFunction',
   });
   expect(SynthUtils.toCloudFormation(stack)).toHaveResource('AWS::CloudFormation::CustomResource', {
     ServiceToken: {
       'Fn::GetAtt': [
-        'ComprehendS3olabBillingLambdaArnCaptorProviderframeworkonEvent5D42761D',
+        'ComprehendS3olabBillingCaptorProviderframeworkonEvent825779C3',
         'Arn',
       ],
     },
-    LambdaFixedName: 'billing-Compre-PiiRedactionFunction',
+    LambdaFixedName: 'PiiRedactionFunction',
   });
   expect(SynthUtils.toCloudFormation(stack)).toHaveResource('AWS::CloudFormation::CustomResource', {
     ServiceToken: {
       'Fn::GetAtt': [
-        'ComprehendS3olabCustomSupportLambdaArnCaptorProviderframeworkonEventB3809E68',
+        'ComprehendS3olabCustomSupportCaptorProviderframeworkonEvent551BC29F',
         'Arn',
       ],
     },
-    LambdaFixedName: 'customersuppor-PiiRedactionFunction',
+    LambdaFixedName: 'PiiRedactionFunction',
   });
 
 });

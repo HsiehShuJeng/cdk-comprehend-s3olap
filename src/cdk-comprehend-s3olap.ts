@@ -40,7 +40,7 @@ export interface s3AccessPointNames {
   /**
    * The name of the S3 aceess point for the billing role in the redaction case.
    *
-   * @default 'billing-s3-access-point-call-transcripts-known-pii'
+   * @default 'bill-s3-access-point-call-transcripts-known-pii'
    */
   readonly billing: string;
   /**
@@ -152,7 +152,7 @@ export class ComprehendS3olab extends cdk.Construct {
     const s3AccessPointNames: s3AccessPointNames = {
       general: props?.s3AccessPointNames?.general ?? 'accessctl-s3-ap-survey-results-unknown-pii',
       admin: props?.s3AccessPointNames?.admin ?? 'admin-s3-access-point-call-transcripts-known-pii',
-      billing: props?.s3AccessPointNames?.billing ?? 'billing-s3-access-point-call-transcripts-known-pii',
+      billing: props?.s3AccessPointNames?.billing ?? 'bill-s3-access-point-call-transcripts-known-pii',
       customerSupport: props?.s3AccessPointNames?.customerSupport ?? 'cs-s3-access-point-call-transcripts-known-pii',
     };
     // object Lambda
@@ -188,6 +188,10 @@ export class ComprehendS3olab extends cdk.Construct {
     const adminRedactLambda = this.initializeRedactLambda(IamRoleName.ADMIN, props?.adminRedactionLambdaConfig);
     const billingRedactLambda = this.initializeRedactLambda(IamRoleName.BILLING, props?.billingRedactionLambdaConfig);
     const custSupportRedactLambda = this.initializeRedactLambda(IamRoleName.CUST_SUPPORT, props?.cusrtSupportRedactionLambdaConfig);
+    cdk.Tags.of(accessControlLambda).add('Genre', IamRoleName.GENERAL);
+    cdk.Tags.of(adminRedactLambda).add('Genre', IamRoleName.ADMIN);
+    cdk.Tags.of(billingRedactLambda).add('Genre', IamRoleName.BILLING);
+    cdk.Tags.of(custSupportRedactLambda).add('Genre', IamRoleName.CUST_SUPPORT);
 
 
     // IAM roles
@@ -271,21 +275,21 @@ export class ComprehendS3olab extends cdk.Construct {
     transcriptBucket.node.addDependency(custSupportRole);
 
     // custom resources
-    const generalLambdaArnCaptor = new LambdaArnCaptorCustomResource(this, 'GeneralLambdaArnCaptor', {
+    const generalLambdaArnCaptor = new LambdaArnCaptorCustomResource(this, 'GeneralCaptor', {
       roleName: IamRoleName.GENERAL,
       partialLambdaName: 'PiiAccessControlFunction',
     });
-    const adminLambdaArnCaptor = new LambdaArnCaptorCustomResource(this, 'AdminLambdaArnCaptor', {
+    const adminLambdaArnCaptor = new LambdaArnCaptorCustomResource(this, 'AdminLambdaCaptor', {
       roleName: IamRoleName.ADMIN,
-      partialLambdaName: 'admin-Comprehe-PiiRedactionFunction',
+      partialLambdaName: 'PiiRedactionFunction',
     });
-    const billingLambdaArnCaptor = new LambdaArnCaptorCustomResource(this, 'BillingLambdaArnCaptor', {
+    const billingLambdaArnCaptor = new LambdaArnCaptorCustomResource(this, 'BillingCaptor', {
       roleName: IamRoleName.BILLING,
-      partialLambdaName: 'billing-Compre-PiiRedactionFunction',
+      partialLambdaName: 'PiiRedactionFunction',
     });
-    const customSupportLambdaArnCaptor = new LambdaArnCaptorCustomResource(this, 'CustomSupportLambdaArnCaptor', {
+    const customSupportLambdaArnCaptor = new LambdaArnCaptorCustomResource(this, 'CustomSupportCaptor', {
       roleName: IamRoleName.CUST_SUPPORT,
-      partialLambdaName: 'customersuppor-PiiRedactionFunction',
+      partialLambdaName: 'PiiRedactionFunction',
     });
     generalLambdaArnCaptor.node.addDependency(accessControlLambda);
     adminLambdaArnCaptor.node.addDependency(adminRedactLambda);
@@ -299,19 +303,19 @@ export class ComprehendS3olab extends cdk.Construct {
     // S3 access points
     const generalAccessPoint = new s3.CfnAccessPoint(this, 'AccessControlS3AccessPoint', {
       bucket: surveyBucket.bucketName,
-      name: `${s3AccessPointNames.general}-${this.generateS3Prefix(6)}`,
+      name: `${s3AccessPointNames.general}-${this.generateS3Prefix(6)}`.substring(0, 50),
     });
     const adminAccessPoint = new s3.CfnAccessPoint(this, 'AdminS3AccessPoint', {
       bucket: transcriptBucket.bucketName,
-      name: `${s3AccessPointNames.admin}-${this.generateS3Prefix(6)}`,
+      name: `${s3AccessPointNames.admin}-${this.generateS3Prefix(6)}`.substring(0, 50),
     });
     const billingAccessPoint = new s3.CfnAccessPoint(this, 'BillingS3AccessPoint', {
       bucket: transcriptBucket.bucketName,
-      name: `${s3AccessPointNames.billing}-${this.generateS3Prefix(6)}`,
+      name: `${s3AccessPointNames.billing}-${this.generateS3Prefix(6)}`.substring(0, 50),
     });
     const customerSupportAccessPoint = new s3.CfnAccessPoint(this, 'CustomerSupportS3AccessPoint', {
       bucket: transcriptBucket.bucketName,
-      name: `${s3AccessPointNames.customerSupport}-${this.generateS3Prefix(6)}`,
+      name: `${s3AccessPointNames.customerSupport}-${this.generateS3Prefix(6)}`.substring(0, 50),
     });
 
     // S3ObjectLambda resources
@@ -564,7 +568,7 @@ export class LambdaArnCaptorCustomResource extends cdk.Construct {
   public readonly lambdaArn: string;
   constructor(scope: cdk.Construct, id: string, props: LambdaArnCaptorResourceProps) {
     super(scope, id);
-    const customResourceRole = new iam.Role(this, 'CustomResourceRole', {
+    const customResourceRole = new iam.Role(this, 'CRRole', {
       assumedBy: new iam.ServicePrincipal('lambda.amazonaws.com'),
       description: 'An execution role to find out the ARN of the access control Lambda.',
       managedPolicies: [
@@ -593,7 +597,7 @@ export class LambdaArnCaptorCustomResource extends cdk.Construct {
         }),
       },
     });
-    const onEvent = new lambda.NodejsFunction(this, 'LambdaArnExpert', {
+    const onEvent = new lambda.NodejsFunction(this, 'ArnExpert', {
       description: `A Lambda function that gets the ARN of \`${props.partialLambdaName}\``,
       entry: fs.existsSync(path.join(__dirname, 'resources/lambda-arn-helper.ts')) ? path.join(__dirname, 'resources/lambda-arn-helper.ts') : path.join(__dirname, 'resources/lambda-arn-helper.js'),
       handler: 'lambdaHandler',
@@ -615,6 +619,7 @@ export class LambdaArnCaptorCustomResource extends cdk.Construct {
       serviceToken: provider.serviceToken,
       properties: {
         LambdaFixedName: props.partialLambdaName,
+        Genre: props.roleName
       },
     });
     this.lambdaArn = cdk.Token.asString(lambdaArnSearchUnit.getAtt('LambdaArn'));
