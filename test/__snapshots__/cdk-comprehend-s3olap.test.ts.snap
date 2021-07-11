@@ -1,6 +1,6 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
-exports[`IAM role test 1`] = `
+exports[`comprehend-s3olap test 1`] = `
 Object {
   "Parameters": Object {
     "AssetParameters43079f879513e0d85eeb42ddfe71e5ead66edf1ee02c33bb165d7c2f926030c4ArtifactHashCB97A4BE": Object {
@@ -148,20 +148,17 @@ Object {
         "Bucket": Object {
           "Ref": "ComprehendS3olabSurveyResultBucketAED4B852",
         },
-        "Name": "accessctl-s3-ap-survey-results-unknown-pii-kjnzg2",
+        "Name": "accessctl-s3-ap-survey-results-unknown-pii-q0gghe",
       },
       "Type": "AWS::S3::AccessPoint",
     },
     "ComprehendS3olabAdminLambdaAccessPointB8F61F10": Object {
       "DependsOn": Array [
-        "ComprehendS3olabLambdaArnCaptorAdminSearchUnit0BD9E08F",
-        "ComprehendS3olabLambdaArnCaptorBillingSearchUnit870C78F3",
-        "ComprehendS3olabLambdaArnCaptorCustomResourceRoleFA19C041",
-        "ComprehendS3olabLambdaArnCaptorCustSupportingSearchUnitFC382EE3",
-        "ComprehendS3olabLambdaArnCaptorGeneralSearchUnit7F7544C5",
-        "ComprehendS3olabLambdaArnCaptorLambdaArnExpertB9231BFC",
-        "ComprehendS3olabLambdaArnCaptorProviderframeworkonEventLogRetentionCDC72DF2",
-        "ComprehendS3olabLambdaArnCaptorProviderframeworkonEvent2B52715F",
+        "ComprehendS3olabAdminLambdaArnCaptorAdminGeneralSearchUnit28AF8E74",
+        "ComprehendS3olabAdminLambdaArnCaptorCustomResourceRole99C579CB",
+        "ComprehendS3olabAdminLambdaArnCaptorLambdaArnExpert68296D18",
+        "ComprehendS3olabAdminLambdaArnCaptorProviderframeworkonEventLogRetention6F4BE2F9",
+        "ComprehendS3olabAdminLambdaArnCaptorProviderframeworkonEvent0857ABB8",
       ],
       "Properties": Object {
         "Name": "admin-s3olap-call-transcripts-known-pii",
@@ -182,7 +179,7 @@ Object {
                 Object {
                   "Ref": "AWS::AccountId",
                 },
-                ":accesspoint/admin-s3-access-point-call-transcripts-known-pii-8d71gz",
+                ":accesspoint/admin-s3-access-point-call-transcripts-known-pii-40d8o1",
               ],
             ],
           },
@@ -203,6 +200,269 @@ Object {
       },
       "Type": "AWS::S3ObjectLambda::AccessPoint",
     },
+    "ComprehendS3olabAdminLambdaArnCaptorAdminGeneralSearchUnit28AF8E74": Object {
+      "DeletionPolicy": "Delete",
+      "DependsOn": Array [
+        "ComprehendS3olabServerlessRedactLambdaAdminComprehendPiiAccessControlS3ObjectLambdaD15B85DC",
+      ],
+      "Properties": Object {
+        "LambdaFixedName": "admin-Comprehe-PiiRedactionFunction",
+        "ServiceToken": Object {
+          "Fn::GetAtt": Array [
+            "ComprehendS3olabAdminLambdaArnCaptorProviderframeworkonEvent0857ABB8",
+            "Arn",
+          ],
+        },
+      },
+      "Type": "AWS::CloudFormation::CustomResource",
+      "UpdateReplacePolicy": "Delete",
+    },
+    "ComprehendS3olabAdminLambdaArnCaptorCustomResourceRole99C579CB": Object {
+      "DependsOn": Array [
+        "ComprehendS3olabServerlessRedactLambdaAdminComprehendPiiAccessControlS3ObjectLambdaD15B85DC",
+      ],
+      "Properties": Object {
+        "AssumeRolePolicyDocument": Object {
+          "Statement": Array [
+            Object {
+              "Action": "sts:AssumeRole",
+              "Effect": "Allow",
+              "Principal": Object {
+                "Service": "lambda.amazonaws.com",
+              },
+            },
+          ],
+          "Version": "2012-10-17",
+        },
+        "Description": "An execution role to find out the ARN of the access control Lambda.",
+        "ManagedPolicyArns": Array [
+          Object {
+            "Fn::Join": Array [
+              "",
+              Array [
+                "arn:",
+                Object {
+                  "Ref": "AWS::Partition",
+                },
+                ":iam::aws:policy/service-role/AWSLambdaBasicExecutionRole",
+              ],
+            ],
+          },
+          Object {
+            "Fn::Join": Array [
+              "",
+              Array [
+                "arn:",
+                Object {
+                  "Ref": "AWS::Partition",
+                },
+                ":iam::aws:policy/AWSXRayDaemonWriteAccess",
+              ],
+            ],
+          },
+        ],
+        "Policies": Array [
+          Object {
+            "PolicyDocument": Object {
+              "Statement": Array [
+                Object {
+                  "Action": "lambda:ListFunctions",
+                  "Effect": "Allow",
+                  "Resource": "*",
+                  "Sid": "ListLambdaPermissions",
+                },
+                Object {
+                  "Action": Array [
+                    "lambda:GetFunction",
+                    "lambda:InvokeFunction",
+                  ],
+                  "Effect": "Allow",
+                  "Resource": Object {
+                    "Fn::Join": Array [
+                      "",
+                      Array [
+                        "arn:",
+                        Object {
+                          "Ref": "AWS::Partition",
+                        },
+                        ":lambda:",
+                        Object {
+                          "Ref": "AWS::Region",
+                        },
+                        ":",
+                        Object {
+                          "Ref": "AWS::AccountId",
+                        },
+                        ":function:*",
+                      ],
+                    ],
+                  },
+                  "Sid": "GetLambdaFunctionsPermissions",
+                },
+              ],
+              "Version": "2012-10-17",
+            },
+            "PolicyName": "ComprehendS3ObjectLambdaCustomResourcePolicy",
+          },
+        ],
+      },
+      "Type": "AWS::IAM::Role",
+    },
+    "ComprehendS3olabAdminLambdaArnCaptorLambdaArnExpert68296D18": Object {
+      "DependsOn": Array [
+        "ComprehendS3olabAdminLambdaArnCaptorCustomResourceRole99C579CB",
+        "ComprehendS3olabServerlessRedactLambdaAdminComprehendPiiAccessControlS3ObjectLambdaD15B85DC",
+      ],
+      "Properties": Object {
+        "Code": Object {
+          "S3Bucket": Object {
+            "Ref": "AssetParameters9c4f86274e87ed34a50dba5d78bc94a321f082416dc3becda73906d6e392893bS3Bucket6BF99F8D",
+          },
+          "S3Key": Object {
+            "Fn::Join": Array [
+              "",
+              Array [
+                Object {
+                  "Fn::Select": Array [
+                    0,
+                    Object {
+                      "Fn::Split": Array [
+                        "||",
+                        Object {
+                          "Ref": "AssetParameters9c4f86274e87ed34a50dba5d78bc94a321f082416dc3becda73906d6e392893bS3VersionKey89DE1382",
+                        },
+                      ],
+                    },
+                  ],
+                },
+                Object {
+                  "Fn::Select": Array [
+                    1,
+                    Object {
+                      "Fn::Split": Array [
+                        "||",
+                        Object {
+                          "Ref": "AssetParameters9c4f86274e87ed34a50dba5d78bc94a321f082416dc3becda73906d6e392893bS3VersionKey89DE1382",
+                        },
+                      ],
+                    },
+                  ],
+                },
+              ],
+            ],
+          },
+        },
+        "Description": "A Lambda function that gets the ARN of \`admin-Comprehe-PiiRedactionFunction\`",
+        "Environment": Object {
+          "Variables": Object {
+            "AWS_NODEJS_CONNECTION_REUSE_ENABLED": "1",
+          },
+        },
+        "Handler": "index.lambdaHandler",
+        "Role": Object {
+          "Fn::GetAtt": Array [
+            "ComprehendS3olabAdminLambdaArnCaptorCustomResourceRole99C579CB",
+            "Arn",
+          ],
+        },
+        "Runtime": "nodejs14.x",
+        "Timeout": 120,
+      },
+      "Type": "AWS::Lambda::Function",
+    },
+    "ComprehendS3olabAdminLambdaArnCaptorProviderframeworkonEvent0857ABB8": Object {
+      "DependsOn": Array [
+        "ComprehendS3olabAdminLambdaArnCaptorCustomResourceRole99C579CB",
+        "ComprehendS3olabServerlessRedactLambdaAdminComprehendPiiAccessControlS3ObjectLambdaD15B85DC",
+      ],
+      "Properties": Object {
+        "Code": Object {
+          "S3Bucket": Object {
+            "Ref": "AssetParametersc691172cdeefa2c91b5a2907f9d81118e47597634943344795f1a844192dd49cS3BucketEAC9DD43",
+          },
+          "S3Key": Object {
+            "Fn::Join": Array [
+              "",
+              Array [
+                Object {
+                  "Fn::Select": Array [
+                    0,
+                    Object {
+                      "Fn::Split": Array [
+                        "||",
+                        Object {
+                          "Ref": "AssetParametersc691172cdeefa2c91b5a2907f9d81118e47597634943344795f1a844192dd49cS3VersionKeyDD9AE9E7",
+                        },
+                      ],
+                    },
+                  ],
+                },
+                Object {
+                  "Fn::Select": Array [
+                    1,
+                    Object {
+                      "Fn::Split": Array [
+                        "||",
+                        Object {
+                          "Ref": "AssetParametersc691172cdeefa2c91b5a2907f9d81118e47597634943344795f1a844192dd49cS3VersionKeyDD9AE9E7",
+                        },
+                      ],
+                    },
+                  ],
+                },
+              ],
+            ],
+          },
+        },
+        "Description": "AWS CDK resource provider framework - onEvent (ker-ker/ComprehendS3olab/AdminLambdaArnCaptor/Provider)",
+        "Environment": Object {
+          "Variables": Object {
+            "USER_ON_EVENT_FUNCTION_ARN": Object {
+              "Fn::GetAtt": Array [
+                "ComprehendS3olabAdminLambdaArnCaptorLambdaArnExpert68296D18",
+                "Arn",
+              ],
+            },
+          },
+        },
+        "Handler": "framework.onEvent",
+        "Role": Object {
+          "Fn::GetAtt": Array [
+            "ComprehendS3olabAdminLambdaArnCaptorCustomResourceRole99C579CB",
+            "Arn",
+          ],
+        },
+        "Runtime": "nodejs14.x",
+        "Timeout": 900,
+      },
+      "Type": "AWS::Lambda::Function",
+    },
+    "ComprehendS3olabAdminLambdaArnCaptorProviderframeworkonEventLogRetention6F4BE2F9": Object {
+      "DependsOn": Array [
+        "ComprehendS3olabServerlessRedactLambdaAdminComprehendPiiAccessControlS3ObjectLambdaD15B85DC",
+      ],
+      "Properties": Object {
+        "LogGroupName": Object {
+          "Fn::Join": Array [
+            "",
+            Array [
+              "/aws/lambda/",
+              Object {
+                "Ref": "ComprehendS3olabAdminLambdaArnCaptorProviderframeworkonEvent0857ABB8",
+              },
+            ],
+          ],
+        },
+        "RetentionInDays": 30,
+        "ServiceToken": Object {
+          "Fn::GetAtt": Array [
+            "LogRetentionaae0aa3c5b4d4f87b02d85b201efdd8aFD4BFC8A",
+            "Arn",
+          ],
+        },
+      },
+      "Type": "Custom::LogRetention",
+    },
     "ComprehendS3olabAdminObjectLambdaConfig548D7518": Object {
       "DeletionPolicy": "Delete",
       "Properties": Object {
@@ -219,7 +479,7 @@ Object {
               "{\\"AwsLambda\\":{\\"FunctionArn\\":\\"",
               Object {
                 "Fn::GetAtt": Array [
-                  "ComprehendS3olabLambdaArnCaptorAdminSearchUnit0BD9E08F",
+                  "ComprehendS3olabAdminLambdaArnCaptorAdminGeneralSearchUnit28AF8E74",
                   "LambdaArn",
                 ],
               },
@@ -360,20 +620,17 @@ Object {
         "Bucket": Object {
           "Ref": "ComprehendS3olabTranscriptBucket53AA37B3",
         },
-        "Name": "admin-s3-access-point-call-transcripts-known-pii-8d71gz",
+        "Name": "admin-s3-access-point-call-transcripts-known-pii-40d8o1",
       },
       "Type": "AWS::S3::AccessPoint",
     },
     "ComprehendS3olabBillingLambdaAccessPointFA19F8A0": Object {
       "DependsOn": Array [
-        "ComprehendS3olabLambdaArnCaptorAdminSearchUnit0BD9E08F",
-        "ComprehendS3olabLambdaArnCaptorBillingSearchUnit870C78F3",
-        "ComprehendS3olabLambdaArnCaptorCustomResourceRoleFA19C041",
-        "ComprehendS3olabLambdaArnCaptorCustSupportingSearchUnitFC382EE3",
-        "ComprehendS3olabLambdaArnCaptorGeneralSearchUnit7F7544C5",
-        "ComprehendS3olabLambdaArnCaptorLambdaArnExpertB9231BFC",
-        "ComprehendS3olabLambdaArnCaptorProviderframeworkonEventLogRetentionCDC72DF2",
-        "ComprehendS3olabLambdaArnCaptorProviderframeworkonEvent2B52715F",
+        "ComprehendS3olabBillingLambdaArnCaptorBillingGeneralSearchUnit24D10A1B",
+        "ComprehendS3olabBillingLambdaArnCaptorCustomResourceRole442802DA",
+        "ComprehendS3olabBillingLambdaArnCaptorLambdaArnExpert0A76E95F",
+        "ComprehendS3olabBillingLambdaArnCaptorProviderframeworkonEventLogRetention3F759A2C",
+        "ComprehendS3olabBillingLambdaArnCaptorProviderframeworkonEvent5D42761D",
       ],
       "Properties": Object {
         "Name": "billing-s3olap-call-transcripts-known-pii",
@@ -394,7 +651,7 @@ Object {
                 Object {
                   "Ref": "AWS::AccountId",
                 },
-                ":accesspoint/billing-s3-access-point-call-transcripts-known-pii-ecg0fy",
+                ":accesspoint/billing-s3-access-point-call-transcripts-known-pii-hg8eel",
               ],
             ],
           },
@@ -415,6 +672,269 @@ Object {
       },
       "Type": "AWS::S3ObjectLambda::AccessPoint",
     },
+    "ComprehendS3olabBillingLambdaArnCaptorBillingGeneralSearchUnit24D10A1B": Object {
+      "DeletionPolicy": "Delete",
+      "DependsOn": Array [
+        "ComprehendS3olabServerlessRedactLambdaBillingComprehendPiiAccessControlS3ObjectLambda6C419F7E",
+      ],
+      "Properties": Object {
+        "LambdaFixedName": "billing-Compre-PiiRedactionFunction",
+        "ServiceToken": Object {
+          "Fn::GetAtt": Array [
+            "ComprehendS3olabBillingLambdaArnCaptorProviderframeworkonEvent5D42761D",
+            "Arn",
+          ],
+        },
+      },
+      "Type": "AWS::CloudFormation::CustomResource",
+      "UpdateReplacePolicy": "Delete",
+    },
+    "ComprehendS3olabBillingLambdaArnCaptorCustomResourceRole442802DA": Object {
+      "DependsOn": Array [
+        "ComprehendS3olabServerlessRedactLambdaBillingComprehendPiiAccessControlS3ObjectLambda6C419F7E",
+      ],
+      "Properties": Object {
+        "AssumeRolePolicyDocument": Object {
+          "Statement": Array [
+            Object {
+              "Action": "sts:AssumeRole",
+              "Effect": "Allow",
+              "Principal": Object {
+                "Service": "lambda.amazonaws.com",
+              },
+            },
+          ],
+          "Version": "2012-10-17",
+        },
+        "Description": "An execution role to find out the ARN of the access control Lambda.",
+        "ManagedPolicyArns": Array [
+          Object {
+            "Fn::Join": Array [
+              "",
+              Array [
+                "arn:",
+                Object {
+                  "Ref": "AWS::Partition",
+                },
+                ":iam::aws:policy/service-role/AWSLambdaBasicExecutionRole",
+              ],
+            ],
+          },
+          Object {
+            "Fn::Join": Array [
+              "",
+              Array [
+                "arn:",
+                Object {
+                  "Ref": "AWS::Partition",
+                },
+                ":iam::aws:policy/AWSXRayDaemonWriteAccess",
+              ],
+            ],
+          },
+        ],
+        "Policies": Array [
+          Object {
+            "PolicyDocument": Object {
+              "Statement": Array [
+                Object {
+                  "Action": "lambda:ListFunctions",
+                  "Effect": "Allow",
+                  "Resource": "*",
+                  "Sid": "ListLambdaPermissions",
+                },
+                Object {
+                  "Action": Array [
+                    "lambda:GetFunction",
+                    "lambda:InvokeFunction",
+                  ],
+                  "Effect": "Allow",
+                  "Resource": Object {
+                    "Fn::Join": Array [
+                      "",
+                      Array [
+                        "arn:",
+                        Object {
+                          "Ref": "AWS::Partition",
+                        },
+                        ":lambda:",
+                        Object {
+                          "Ref": "AWS::Region",
+                        },
+                        ":",
+                        Object {
+                          "Ref": "AWS::AccountId",
+                        },
+                        ":function:*",
+                      ],
+                    ],
+                  },
+                  "Sid": "GetLambdaFunctionsPermissions",
+                },
+              ],
+              "Version": "2012-10-17",
+            },
+            "PolicyName": "ComprehendS3ObjectLambdaCustomResourcePolicy",
+          },
+        ],
+      },
+      "Type": "AWS::IAM::Role",
+    },
+    "ComprehendS3olabBillingLambdaArnCaptorLambdaArnExpert0A76E95F": Object {
+      "DependsOn": Array [
+        "ComprehendS3olabBillingLambdaArnCaptorCustomResourceRole442802DA",
+        "ComprehendS3olabServerlessRedactLambdaBillingComprehendPiiAccessControlS3ObjectLambda6C419F7E",
+      ],
+      "Properties": Object {
+        "Code": Object {
+          "S3Bucket": Object {
+            "Ref": "AssetParameters9c4f86274e87ed34a50dba5d78bc94a321f082416dc3becda73906d6e392893bS3Bucket6BF99F8D",
+          },
+          "S3Key": Object {
+            "Fn::Join": Array [
+              "",
+              Array [
+                Object {
+                  "Fn::Select": Array [
+                    0,
+                    Object {
+                      "Fn::Split": Array [
+                        "||",
+                        Object {
+                          "Ref": "AssetParameters9c4f86274e87ed34a50dba5d78bc94a321f082416dc3becda73906d6e392893bS3VersionKey89DE1382",
+                        },
+                      ],
+                    },
+                  ],
+                },
+                Object {
+                  "Fn::Select": Array [
+                    1,
+                    Object {
+                      "Fn::Split": Array [
+                        "||",
+                        Object {
+                          "Ref": "AssetParameters9c4f86274e87ed34a50dba5d78bc94a321f082416dc3becda73906d6e392893bS3VersionKey89DE1382",
+                        },
+                      ],
+                    },
+                  ],
+                },
+              ],
+            ],
+          },
+        },
+        "Description": "A Lambda function that gets the ARN of \`billing-Compre-PiiRedactionFunction\`",
+        "Environment": Object {
+          "Variables": Object {
+            "AWS_NODEJS_CONNECTION_REUSE_ENABLED": "1",
+          },
+        },
+        "Handler": "index.lambdaHandler",
+        "Role": Object {
+          "Fn::GetAtt": Array [
+            "ComprehendS3olabBillingLambdaArnCaptorCustomResourceRole442802DA",
+            "Arn",
+          ],
+        },
+        "Runtime": "nodejs14.x",
+        "Timeout": 120,
+      },
+      "Type": "AWS::Lambda::Function",
+    },
+    "ComprehendS3olabBillingLambdaArnCaptorProviderframeworkonEvent5D42761D": Object {
+      "DependsOn": Array [
+        "ComprehendS3olabBillingLambdaArnCaptorCustomResourceRole442802DA",
+        "ComprehendS3olabServerlessRedactLambdaBillingComprehendPiiAccessControlS3ObjectLambda6C419F7E",
+      ],
+      "Properties": Object {
+        "Code": Object {
+          "S3Bucket": Object {
+            "Ref": "AssetParametersc691172cdeefa2c91b5a2907f9d81118e47597634943344795f1a844192dd49cS3BucketEAC9DD43",
+          },
+          "S3Key": Object {
+            "Fn::Join": Array [
+              "",
+              Array [
+                Object {
+                  "Fn::Select": Array [
+                    0,
+                    Object {
+                      "Fn::Split": Array [
+                        "||",
+                        Object {
+                          "Ref": "AssetParametersc691172cdeefa2c91b5a2907f9d81118e47597634943344795f1a844192dd49cS3VersionKeyDD9AE9E7",
+                        },
+                      ],
+                    },
+                  ],
+                },
+                Object {
+                  "Fn::Select": Array [
+                    1,
+                    Object {
+                      "Fn::Split": Array [
+                        "||",
+                        Object {
+                          "Ref": "AssetParametersc691172cdeefa2c91b5a2907f9d81118e47597634943344795f1a844192dd49cS3VersionKeyDD9AE9E7",
+                        },
+                      ],
+                    },
+                  ],
+                },
+              ],
+            ],
+          },
+        },
+        "Description": "AWS CDK resource provider framework - onEvent (ker-ker/ComprehendS3olab/BillingLambdaArnCaptor/Provider)",
+        "Environment": Object {
+          "Variables": Object {
+            "USER_ON_EVENT_FUNCTION_ARN": Object {
+              "Fn::GetAtt": Array [
+                "ComprehendS3olabBillingLambdaArnCaptorLambdaArnExpert0A76E95F",
+                "Arn",
+              ],
+            },
+          },
+        },
+        "Handler": "framework.onEvent",
+        "Role": Object {
+          "Fn::GetAtt": Array [
+            "ComprehendS3olabBillingLambdaArnCaptorCustomResourceRole442802DA",
+            "Arn",
+          ],
+        },
+        "Runtime": "nodejs14.x",
+        "Timeout": 900,
+      },
+      "Type": "AWS::Lambda::Function",
+    },
+    "ComprehendS3olabBillingLambdaArnCaptorProviderframeworkonEventLogRetention3F759A2C": Object {
+      "DependsOn": Array [
+        "ComprehendS3olabServerlessRedactLambdaBillingComprehendPiiAccessControlS3ObjectLambda6C419F7E",
+      ],
+      "Properties": Object {
+        "LogGroupName": Object {
+          "Fn::Join": Array [
+            "",
+            Array [
+              "/aws/lambda/",
+              Object {
+                "Ref": "ComprehendS3olabBillingLambdaArnCaptorProviderframeworkonEvent5D42761D",
+              },
+            ],
+          ],
+        },
+        "RetentionInDays": 30,
+        "ServiceToken": Object {
+          "Fn::GetAtt": Array [
+            "LogRetentionaae0aa3c5b4d4f87b02d85b201efdd8aFD4BFC8A",
+            "Arn",
+          ],
+        },
+      },
+      "Type": "Custom::LogRetention",
+    },
     "ComprehendS3olabBillingObjectLambdaConfig384DA850": Object {
       "DeletionPolicy": "Delete",
       "Properties": Object {
@@ -431,7 +951,7 @@ Object {
               "{\\"AwsLambda\\":{\\"FunctionArn\\":\\"",
               Object {
                 "Fn::GetAtt": Array [
-                  "ComprehendS3olabLambdaArnCaptorBillingSearchUnit870C78F3",
+                  "ComprehendS3olabBillingLambdaArnCaptorBillingGeneralSearchUnit24D10A1B",
                   "LambdaArn",
                 ],
               },
@@ -572,7 +1092,7 @@ Object {
         "Bucket": Object {
           "Ref": "ComprehendS3olabTranscriptBucket53AA37B3",
         },
-        "Name": "billing-s3-access-point-call-transcripts-known-pii-ecg0fy",
+        "Name": "billing-s3-access-point-call-transcripts-known-pii-hg8eel",
       },
       "Type": "AWS::S3::AccessPoint",
     },
@@ -700,6 +1220,269 @@ Object {
       },
       "Type": "AWS::IAM::Role",
     },
+    "ComprehendS3olabCustomSupportLambdaArnCaptorCustSupportGeneralSearchUnit669DC929": Object {
+      "DeletionPolicy": "Delete",
+      "DependsOn": Array [
+        "ComprehendS3olabServerlessRedactLambdaCustSupportComprehendPiiAccessControlS3ObjectLambda376EF5E8",
+      ],
+      "Properties": Object {
+        "LambdaFixedName": "customersuppor-PiiRedactionFunction",
+        "ServiceToken": Object {
+          "Fn::GetAtt": Array [
+            "ComprehendS3olabCustomSupportLambdaArnCaptorProviderframeworkonEventB3809E68",
+            "Arn",
+          ],
+        },
+      },
+      "Type": "AWS::CloudFormation::CustomResource",
+      "UpdateReplacePolicy": "Delete",
+    },
+    "ComprehendS3olabCustomSupportLambdaArnCaptorCustomResourceRoleC17C1626": Object {
+      "DependsOn": Array [
+        "ComprehendS3olabServerlessRedactLambdaCustSupportComprehendPiiAccessControlS3ObjectLambda376EF5E8",
+      ],
+      "Properties": Object {
+        "AssumeRolePolicyDocument": Object {
+          "Statement": Array [
+            Object {
+              "Action": "sts:AssumeRole",
+              "Effect": "Allow",
+              "Principal": Object {
+                "Service": "lambda.amazonaws.com",
+              },
+            },
+          ],
+          "Version": "2012-10-17",
+        },
+        "Description": "An execution role to find out the ARN of the access control Lambda.",
+        "ManagedPolicyArns": Array [
+          Object {
+            "Fn::Join": Array [
+              "",
+              Array [
+                "arn:",
+                Object {
+                  "Ref": "AWS::Partition",
+                },
+                ":iam::aws:policy/service-role/AWSLambdaBasicExecutionRole",
+              ],
+            ],
+          },
+          Object {
+            "Fn::Join": Array [
+              "",
+              Array [
+                "arn:",
+                Object {
+                  "Ref": "AWS::Partition",
+                },
+                ":iam::aws:policy/AWSXRayDaemonWriteAccess",
+              ],
+            ],
+          },
+        ],
+        "Policies": Array [
+          Object {
+            "PolicyDocument": Object {
+              "Statement": Array [
+                Object {
+                  "Action": "lambda:ListFunctions",
+                  "Effect": "Allow",
+                  "Resource": "*",
+                  "Sid": "ListLambdaPermissions",
+                },
+                Object {
+                  "Action": Array [
+                    "lambda:GetFunction",
+                    "lambda:InvokeFunction",
+                  ],
+                  "Effect": "Allow",
+                  "Resource": Object {
+                    "Fn::Join": Array [
+                      "",
+                      Array [
+                        "arn:",
+                        Object {
+                          "Ref": "AWS::Partition",
+                        },
+                        ":lambda:",
+                        Object {
+                          "Ref": "AWS::Region",
+                        },
+                        ":",
+                        Object {
+                          "Ref": "AWS::AccountId",
+                        },
+                        ":function:*",
+                      ],
+                    ],
+                  },
+                  "Sid": "GetLambdaFunctionsPermissions",
+                },
+              ],
+              "Version": "2012-10-17",
+            },
+            "PolicyName": "ComprehendS3ObjectLambdaCustomResourcePolicy",
+          },
+        ],
+      },
+      "Type": "AWS::IAM::Role",
+    },
+    "ComprehendS3olabCustomSupportLambdaArnCaptorLambdaArnExpertCE7DE813": Object {
+      "DependsOn": Array [
+        "ComprehendS3olabCustomSupportLambdaArnCaptorCustomResourceRoleC17C1626",
+        "ComprehendS3olabServerlessRedactLambdaCustSupportComprehendPiiAccessControlS3ObjectLambda376EF5E8",
+      ],
+      "Properties": Object {
+        "Code": Object {
+          "S3Bucket": Object {
+            "Ref": "AssetParameters9c4f86274e87ed34a50dba5d78bc94a321f082416dc3becda73906d6e392893bS3Bucket6BF99F8D",
+          },
+          "S3Key": Object {
+            "Fn::Join": Array [
+              "",
+              Array [
+                Object {
+                  "Fn::Select": Array [
+                    0,
+                    Object {
+                      "Fn::Split": Array [
+                        "||",
+                        Object {
+                          "Ref": "AssetParameters9c4f86274e87ed34a50dba5d78bc94a321f082416dc3becda73906d6e392893bS3VersionKey89DE1382",
+                        },
+                      ],
+                    },
+                  ],
+                },
+                Object {
+                  "Fn::Select": Array [
+                    1,
+                    Object {
+                      "Fn::Split": Array [
+                        "||",
+                        Object {
+                          "Ref": "AssetParameters9c4f86274e87ed34a50dba5d78bc94a321f082416dc3becda73906d6e392893bS3VersionKey89DE1382",
+                        },
+                      ],
+                    },
+                  ],
+                },
+              ],
+            ],
+          },
+        },
+        "Description": "A Lambda function that gets the ARN of \`customersuppor-PiiRedactionFunction\`",
+        "Environment": Object {
+          "Variables": Object {
+            "AWS_NODEJS_CONNECTION_REUSE_ENABLED": "1",
+          },
+        },
+        "Handler": "index.lambdaHandler",
+        "Role": Object {
+          "Fn::GetAtt": Array [
+            "ComprehendS3olabCustomSupportLambdaArnCaptorCustomResourceRoleC17C1626",
+            "Arn",
+          ],
+        },
+        "Runtime": "nodejs14.x",
+        "Timeout": 120,
+      },
+      "Type": "AWS::Lambda::Function",
+    },
+    "ComprehendS3olabCustomSupportLambdaArnCaptorProviderframeworkonEventB3809E68": Object {
+      "DependsOn": Array [
+        "ComprehendS3olabCustomSupportLambdaArnCaptorCustomResourceRoleC17C1626",
+        "ComprehendS3olabServerlessRedactLambdaCustSupportComprehendPiiAccessControlS3ObjectLambda376EF5E8",
+      ],
+      "Properties": Object {
+        "Code": Object {
+          "S3Bucket": Object {
+            "Ref": "AssetParametersc691172cdeefa2c91b5a2907f9d81118e47597634943344795f1a844192dd49cS3BucketEAC9DD43",
+          },
+          "S3Key": Object {
+            "Fn::Join": Array [
+              "",
+              Array [
+                Object {
+                  "Fn::Select": Array [
+                    0,
+                    Object {
+                      "Fn::Split": Array [
+                        "||",
+                        Object {
+                          "Ref": "AssetParametersc691172cdeefa2c91b5a2907f9d81118e47597634943344795f1a844192dd49cS3VersionKeyDD9AE9E7",
+                        },
+                      ],
+                    },
+                  ],
+                },
+                Object {
+                  "Fn::Select": Array [
+                    1,
+                    Object {
+                      "Fn::Split": Array [
+                        "||",
+                        Object {
+                          "Ref": "AssetParametersc691172cdeefa2c91b5a2907f9d81118e47597634943344795f1a844192dd49cS3VersionKeyDD9AE9E7",
+                        },
+                      ],
+                    },
+                  ],
+                },
+              ],
+            ],
+          },
+        },
+        "Description": "AWS CDK resource provider framework - onEvent (ker-ker/ComprehendS3olab/CustomSupportLambdaArnCaptor/Provider)",
+        "Environment": Object {
+          "Variables": Object {
+            "USER_ON_EVENT_FUNCTION_ARN": Object {
+              "Fn::GetAtt": Array [
+                "ComprehendS3olabCustomSupportLambdaArnCaptorLambdaArnExpertCE7DE813",
+                "Arn",
+              ],
+            },
+          },
+        },
+        "Handler": "framework.onEvent",
+        "Role": Object {
+          "Fn::GetAtt": Array [
+            "ComprehendS3olabCustomSupportLambdaArnCaptorCustomResourceRoleC17C1626",
+            "Arn",
+          ],
+        },
+        "Runtime": "nodejs14.x",
+        "Timeout": 900,
+      },
+      "Type": "AWS::Lambda::Function",
+    },
+    "ComprehendS3olabCustomSupportLambdaArnCaptorProviderframeworkonEventLogRetentionA78675C1": Object {
+      "DependsOn": Array [
+        "ComprehendS3olabServerlessRedactLambdaCustSupportComprehendPiiAccessControlS3ObjectLambda376EF5E8",
+      ],
+      "Properties": Object {
+        "LogGroupName": Object {
+          "Fn::Join": Array [
+            "",
+            Array [
+              "/aws/lambda/",
+              Object {
+                "Ref": "ComprehendS3olabCustomSupportLambdaArnCaptorProviderframeworkonEventB3809E68",
+              },
+            ],
+          ],
+        },
+        "RetentionInDays": 30,
+        "ServiceToken": Object {
+          "Fn::GetAtt": Array [
+            "LogRetentionaae0aa3c5b4d4f87b02d85b201efdd8aFD4BFC8A",
+            "Arn",
+          ],
+        },
+      },
+      "Type": "Custom::LogRetention",
+    },
     "ComprehendS3olabCustomerSupportLambdaAccessPoint80111B00": Object {
       "Properties": Object {
         "Name": "custsupport-s3olap-call-transcripts-known-pii",
@@ -720,7 +1503,7 @@ Object {
                 Object {
                   "Ref": "AWS::AccountId",
                 },
-                ":accesspoint/cs-s3-access-point-call-transcripts-known-pii-fhxf9n",
+                ":accesspoint/cs-s3-access-point-call-transcripts-known-pii-qpqgbx",
               ],
             ],
           },
@@ -757,7 +1540,7 @@ Object {
               "{\\"AwsLambda\\":{\\"FunctionArn\\":\\"",
               Object {
                 "Fn::GetAtt": Array [
-                  "ComprehendS3olabLambdaArnCaptorCustSupportingSearchUnitFC382EE3",
+                  "ComprehendS3olabCustomSupportLambdaArnCaptorCustSupportGeneralSearchUnit669DC929",
                   "LambdaArn",
                 ],
               },
@@ -774,7 +1557,7 @@ Object {
         "Bucket": Object {
           "Ref": "ComprehendS3olabTranscriptBucket53AA37B3",
         },
-        "Name": "cs-s3-access-point-call-transcripts-known-pii-fhxf9n",
+        "Name": "cs-s3-access-point-call-transcripts-known-pii-qpqgbx",
       },
       "Type": "AWS::S3::AccessPoint",
     },
@@ -904,14 +1687,11 @@ Object {
     },
     "ComprehendS3olabGeneralLambdaAccessPoint02C30CE4": Object {
       "DependsOn": Array [
-        "ComprehendS3olabLambdaArnCaptorAdminSearchUnit0BD9E08F",
-        "ComprehendS3olabLambdaArnCaptorBillingSearchUnit870C78F3",
-        "ComprehendS3olabLambdaArnCaptorCustomResourceRoleFA19C041",
-        "ComprehendS3olabLambdaArnCaptorCustSupportingSearchUnitFC382EE3",
-        "ComprehendS3olabLambdaArnCaptorGeneralSearchUnit7F7544C5",
-        "ComprehendS3olabLambdaArnCaptorLambdaArnExpertB9231BFC",
-        "ComprehendS3olabLambdaArnCaptorProviderframeworkonEventLogRetentionCDC72DF2",
-        "ComprehendS3olabLambdaArnCaptorProviderframeworkonEvent2B52715F",
+        "ComprehendS3olabGeneralLambdaArnCaptorCustomResourceRole52095087",
+        "ComprehendS3olabGeneralLambdaArnCaptorGeneralGeneralSearchUnit6BA14F41",
+        "ComprehendS3olabGeneralLambdaArnCaptorLambdaArnExpert22DB4987",
+        "ComprehendS3olabGeneralLambdaArnCaptorProviderframeworkonEventLogRetention51A64EA2",
+        "ComprehendS3olabGeneralLambdaArnCaptorProviderframeworkonEvent30FAA79F",
       ],
       "Properties": Object {
         "Name": "accessctl-s3olap-survey-results-unknown-pii",
@@ -932,7 +1712,7 @@ Object {
                 Object {
                   "Ref": "AWS::AccountId",
                 },
-                ":accesspoint/accessctl-s3-ap-survey-results-unknown-pii-kjnzg2",
+                ":accesspoint/accessctl-s3-ap-survey-results-unknown-pii-q0gghe",
               ],
             ],
           },
@@ -953,100 +1733,9 @@ Object {
       },
       "Type": "AWS::S3ObjectLambda::AccessPoint",
     },
-    "ComprehendS3olabGeneralObjectLambdaConfig9963CC93": Object {
-      "DeletionPolicy": "Delete",
-      "Properties": Object {
-        "ServiceToken": Object {
-          "Fn::GetAtt": Array [
-            "AWSCDKCfnUtilsProviderCustomResourceProviderHandlerCF82AA57",
-            "Arn",
-          ],
-        },
-        "Value": Object {
-          "Fn::Join": Array [
-            "",
-            Array [
-              "{\\"AwsLambda\\":{\\"FunctionArn\\":\\"",
-              Object {
-                "Fn::GetAtt": Array [
-                  "ComprehendS3olabLambdaArnCaptorGeneralSearchUnit7F7544C5",
-                  "LambdaArn",
-                ],
-              },
-              "\\"}}",
-            ],
-          ],
-        },
-      },
-      "Type": "Custom::AWSCDKCfnJson",
-      "UpdateReplacePolicy": "Delete",
-    },
-    "ComprehendS3olabLambdaArnCaptorAdminSearchUnit0BD9E08F": Object {
-      "DeletionPolicy": "Delete",
+    "ComprehendS3olabGeneralLambdaArnCaptorCustomResourceRole52095087": Object {
       "DependsOn": Array [
         "ComprehendS3olabServerlessLambdaComprehendPiiAccessControlS3ObjectLambdaC1DAEB36",
-        "ComprehendS3olabServerlessRedactLambdaAdminComprehendPiiAccessControlS3ObjectLambdaD15B85DC",
-        "ComprehendS3olabServerlessRedactLambdaBillingComprehendPiiAccessControlS3ObjectLambda6C419F7E",
-        "ComprehendS3olabServerlessRedactLambdaCustSupportComprehendPiiAccessControlS3ObjectLambda376EF5E8",
-      ],
-      "Properties": Object {
-        "LambdaFixedName": "admin-Comprehe-PiiRedactionFunction",
-        "ServiceToken": Object {
-          "Fn::GetAtt": Array [
-            "ComprehendS3olabLambdaArnCaptorProviderframeworkonEvent2B52715F",
-            "Arn",
-          ],
-        },
-      },
-      "Type": "AWS::CloudFormation::CustomResource",
-      "UpdateReplacePolicy": "Delete",
-    },
-    "ComprehendS3olabLambdaArnCaptorBillingSearchUnit870C78F3": Object {
-      "DeletionPolicy": "Delete",
-      "DependsOn": Array [
-        "ComprehendS3olabServerlessLambdaComprehendPiiAccessControlS3ObjectLambdaC1DAEB36",
-        "ComprehendS3olabServerlessRedactLambdaAdminComprehendPiiAccessControlS3ObjectLambdaD15B85DC",
-        "ComprehendS3olabServerlessRedactLambdaBillingComprehendPiiAccessControlS3ObjectLambda6C419F7E",
-        "ComprehendS3olabServerlessRedactLambdaCustSupportComprehendPiiAccessControlS3ObjectLambda376EF5E8",
-      ],
-      "Properties": Object {
-        "LambdaFixedName": "billing-Compre-PiiRedactionFunction",
-        "ServiceToken": Object {
-          "Fn::GetAtt": Array [
-            "ComprehendS3olabLambdaArnCaptorProviderframeworkonEvent2B52715F",
-            "Arn",
-          ],
-        },
-      },
-      "Type": "AWS::CloudFormation::CustomResource",
-      "UpdateReplacePolicy": "Delete",
-    },
-    "ComprehendS3olabLambdaArnCaptorCustSupportingSearchUnitFC382EE3": Object {
-      "DeletionPolicy": "Delete",
-      "DependsOn": Array [
-        "ComprehendS3olabServerlessLambdaComprehendPiiAccessControlS3ObjectLambdaC1DAEB36",
-        "ComprehendS3olabServerlessRedactLambdaAdminComprehendPiiAccessControlS3ObjectLambdaD15B85DC",
-        "ComprehendS3olabServerlessRedactLambdaBillingComprehendPiiAccessControlS3ObjectLambda6C419F7E",
-        "ComprehendS3olabServerlessRedactLambdaCustSupportComprehendPiiAccessControlS3ObjectLambda376EF5E8",
-      ],
-      "Properties": Object {
-        "LambdaFixedName": "customersuppor-PiiRedactionFunction",
-        "ServiceToken": Object {
-          "Fn::GetAtt": Array [
-            "ComprehendS3olabLambdaArnCaptorProviderframeworkonEvent2B52715F",
-            "Arn",
-          ],
-        },
-      },
-      "Type": "AWS::CloudFormation::CustomResource",
-      "UpdateReplacePolicy": "Delete",
-    },
-    "ComprehendS3olabLambdaArnCaptorCustomResourceRoleFA19C041": Object {
-      "DependsOn": Array [
-        "ComprehendS3olabServerlessLambdaComprehendPiiAccessControlS3ObjectLambdaC1DAEB36",
-        "ComprehendS3olabServerlessRedactLambdaAdminComprehendPiiAccessControlS3ObjectLambdaD15B85DC",
-        "ComprehendS3olabServerlessRedactLambdaBillingComprehendPiiAccessControlS3ObjectLambda6C419F7E",
-        "ComprehendS3olabServerlessRedactLambdaCustSupportComprehendPiiAccessControlS3ObjectLambda376EF5E8",
       ],
       "Properties": Object {
         "AssumeRolePolicyDocument": Object {
@@ -1135,19 +1824,16 @@ Object {
       },
       "Type": "AWS::IAM::Role",
     },
-    "ComprehendS3olabLambdaArnCaptorGeneralSearchUnit7F7544C5": Object {
+    "ComprehendS3olabGeneralLambdaArnCaptorGeneralGeneralSearchUnit6BA14F41": Object {
       "DeletionPolicy": "Delete",
       "DependsOn": Array [
         "ComprehendS3olabServerlessLambdaComprehendPiiAccessControlS3ObjectLambdaC1DAEB36",
-        "ComprehendS3olabServerlessRedactLambdaAdminComprehendPiiAccessControlS3ObjectLambdaD15B85DC",
-        "ComprehendS3olabServerlessRedactLambdaBillingComprehendPiiAccessControlS3ObjectLambda6C419F7E",
-        "ComprehendS3olabServerlessRedactLambdaCustSupportComprehendPiiAccessControlS3ObjectLambda376EF5E8",
       ],
       "Properties": Object {
         "LambdaFixedName": "PiiAccessControlFunction",
         "ServiceToken": Object {
           "Fn::GetAtt": Array [
-            "ComprehendS3olabLambdaArnCaptorProviderframeworkonEvent2B52715F",
+            "ComprehendS3olabGeneralLambdaArnCaptorProviderframeworkonEvent30FAA79F",
             "Arn",
           ],
         },
@@ -1155,13 +1841,10 @@ Object {
       "Type": "AWS::CloudFormation::CustomResource",
       "UpdateReplacePolicy": "Delete",
     },
-    "ComprehendS3olabLambdaArnCaptorLambdaArnExpertB9231BFC": Object {
+    "ComprehendS3olabGeneralLambdaArnCaptorLambdaArnExpert22DB4987": Object {
       "DependsOn": Array [
-        "ComprehendS3olabLambdaArnCaptorCustomResourceRoleFA19C041",
+        "ComprehendS3olabGeneralLambdaArnCaptorCustomResourceRole52095087",
         "ComprehendS3olabServerlessLambdaComprehendPiiAccessControlS3ObjectLambdaC1DAEB36",
-        "ComprehendS3olabServerlessRedactLambdaAdminComprehendPiiAccessControlS3ObjectLambdaD15B85DC",
-        "ComprehendS3olabServerlessRedactLambdaBillingComprehendPiiAccessControlS3ObjectLambda6C419F7E",
-        "ComprehendS3olabServerlessRedactLambdaCustSupportComprehendPiiAccessControlS3ObjectLambda376EF5E8",
       ],
       "Properties": Object {
         "Code": Object {
@@ -1211,7 +1894,7 @@ Object {
         "Handler": "index.lambdaHandler",
         "Role": Object {
           "Fn::GetAtt": Array [
-            "ComprehendS3olabLambdaArnCaptorCustomResourceRoleFA19C041",
+            "ComprehendS3olabGeneralLambdaArnCaptorCustomResourceRole52095087",
             "Arn",
           ],
         },
@@ -1220,13 +1903,10 @@ Object {
       },
       "Type": "AWS::Lambda::Function",
     },
-    "ComprehendS3olabLambdaArnCaptorProviderframeworkonEvent2B52715F": Object {
+    "ComprehendS3olabGeneralLambdaArnCaptorProviderframeworkonEvent30FAA79F": Object {
       "DependsOn": Array [
-        "ComprehendS3olabLambdaArnCaptorCustomResourceRoleFA19C041",
+        "ComprehendS3olabGeneralLambdaArnCaptorCustomResourceRole52095087",
         "ComprehendS3olabServerlessLambdaComprehendPiiAccessControlS3ObjectLambdaC1DAEB36",
-        "ComprehendS3olabServerlessRedactLambdaAdminComprehendPiiAccessControlS3ObjectLambdaD15B85DC",
-        "ComprehendS3olabServerlessRedactLambdaBillingComprehendPiiAccessControlS3ObjectLambda6C419F7E",
-        "ComprehendS3olabServerlessRedactLambdaCustSupportComprehendPiiAccessControlS3ObjectLambda376EF5E8",
       ],
       "Properties": Object {
         "Code": Object {
@@ -1267,12 +1947,12 @@ Object {
             ],
           },
         },
-        "Description": "AWS CDK resource provider framework - onEvent (ker-ker/ComprehendS3olab/LambdaArnCaptor/Provider)",
+        "Description": "AWS CDK resource provider framework - onEvent (ker-ker/ComprehendS3olab/GeneralLambdaArnCaptor/Provider)",
         "Environment": Object {
           "Variables": Object {
             "USER_ON_EVENT_FUNCTION_ARN": Object {
               "Fn::GetAtt": Array [
-                "ComprehendS3olabLambdaArnCaptorLambdaArnExpertB9231BFC",
+                "ComprehendS3olabGeneralLambdaArnCaptorLambdaArnExpert22DB4987",
                 "Arn",
               ],
             },
@@ -1281,7 +1961,7 @@ Object {
         "Handler": "framework.onEvent",
         "Role": Object {
           "Fn::GetAtt": Array [
-            "ComprehendS3olabLambdaArnCaptorCustomResourceRoleFA19C041",
+            "ComprehendS3olabGeneralLambdaArnCaptorCustomResourceRole52095087",
             "Arn",
           ],
         },
@@ -1290,12 +1970,9 @@ Object {
       },
       "Type": "AWS::Lambda::Function",
     },
-    "ComprehendS3olabLambdaArnCaptorProviderframeworkonEventLogRetentionCDC72DF2": Object {
+    "ComprehendS3olabGeneralLambdaArnCaptorProviderframeworkonEventLogRetention51A64EA2": Object {
       "DependsOn": Array [
         "ComprehendS3olabServerlessLambdaComprehendPiiAccessControlS3ObjectLambdaC1DAEB36",
-        "ComprehendS3olabServerlessRedactLambdaAdminComprehendPiiAccessControlS3ObjectLambdaD15B85DC",
-        "ComprehendS3olabServerlessRedactLambdaBillingComprehendPiiAccessControlS3ObjectLambda6C419F7E",
-        "ComprehendS3olabServerlessRedactLambdaCustSupportComprehendPiiAccessControlS3ObjectLambda376EF5E8",
       ],
       "Properties": Object {
         "LogGroupName": Object {
@@ -1304,7 +1981,7 @@ Object {
             Array [
               "/aws/lambda/",
               Object {
-                "Ref": "ComprehendS3olabLambdaArnCaptorProviderframeworkonEvent2B52715F",
+                "Ref": "ComprehendS3olabGeneralLambdaArnCaptorProviderframeworkonEvent30FAA79F",
               },
             ],
           ],
@@ -1318,6 +1995,34 @@ Object {
         },
       },
       "Type": "Custom::LogRetention",
+    },
+    "ComprehendS3olabGeneralObjectLambdaConfig9963CC93": Object {
+      "DeletionPolicy": "Delete",
+      "Properties": Object {
+        "ServiceToken": Object {
+          "Fn::GetAtt": Array [
+            "AWSCDKCfnUtilsProviderCustomResourceProviderHandlerCF82AA57",
+            "Arn",
+          ],
+        },
+        "Value": Object {
+          "Fn::Join": Array [
+            "",
+            Array [
+              "{\\"AwsLambda\\":{\\"FunctionArn\\":\\"",
+              Object {
+                "Fn::GetAtt": Array [
+                  "ComprehendS3olabGeneralLambdaArnCaptorGeneralGeneralSearchUnit6BA14F41",
+                  "LambdaArn",
+                ],
+              },
+              "\\"}}",
+            ],
+          ],
+        },
+      },
+      "Type": "Custom::AWSCDKCfnJson",
+      "UpdateReplacePolicy": "Delete",
     },
     "ComprehendS3olabServerlessLambdaComprehendPiiAccessControlS3ObjectLambdaC1DAEB36": Object {
       "Properties": Object {
@@ -1398,14 +2103,11 @@ Object {
     },
     "ComprehendS3olabServerlessRedactLambdaCustSupportComprehendPiiAccessControlS3ObjectLambda376EF5E8": Object {
       "DependsOn": Array [
-        "ComprehendS3olabLambdaArnCaptorAdminSearchUnit0BD9E08F",
-        "ComprehendS3olabLambdaArnCaptorBillingSearchUnit870C78F3",
-        "ComprehendS3olabLambdaArnCaptorCustomResourceRoleFA19C041",
-        "ComprehendS3olabLambdaArnCaptorCustSupportingSearchUnitFC382EE3",
-        "ComprehendS3olabLambdaArnCaptorGeneralSearchUnit7F7544C5",
-        "ComprehendS3olabLambdaArnCaptorLambdaArnExpertB9231BFC",
-        "ComprehendS3olabLambdaArnCaptorProviderframeworkonEventLogRetentionCDC72DF2",
-        "ComprehendS3olabLambdaArnCaptorProviderframeworkonEvent2B52715F",
+        "ComprehendS3olabCustomSupportLambdaArnCaptorCustomResourceRoleC17C1626",
+        "ComprehendS3olabCustomSupportLambdaArnCaptorCustSupportGeneralSearchUnit669DC929",
+        "ComprehendS3olabCustomSupportLambdaArnCaptorLambdaArnExpertCE7DE813",
+        "ComprehendS3olabCustomSupportLambdaArnCaptorProviderframeworkonEventLogRetentionA78675C1",
+        "ComprehendS3olabCustomSupportLambdaArnCaptorProviderframeworkonEventB3809E68",
       ],
       "Properties": Object {
         "Location": Object {
@@ -1440,7 +2142,7 @@ Object {
         "ComprehendS3olabServerlessLambdaComprehendPiiAccessControlS3ObjectLambdaC1DAEB36",
       ],
       "Properties": Object {
-        "BucketName": "survey-results-unknown-pii-90ww7y",
+        "BucketName": "survey-results-unknown-pii-i60fo8",
       },
       "Type": "AWS::S3::Bucket",
       "UpdateReplacePolicy": "Delete",
@@ -1613,7 +2315,7 @@ Object {
         "ComprehendS3olabServerlessRedactLambdaCustSupportComprehendPiiAccessControlS3ObjectLambda376EF5E8",
       ],
       "Properties": Object {
-        "BucketName": "call-transcripts-known-pii-sne3df",
+        "BucketName": "call-transcripts-known-pii-puzoql",
       },
       "Type": "AWS::S3::Bucket",
       "UpdateReplacePolicy": "Delete",

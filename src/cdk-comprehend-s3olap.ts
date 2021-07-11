@@ -271,20 +271,30 @@ export class ComprehendS3olab extends cdk.Construct {
     transcriptBucket.node.addDependency(custSupportRole);
 
     // custom resources
-    const lambdaArnCaptor = new LambdaArnCaptorCustomResource(this, 'LambdaArnCaptor', {
-      generalPartialLambdaName: 'PiiAccessControlFunction',
-      adminPartialLambdaName: 'admin-Comprehe-PiiRedactionFunction',
-      billingPartialLambdaName: 'billing-Compre-PiiRedactionFunction',
-      custSupportPartialLambdaName: 'customersuppor-PiiRedactionFunction',
+    const generalLambdaArnCaptor = new LambdaArnCaptorCustomResource(this, 'GeneralLambdaArnCaptor', {
+      roleName: IamRoleName.GENERAL,
+      partialLambdaName: 'PiiAccessControlFunction',
     });
-    lambdaArnCaptor.node.addDependency(accessControlLambda);
-    lambdaArnCaptor.node.addDependency(adminRedactLambda);
-    lambdaArnCaptor.node.addDependency(billingRedactLambda);
-    lambdaArnCaptor.node.addDependency(custSupportRedactLambda);
-    this.piiAccessConrtolLambdaArn = lambdaArnCaptor.generalLambdaArn;
-    this.adminLambdaArn = lambdaArnCaptor.adminLambdaArn;
-    this.billingLambdaArn = lambdaArnCaptor.billingLambdaArn;
-    this.customerSupportLambdaArn = lambdaArnCaptor.custSupportLambdaArn;
+    const adminLambdaArnCaptor = new LambdaArnCaptorCustomResource(this, 'AdminLambdaArnCaptor', {
+      roleName: IamRoleName.ADMIN,
+      partialLambdaName: 'admin-Comprehe-PiiRedactionFunction',
+    });
+    const billingLambdaArnCaptor = new LambdaArnCaptorCustomResource(this, 'BillingLambdaArnCaptor', {
+      roleName: IamRoleName.BILLING,
+      partialLambdaName: 'billing-Compre-PiiRedactionFunction',
+    });
+    const customSupportLambdaArnCaptor = new LambdaArnCaptorCustomResource(this, 'CustomSupportLambdaArnCaptor', {
+      roleName: IamRoleName.CUST_SUPPORT,
+      partialLambdaName: 'customersuppor-PiiRedactionFunction',
+    });
+    generalLambdaArnCaptor.node.addDependency(accessControlLambda);
+    adminLambdaArnCaptor.node.addDependency(adminRedactLambda);
+    billingLambdaArnCaptor.node.addDependency(billingRedactLambda);
+    customSupportLambdaArnCaptor.node.addDependency(custSupportRedactLambda);
+    this.piiAccessConrtolLambdaArn = generalLambdaArnCaptor.lambdaArn;
+    this.adminLambdaArn = adminLambdaArnCaptor.lambdaArn;
+    this.billingLambdaArn = billingLambdaArnCaptor.lambdaArn;
+    this.customerSupportLambdaArn = customSupportLambdaArnCaptor.lambdaArn;
 
     // S3 access points
     const generalAccessPoint = new s3.CfnAccessPoint(this, 'AccessControlS3AccessPoint', {
@@ -378,6 +388,7 @@ export class ComprehendS3olab extends cdk.Construct {
       },
     });
 
+    // Automatic uploading
     const surveyFilePath = path.join(__dirname, 'files/access_control');
     const redactionFilePath = path.join(__dirname, 'files/redaction');
     console.log(`surveyFilePath: ${surveyFilePath}`);
@@ -403,10 +414,10 @@ export class ComprehendS3olab extends cdk.Construct {
     this.s3objectLambdaAdminArn = cdk.Token.asString(cdk.Fn.getAtt(adminObjectLambda.logicalId, 'Arn'));
     this.s3objectLambdaBillingArn = cdk.Token.asString(cdk.Fn.getAtt(billingObjectLambda.logicalId, 'Arn'));
     this.s3objectLambdaCustomerSupportArn = cdk.Token.asString(cdk.Fn.getAtt(customerSupportObjectLambda.logicalId, 'Arn'));
-    accessControlObjectLambda.node.addDependency(lambdaArnCaptor);
-    adminObjectLambda.node.addDependency(lambdaArnCaptor);
-    billingObjectLambda.node.addDependency(lambdaArnCaptor);
-    custSupportRedactLambda.node.addDependency(lambdaArnCaptor);
+    accessControlObjectLambda.node.addDependency(generalLambdaArnCaptor);
+    adminObjectLambda.node.addDependency(adminLambdaArnCaptor);
+    billingObjectLambda.node.addDependency(billingLambdaArnCaptor);
+    custSupportRedactLambda.node.addDependency(customSupportLambdaArnCaptor);
   }
 
   private generateS3Prefix(length: number): string {
@@ -535,21 +546,13 @@ export class ComprehendS3olab extends cdk.Construct {
 
 export interface LambdaArnCaptorResourceProps {
   /**
+   * the name of the corresponding IAM role
+   */
+  readonly roleName: string;
+  /**
    * The partial fixed name of the gemeral Lambda function created from the serverless application.
    */
-  readonly generalPartialLambdaName: string;
-  /**
-   * The partial fixed name of the administrator Lambda function created from the serverless application.
-   */
-  readonly adminPartialLambdaName: string;
-  /**
-  * The partial fixed name of the billing Lambda function created from the serverless application.
-  */
-  readonly billingPartialLambdaName: string;
-  /**
- * The partial fixed name of the customer support Lambda function created from the serverless application.
- */
-  readonly custSupportPartialLambdaName: string;
+  readonly partialLambdaName: string;
 }
 
 export class LambdaArnCaptorCustomResource extends cdk.Construct {
@@ -558,19 +561,7 @@ export class LambdaArnCaptorCustomResource extends cdk.Construct {
    *
    * @see https://github.com/aws/aws-cdk/issues/8760
    */
-  public readonly generalLambdaArn: string;
-  /**
-   * The ARN of the administrator Lambda function created from the serverless application.
-   */
-  public readonly adminLambdaArn: string;
-  /**
-   * The ARN of the billing Lambda function created from the serverless application.
-   */
-  public readonly billingLambdaArn: string;
-  /**
-   * The ARN of the billing Lambda function created from the serverless application.
-   */
-  public readonly custSupportLambdaArn: string;
+  public readonly lambdaArn: string;
   constructor(scope: cdk.Construct, id: string, props: LambdaArnCaptorResourceProps) {
     super(scope, id);
     const customResourceRole = new iam.Role(this, 'CustomResourceRole', {
@@ -603,7 +594,7 @@ export class LambdaArnCaptorCustomResource extends cdk.Construct {
       },
     });
     const onEvent = new lambda.NodejsFunction(this, 'LambdaArnExpert', {
-      description: `A Lambda function that gets the ARN of \`${props.generalPartialLambdaName}\``,
+      description: `A Lambda function that gets the ARN of \`${props.partialLambdaName}\``,
       entry: fs.existsSync(path.join(__dirname, 'resources/lambda-arn-helper.ts')) ? path.join(__dirname, 'resources/lambda-arn-helper.ts') : path.join(__dirname, 'resources/lambda-arn-helper.js'),
       handler: 'lambdaHandler',
       timeout: cdk.Duration.minutes(2),
@@ -620,33 +611,12 @@ export class LambdaArnCaptorCustomResource extends cdk.Construct {
       logRetention: logs.RetentionDays.ONE_MONTH,
       role: customResourceRole.withoutPolicyUpdates(),
     });
-    const generalLambdaArnSearchUnit = new cdk.CustomResource(this, 'GeneralSearchUnit', {
+    const lambdaArnSearchUnit = new cdk.CustomResource(this, `${props.roleName}GeneralSearchUnit`, {
       serviceToken: provider.serviceToken,
       properties: {
-        LambdaFixedName: props.generalPartialLambdaName,
+        LambdaFixedName: props.partialLambdaName,
       },
     });
-    const adminLambdaArnSearchUnit = new cdk.CustomResource(this, 'AdminSearchUnit', {
-      serviceToken: provider.serviceToken,
-      properties: {
-        LambdaFixedName: props.adminPartialLambdaName,
-      },
-    });
-    const billingLambdaArnSearchUnit = new cdk.CustomResource(this, 'BillingSearchUnit', {
-      serviceToken: provider.serviceToken,
-      properties: {
-        LambdaFixedName: props.billingPartialLambdaName,
-      },
-    });
-    const custSupportLambdaArnSearchUnit = new cdk.CustomResource(this, 'CustSupportingSearchUnit', {
-      serviceToken: provider.serviceToken,
-      properties: {
-        LambdaFixedName: props.custSupportPartialLambdaName,
-      },
-    });
-    this.generalLambdaArn = cdk.Token.asString(generalLambdaArnSearchUnit.getAtt('LambdaArn'));
-    this.adminLambdaArn = cdk.Token.asString(adminLambdaArnSearchUnit.getAtt('LambdaArn'));
-    this.billingLambdaArn = cdk.Token.asString(billingLambdaArnSearchUnit.getAtt('LambdaArn'));
-    this.custSupportLambdaArn = cdk.Token.asString(custSupportLambdaArnSearchUnit.getAtt('LambdaArn'));
+    this.lambdaArn = cdk.Token.asString(lambdaArnSearchUnit.getAtt('LambdaArn'));
   }
 }
