@@ -380,13 +380,24 @@ export class ComprehendS3olab extends cdk.Construct {
     });
 
     const surveyFilePath = path.join(__dirname, 'files/access_control');
-    console.log(surveyFilePath);
+    const redactionFilePath = path.join(__dirname, 'files/redaction');
+    console.log(`surveyFilePath: ${surveyFilePath}`);
+    console.log(`redactionFilePath: ${redactionFilePath}`)
     if (fs.existsSync(surveyFilePath)) {
       const deployFiles = new s3delpoy.BucketDeployment(this, 'DeploySurveyResultFiles', {
         sources: [s3delpoy.Source.asset(surveyFilePath)],
         destinationBucket: surveyBucket,
       });
       deployFiles.node.addDependency(accessControlObjectLambda);
+    };
+    if (fs.existsSync(redactionFilePath)) {
+      const deployTranscriptFiles = new s3delpoy.BucketDeployment(this, 'DeployTranscriptFiles', {
+        sources: [s3delpoy.Source.asset(redactionFilePath)],
+        destinationBucket: transcriptBucket,
+      });
+      deployTranscriptFiles.node.addDependency(adminObjectLambda);
+      deployTranscriptFiles.node.addDependency(billingObjectLambda);
+      deployTranscriptFiles.node.addDependency(customerSupportObjectLambda);
     };
 
     this.s3objectLambdaAccessControlArn = cdk.Token.asString(cdk.Fn.getAtt(accessControlObjectLambda.logicalId, 'Arn'));
