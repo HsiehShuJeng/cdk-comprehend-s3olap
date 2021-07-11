@@ -188,11 +188,8 @@ export class ComprehendS3olab extends cdk.Construct {
     const adminRedactLambda = this.initializeRedactLambda(IamRoleName.ADMIN, props?.adminRedactionLambdaConfig);
     const billingRedactLambda = this.initializeRedactLambda(IamRoleName.BILLING, props?.billingRedactionLambdaConfig);
     const custSupportRedactLambda = this.initializeRedactLambda(IamRoleName.CUST_SUPPORT, props?.cusrtSupportRedactionLambdaConfig);
-    cdk.Tags.of(accessControlLambda).add('Genre', IamRoleName.GENERAL);
-    cdk.Tags.of(adminRedactLambda).add('Genre', IamRoleName.ADMIN);
-    cdk.Tags.of(billingRedactLambda).add('Genre', IamRoleName.BILLING);
-    cdk.Tags.of(custSupportRedactLambda).add('Genre', IamRoleName.CUST_SUPPORT);
-
+    billingRedactLambda.node.addDependency(adminRedactLambda);
+    custSupportRedactLambda.node.addDependency(billingRedactLambda);
 
     // IAM roles
     const generalRole = new GeneralRole(this, 'General', {
@@ -619,7 +616,7 @@ export class LambdaArnCaptorCustomResource extends cdk.Construct {
       serviceToken: provider.serviceToken,
       properties: {
         LambdaFixedName: props.partialLambdaName,
-        Genre: props.roleName
+        Genre: props.roleName,
       },
     });
     this.lambdaArn = cdk.Token.asString(lambdaArnSearchUnit.getAtt('LambdaArn'));

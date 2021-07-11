@@ -90,9 +90,12 @@
     "cfn-response"
   ],
   "keywords": [
+    "AWS::S3ObjectLambda",
     "amazon-comprehhend",
+    "aws-s3objectlambda",
     "aws-sam",
     "cdk",
+    "machine-learning",
     "object-lambda",
     "pii",
     "s3",

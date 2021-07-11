@@ -11,6 +11,9 @@ const project = new AwsCdkConstructLibrary({
     'pii',
     's3',
     'scott.hsieh',
+    'machine-learning',
+    'AWS::S3ObjectLambda',
+    'aws-s3objectlambda'
   ],
 
   catalog: {
