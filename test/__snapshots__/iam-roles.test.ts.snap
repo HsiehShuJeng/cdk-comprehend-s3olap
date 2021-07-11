@@ -3,6 +3,378 @@
 exports[`IAM roles test 1`] = `
 Object {
   "Resources": Object {
+    "AdminRoleRedactionAdminRole0DE28314": Object {
+      "Properties": Object {
+        "AssumeRolePolicyDocument": Object {
+          "Statement": Array [
+            Object {
+              "Action": "sts:AssumeRole",
+              "Effect": "Allow",
+              "Principal": Object {
+                "AWS": Object {
+                  "Fn::Join": Array [
+                    "",
+                    Array [
+                      "arn:",
+                      Object {
+                        "Ref": "AWS::Partition",
+                      },
+                      ":iam::",
+                      Object {
+                        "Ref": "AWS::AccountId",
+                      },
+                      ":root",
+                    ],
+                  ],
+                },
+              },
+            },
+          ],
+          "Version": "2012-10-17",
+        },
+        "Policies": Array [
+          Object {
+            "PolicyDocument": Object {
+              "Statement": Array [
+                Object {
+                  "Action": "s3:ListBucket",
+                  "Effect": "Allow",
+                  "Resource": "*",
+                  "Sid": "AllowListingObjects",
+                },
+                Object {
+                  "Action": Array [
+                    "s3:GetAccessPointForObjectLambda",
+                    "s3:GetAccessPointConfigurationForObjectLambda",
+                    "s3:ListAccessPointsForObjectLambda",
+                    "s3:ListAllMyBuckets",
+                    "s3:ListAccessPoints",
+                    "s3:GetAccessPoint",
+                    "s3:GetAccountPublicAccessBlock",
+                    "s3:GetBucketPublicAccessBlock",
+                    "s3:GetBucketPolicyStatus",
+                    "s3:GetBucketAcl",
+                    "s3:GetAccessPointPolicyStatus",
+                  ],
+                  "Effect": "Allow",
+                  "Resource": "*",
+                  "Sid": "AllowListingBucketsAndAccessPoints",
+                },
+                Object {
+                  "Action": Array [
+                    "s3-object-lambda:Get*",
+                    "s3-object-lambda:List*",
+                  ],
+                  "Effect": "Allow",
+                  "Resource": Object {
+                    "Fn::Join": Array [
+                      "",
+                      Array [
+                        "arn:",
+                        Object {
+                          "Ref": "AWS::Partition",
+                        },
+                        ":s3-object-lambda:",
+                        Object {
+                          "Ref": "AWS::Region",
+                        },
+                        ":",
+                        Object {
+                          "Ref": "AWS::AccountId",
+                        },
+                        ":accesspoint/admin-s3olap-call-transcripts-known-pii",
+                      ],
+                    ],
+                  },
+                  "Sid": "AllowObjectLambdaAccess",
+                },
+                Object {
+                  "Action": Array [
+                    "s3:Get*",
+                    "s3:List*",
+                  ],
+                  "Condition": Object {
+                    "ForAnyValue:StringEquals": Object {
+                      "aws:CalledVia": Array [
+                        "s3-object-lambda.amazonaws.com",
+                      ],
+                    },
+                  },
+                  "Effect": "Allow",
+                  "Resource": "*",
+                  "Sid": "AllowStandardAccessPointAccess",
+                },
+                Object {
+                  "Action": "lambda:InvokeFunction",
+                  "Condition": Object {
+                    "ForAnyValue:StringEquals": Object {
+                      "aws:CalledVia": Array [
+                        "s3-object-lambda.amazonaws.com",
+                      ],
+                    },
+                  },
+                  "Effect": "Allow",
+                  "Resource": "*",
+                  "Sid": "AllowLambdaInvocation",
+                },
+              ],
+              "Version": "2012-10-17",
+            },
+            "PolicyName": "admin-role-s3olap-policy",
+          },
+        ],
+        "RoleName": "RedactionAdminRole",
+      },
+      "Type": "AWS::IAM::Role",
+    },
+    "BillingRoleRedactionBillingRole72FB0886": Object {
+      "Properties": Object {
+        "AssumeRolePolicyDocument": Object {
+          "Statement": Array [
+            Object {
+              "Action": "sts:AssumeRole",
+              "Effect": "Allow",
+              "Principal": Object {
+                "AWS": Object {
+                  "Fn::Join": Array [
+                    "",
+                    Array [
+                      "arn:",
+                      Object {
+                        "Ref": "AWS::Partition",
+                      },
+                      ":iam::",
+                      Object {
+                        "Ref": "AWS::AccountId",
+                      },
+                      ":root",
+                    ],
+                  ],
+                },
+              },
+            },
+          ],
+          "Version": "2012-10-17",
+        },
+        "Policies": Array [
+          Object {
+            "PolicyDocument": Object {
+              "Statement": Array [
+                Object {
+                  "Action": "s3:ListBucket",
+                  "Effect": "Allow",
+                  "Resource": "*",
+                  "Sid": "AllowListingObjects",
+                },
+                Object {
+                  "Action": Array [
+                    "s3:GetAccessPointForObjectLambda",
+                    "s3:GetAccessPointConfigurationForObjectLambda",
+                    "s3:ListAccessPointsForObjectLambda",
+                    "s3:ListAllMyBuckets",
+                    "s3:ListAccessPoints",
+                    "s3:GetAccessPoint",
+                    "s3:GetAccountPublicAccessBlock",
+                    "s3:GetBucketPublicAccessBlock",
+                    "s3:GetBucketPolicyStatus",
+                    "s3:GetBucketAcl",
+                    "s3:GetAccessPointPolicyStatus",
+                  ],
+                  "Effect": "Allow",
+                  "Resource": "*",
+                  "Sid": "AllowListingBucketsAndAccessPoints",
+                },
+                Object {
+                  "Action": Array [
+                    "s3-object-lambda:Get*",
+                    "s3-object-lambda:List*",
+                  ],
+                  "Effect": "Allow",
+                  "Resource": Object {
+                    "Fn::Join": Array [
+                      "",
+                      Array [
+                        "arn:",
+                        Object {
+                          "Ref": "AWS::Partition",
+                        },
+                        ":s3-object-lambda:",
+                        Object {
+                          "Ref": "AWS::Region",
+                        },
+                        ":",
+                        Object {
+                          "Ref": "AWS::AccountId",
+                        },
+                        ":accesspoint/billing-s3olap-call-transcripts-known-pii",
+                      ],
+                    ],
+                  },
+                  "Sid": "AllowObjectLambdaAccess",
+                },
+                Object {
+                  "Action": Array [
+                    "s3:Get*",
+                    "s3:List*",
+                  ],
+                  "Condition": Object {
+                    "ForAnyValue:StringEquals": Object {
+                      "aws:CalledVia": Array [
+                        "s3-object-lambda.amazonaws.com",
+                      ],
+                    },
+                  },
+                  "Effect": "Allow",
+                  "Resource": "*",
+                  "Sid": "AllowStandardAccessPointAccess",
+                },
+                Object {
+                  "Action": "lambda:InvokeFunction",
+                  "Condition": Object {
+                    "ForAnyValue:StringEquals": Object {
+                      "aws:CalledVia": Array [
+                        "s3-object-lambda.amazonaws.com",
+                      ],
+                    },
+                  },
+                  "Effect": "Allow",
+                  "Resource": "*",
+                  "Sid": "AllowLambdaInvocation",
+                },
+              ],
+              "Version": "2012-10-17",
+            },
+            "PolicyName": "billing-role-s3olap-policy",
+          },
+        ],
+        "RoleName": "RedactionBillingRole",
+      },
+      "Type": "AWS::IAM::Role",
+    },
+    "CustSupportRoleRedactionCustSupportRole3F19038E": Object {
+      "Properties": Object {
+        "AssumeRolePolicyDocument": Object {
+          "Statement": Array [
+            Object {
+              "Action": "sts:AssumeRole",
+              "Effect": "Allow",
+              "Principal": Object {
+                "AWS": Object {
+                  "Fn::Join": Array [
+                    "",
+                    Array [
+                      "arn:",
+                      Object {
+                        "Ref": "AWS::Partition",
+                      },
+                      ":iam::",
+                      Object {
+                        "Ref": "AWS::AccountId",
+                      },
+                      ":root",
+                    ],
+                  ],
+                },
+              },
+            },
+          ],
+          "Version": "2012-10-17",
+        },
+        "Policies": Array [
+          Object {
+            "PolicyDocument": Object {
+              "Statement": Array [
+                Object {
+                  "Action": "s3:ListBucket",
+                  "Effect": "Allow",
+                  "Resource": "*",
+                  "Sid": "AllowListingObjects",
+                },
+                Object {
+                  "Action": Array [
+                    "s3:GetAccessPointForObjectLambda",
+                    "s3:GetAccessPointConfigurationForObjectLambda",
+                    "s3:ListAccessPointsForObjectLambda",
+                    "s3:ListAllMyBuckets",
+                    "s3:ListAccessPoints",
+                    "s3:GetAccessPoint",
+                    "s3:GetAccountPublicAccessBlock",
+                    "s3:GetBucketPublicAccessBlock",
+                    "s3:GetBucketPolicyStatus",
+                    "s3:GetBucketAcl",
+                    "s3:GetAccessPointPolicyStatus",
+                  ],
+                  "Effect": "Allow",
+                  "Resource": "*",
+                  "Sid": "AllowListingBucketsAndAccessPoints",
+                },
+                Object {
+                  "Action": Array [
+                    "s3-object-lambda:Get*",
+                    "s3-object-lambda:List*",
+                  ],
+                  "Effect": "Allow",
+                  "Resource": Object {
+                    "Fn::Join": Array [
+                      "",
+                      Array [
+                        "arn:",
+                        Object {
+                          "Ref": "AWS::Partition",
+                        },
+                        ":s3-object-lambda:",
+                        Object {
+                          "Ref": "AWS::Region",
+                        },
+                        ":",
+                        Object {
+                          "Ref": "AWS::AccountId",
+                        },
+                        ":accesspoint/custsupport-s3olap-call-transcripts-known-pii",
+                      ],
+                    ],
+                  },
+                  "Sid": "AllowObjectLambdaAccess",
+                },
+                Object {
+                  "Action": Array [
+                    "s3:Get*",
+                    "s3:List*",
+                  ],
+                  "Condition": Object {
+                    "ForAnyValue:StringEquals": Object {
+                      "aws:CalledVia": Array [
+                        "s3-object-lambda.amazonaws.com",
+                      ],
+                    },
+                  },
+                  "Effect": "Allow",
+                  "Resource": "*",
+                  "Sid": "AllowStandardAccessPointAccess",
+                },
+                Object {
+                  "Action": "lambda:InvokeFunction",
+                  "Condition": Object {
+                    "ForAnyValue:StringEquals": Object {
+                      "aws:CalledVia": Array [
+                        "s3-object-lambda.amazonaws.com",
+                      ],
+                    },
+                  },
+                  "Effect": "Allow",
+                  "Resource": "*",
+                  "Sid": "AllowLambdaInvocation",
+                },
+              ],
+              "Version": "2012-10-17",
+            },
+            "PolicyName": "customersupport-role-s3olap-policy",
+          },
+        ],
+        "RoleName": "RedactionCustSupportRole",
+      },
+      "Type": "AWS::IAM::Role",
+    },
     "GeneralRoleIamRoleD3D7532B": Object {
       "Properties": Object {
         "AssumeRolePolicyDocument": Object {

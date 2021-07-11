@@ -10,10 +10,10 @@ test('IAM role test', () => {
 
 
   expect(SynthUtils.toCloudFormation(stack)).toMatchSnapshot();
-  expect(SynthUtils.toCloudFormation(stack)).toCountResources('AWS::Serverless::Application', 1);
+  expect(SynthUtils.toCloudFormation(stack)).toCountResources('AWS::Serverless::Application', 4);
 
 
-  expect(SynthUtils.toCloudFormation(stack)).toCountResources('AWS::IAM::Role', 5);
+  expect(SynthUtils.toCloudFormation(stack)).toCountResources('AWS::IAM::Role', 8);
   expect(SynthUtils.toCloudFormation(stack)).toHaveResource('AWS::IAM::Role', {
     AssumeRolePolicyDocument: {
       Statement: [
@@ -399,8 +399,8 @@ test('IAM role test', () => {
     Timeout: 120,
   });
 
-  expect(SynthUtils.toCloudFormation(stack)).toCountResources('AWS::S3::Bucket', 1);
-  expect(SynthUtils.toCloudFormation(stack)).toCountResources('AWS::S3::BucketPolicy', 1);
+  expect(SynthUtils.toCloudFormation(stack)).toCountResources('AWS::S3::Bucket', 2);
+  expect(SynthUtils.toCloudFormation(stack)).toCountResources('AWS::S3::BucketPolicy', 2);
   expect(SynthUtils.toCloudFormation(stack)).toHaveResource('AWS::S3::BucketPolicy', {
     Bucket: {
       Ref: 'ComprehendS3olabSurveyResultBucketAED4B852',
@@ -530,35 +530,218 @@ test('IAM role test', () => {
       Version: '2012-10-17',
     },
   });
+  expect(SynthUtils.toCloudFormation(stack)).toHaveResource('AWS::S3::BucketPolicy', {
+    "Bucket": {
+      "Ref": "ComprehendS3olabTranscriptBucket53AA37B3"
+    },
+    "PolicyDocument": {
+      "Statement": [
+        {
+          "Action": [
+            "s3:GetBucket*",
+            "s3:List*",
+            "s3:DeleteObject*"
+          ],
+          "Effect": "Allow",
+          "Principal": {
+            "AWS": {
+              "Fn::GetAtt": [
+                "CustomS3AutoDeleteObjectsCustomResourceProviderRole3B1BD092",
+                "Arn"
+              ]
+            }
+          },
+          "Resource": [
+            {
+              "Fn::GetAtt": [
+                "ComprehendS3olabTranscriptBucket53AA37B3",
+                "Arn"
+              ]
+            },
+            {
+              "Fn::Join": [
+                "",
+                [
+                  {
+                    "Fn::GetAtt": [
+                      "ComprehendS3olabTranscriptBucket53AA37B3",
+                      "Arn"
+                    ]
+                  },
+                  "/*"
+                ]
+              ]
+            }
+          ]
+        },
+        {
+          "Action": "s3:GetObject",
+          "Condition": {
+            "StringEquals": {
+              "s3:DataAccessPointAccount": {
+                "Ref": "AWS::AccountId"
+              }
+            }
+          },
+          "Effect": "Allow",
+          "Principal": {
+            "AWS": {
+              "Fn::Join": [
+                "",
+                [
+                  "arn:",
+                  {
+                    "Ref": "AWS::Partition"
+                  },
+                  ":iam::",
+                  {
+                    "Ref": "AWS::AccountId"
+                  },
+                  ":root"
+                ]
+              ]
+            }
+          },
+          "Resource": {
+            "Fn::Join": [
+              "",
+              [
+                {
+                  "Fn::GetAtt": [
+                    "ComprehendS3olabSurveyResultBucketAED4B852",
+                    "Arn"
+                  ]
+                },
+                "/*"
+              ]
+            ]
+          },
+          "Sid": "AWSBucketGetPolicy"
+        },
+        {
+          "Action": "s3:PutObject",
+          "Effect": "Allow",
+          "Principal": {
+            "AWS": {
+              "Fn::Join": [
+                "",
+                [
+                  "arn:",
+                  {
+                    "Ref": "AWS::Partition"
+                  },
+                  ":iam::",
+                  {
+                    "Ref": "AWS::AccountId"
+                  },
+                  ":root"
+                ]
+              ]
+            }
+          },
+          "Resource": {
+            "Fn::Join": [
+              "",
+              [
+                {
+                  "Fn::GetAtt": [
+                    "ComprehendS3olabTranscriptBucket53AA37B3",
+                    "Arn"
+                  ]
+                },
+                "/*"
+              ]
+            ]
+          },
+          "Sid": "AWSBucketPutPolicy"
+        }
+      ],
+      "Version": "2012-10-17"
+    }
+  });
 
-  expect(SynthUtils.toCloudFormation(stack)).toCountResources('AWS::S3::AccessPoint', 1);
+  expect(SynthUtils.toCloudFormation(stack)).toCountResources('AWS::S3::AccessPoint', 4);
   expect(SynthUtils.toCloudFormation(stack)).toHaveResource('AWS::S3::AccessPoint', {
     Bucket: {
       Ref: 'ComprehendS3olabSurveyResultBucketAED4B852',
     },
   });
 
-  expect(SynthUtils.toCloudFormation(stack)).toCountResources('AWS::S3ObjectLambda::AccessPoint', 1);
+  expect(SynthUtils.toCloudFormation(stack)).toCountResources('AWS::S3ObjectLambda::AccessPoint', 4);
   expect(SynthUtils.toCloudFormation(stack)).toHaveResourceLike('AWS::S3ObjectLambda::AccessPoint', {
-    Name: 'accessctl-s3olap-survey-results-unknown-pii',
-    ObjectLambdaConfiguration: {
-      TransformationConfigurations: [
+    "Name": "accessctl-s3olap-survey-results-unknown-pii",
+    "ObjectLambdaConfiguration": {
+      "TransformationConfigurations": [
         {
-          Actions: [
-            'GetObject',
+          "Actions": [
+            "GetObject"
           ],
-          ContentTransformation: {
-            'Fn::GetAtt': [
-              'ComprehendS3olabObjectLambdaConfig96E4FB6D',
-              'Value',
-            ],
-          },
-        },
-      ],
-    },
+          "ContentTransformation": {
+            "Fn::GetAtt": [
+              "ComprehendS3olabGeneralObjectLambdaConfig9963CC93",
+              "Value"
+            ]
+          }
+        }
+      ]
+    }
+  });
+  expect(SynthUtils.toCloudFormation(stack)).toHaveResourceLike('AWS::S3ObjectLambda::AccessPoint', {
+    "Name": "admin-s3olap-call-transcripts-known-pii",
+    "ObjectLambdaConfiguration": {
+      "TransformationConfigurations": [
+        {
+          "Actions": [
+            "GetObject"
+          ],
+          "ContentTransformation": {
+            "Fn::GetAtt": [
+              "ComprehendS3olabAdminObjectLambdaConfig548D7518",
+              "Value"
+            ]
+          }
+        }
+      ]
+    }
+  });
+  expect(SynthUtils.toCloudFormation(stack)).toHaveResourceLike('AWS::S3ObjectLambda::AccessPoint', {
+    "Name": "billing-s3olap-call-transcripts-known-pii",
+    "ObjectLambdaConfiguration": {
+      "TransformationConfigurations": [
+        {
+          "Actions": [
+            "GetObject"
+          ],
+          "ContentTransformation": {
+            "Fn::GetAtt": [
+              "ComprehendS3olabBillingObjectLambdaConfig384DA850",
+              "Value"
+            ]
+          }
+        }
+      ]
+    }
+  });
+  expect(SynthUtils.toCloudFormation(stack)).toHaveResourceLike('AWS::S3ObjectLambda::AccessPoint', {
+    "Name": "custsupport-s3olap-call-transcripts-known-pii",
+    "ObjectLambdaConfiguration": {
+      "TransformationConfigurations": [
+        {
+          "Actions": [
+            "GetObject"
+          ],
+          "ContentTransformation": {
+            "Fn::GetAtt": [
+              "ComprehendS3olabCustomerSupportObjectLambdaConfigC8BCFACA",
+              "Value"
+            ]
+          }
+        }
+      ]
+    }
   });
 
-  expect(SynthUtils.toCloudFormation(stack)).toCountResources('AWS::CloudFormation::CustomResource', 1);
+  expect(SynthUtils.toCloudFormation(stack)).toCountResources('AWS::CloudFormation::CustomResource', 4);
   expect(SynthUtils.toCloudFormation(stack)).toHaveResource('AWS::CloudFormation::CustomResource', {
     ServiceToken: {
       'Fn::GetAtt': [

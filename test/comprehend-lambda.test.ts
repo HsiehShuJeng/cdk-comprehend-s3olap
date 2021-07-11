@@ -1,7 +1,6 @@
 import { SynthUtils } from '@aws-cdk/assert';
 import '@aws-cdk/assert/jest';
 import * as cdk from '@aws-cdk/core';
-// import { ServerlessApp } from '../src/cdk-comprehend-s3olap';
 import { AccessConrtolLambda } from '../src/comprehend-lambdas';
 
 test('Comprehend Lambda test', () => {

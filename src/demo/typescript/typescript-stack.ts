@@ -5,7 +5,20 @@ import { ComprehendS3olab } from '../../cdk-comprehend-s3olap';
 class TypescriptStack extends cdk.Stack {
   constructor(scope: cdk.Construct, id: string, props?: cdk.StackProps) {
     super(scope, id, props);
-    const s3olab = new ComprehendS3olab(this, 'ComprehendS3olab', {});
+    const s3olab = new ComprehendS3olab(this, 'PiiDemo', {
+      adminRedactionLambdaConfig: {
+        maskCharacter: ' ',
+        unsupportedFileHandling: 'PASS',
+      },
+      billingRedactionLambdaConfig: {
+        maskMode: 'REPLACE_WITH_PII_ENTITY_TYPE',
+        piiEntityTypes: 'AGE,DRIVER_ID,IP_ADDRESS,MAC_ADDRESS,PASSPORT_NUMBER,PASSWORD,SSN',
+      },
+      cusrtSupportRedactionLambdaConfig: {
+        maskMode: 'REPLACE_WITH_PII_ENTITY_TYPE',
+        piiEntityTypes: ' BANK_ACCOUNT_NUMBER,BANK_ROUTING,CREDIT_DEBIT_CVV,CREDIT_DEBIT_EXPIRY,CREDIT_DEBIT_NUMBER,SSN',
+      },
+    });
 
     new cdk.CfnOutput(this, 'OPiiAccessControlLambdaArn', { value: s3olab.piiAccessConrtolLambdaArn });
     new cdk.CfnOutput(this, 'OS3ObjectLambdaArn', { value: s3olab.s3objectLambdaAccessControlArn });
