@@ -28,12 +28,12 @@ export interface ComprehendS3olabProps extends AccessConrtolLambdaProps, General
   readonly accessControlAccessPointName?: string;
   /**
    * The parameters needed for the `ComprehendPiiAccessControlS3ObjectLambda` function.
-   * 
+   *
    */
   readonly accessControlLambdaConfig?: AccessConrtolLambdaProps;
   /**
    * The manageable properties for the IAM role used to access the `survey-results.txt` data.
-   * 
+   *
    */
   readonly generalRoleConfig?: GeneralRoleProps;
 }
@@ -121,14 +121,6 @@ export class ComprehendS3olab extends cdk.Construct {
       },
     ));
 
-    const surveyFilePath = path.join(__dirname, 'files/access_control');
-    if (fs.existsSync(surveyFilePath)) {
-      new s3delpoy.BucketDeployment(this, 'DeploySurveyResultFiles', {
-        sources: [s3delpoy.Source.asset(surveyFilePath)],
-        destinationBucket: surveyBucket,
-      });
-    }
-
     surveyBucket.node.addDependency(accessControlLambda);
     surveyBucket.node.addDependency(generalRole);
 
@@ -139,7 +131,7 @@ export class ComprehendS3olab extends cdk.Construct {
     this.piiAccessConrtolLambdaArn = lambdaArnCaptor.lambdaArn;
     const surveyAccessPoint = new s3.CfnAccessPoint(this, 'AccessControlAccessPoint', {
       bucket: surveyBucket.bucketName,
-      name: accessControlAccessPointName,
+      name: `${accessControlAccessPointName}-${this.generateS3Prefix(6)}`,
     });
     const accessControlObjectLambda = new s3objectlambda.CfnAccessPoint(this, 'LambdaAccessPoint', {
       name: objectLambdaAccessPointName,
@@ -159,6 +151,15 @@ export class ComprehendS3olab extends cdk.Construct {
         ],
       },
     });
+    const surveyFilePath = path.join(__dirname, 'files/access_control');
+    console.log(surveyFilePath);
+    if (fs.existsSync(surveyFilePath)) {
+      const deployFiles = new s3delpoy.BucketDeployment(this, 'DeploySurveyResultFiles', {
+        sources: [s3delpoy.Source.asset(surveyFilePath)],
+        destinationBucket: surveyBucket,
+      });
+      deployFiles.node.addDependency(accessControlObjectLambda);
+    };
     this.s3objectLambdaAccessControlArn = cdk.Token.asString(cdk.Fn.getAtt(accessControlObjectLambda.logicalId, 'Arn'));
     accessControlObjectLambda.node.addDependency(lambdaArnCaptor);
   }
