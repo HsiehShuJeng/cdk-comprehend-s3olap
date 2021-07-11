@@ -11,11 +11,10 @@ import * as cdk from '@aws-cdk/core';
 import * as cr from '@aws-cdk/custom-resources';
 import { AccessConrtolLambda, AccessConrtolLambdaProps, RedactionLambda, RedactionLambdaProps } from './comprehend-lambdas';
 import {
-  CommonIamRoleProps,
   GeneralRole, GeneralRoleProps,
   AdminRole, AdminRoleProps,
   BillingRole, BillingRoleProps,
-  CustSupportRole, CustSupportRoleProps
+  CustSupportRole, CustSupportRoleProps,
 } from './iam-roles';
 
 export enum IamRoleName {
@@ -28,25 +27,25 @@ export enum IamRoleName {
 export interface s3AccessPointNames {
   /**
    * The name of the S3 aceess point for the general role in the access control case.
-   * 
+   *
    * @default 'accessctl-s3-ap-survey-results-unknown-pii'
    */
   readonly general: string;
   /**
    * The name of the S3 aceess point for the admin role in the redaction case.
-   * 
+   *
    * @default 'admin-s3-access-point-call-transcripts-known-pii'
    */
   readonly admin: string;
   /**
    * The name of the S3 aceess point for the billing role in the redaction case.
-   * 
+   *
    * @default 'billing-s3-access-point-call-transcripts-known-pii'
    */
   readonly billing: string;
   /**
   * The name of the S3 aceess point for the customer support role in the redaction case.
-  * 
+  *
   * @default 'cs-s3-access-point-call-transcripts-known-pii'
   */
   readonly customerSupport: string;
@@ -154,7 +153,7 @@ export class ComprehendS3olab extends cdk.Construct {
       general: props?.s3AccessPointNames?.general ?? 'accessctl-s3-ap-survey-results-unknown-pii',
       admin: props?.s3AccessPointNames?.admin ?? 'admin-s3-access-point-call-transcripts-known-pii',
       billing: props?.s3AccessPointNames?.billing ?? 'billing-s3-access-point-call-transcripts-known-pii',
-      customerSupport: props?.s3AccessPointNames?.customerSupport ?? 'cs-s3-access-point-call-transcripts-known-pii'
+      customerSupport: props?.s3AccessPointNames?.customerSupport ?? 'cs-s3-access-point-call-transcripts-known-pii',
     };
     // object Lambda
     const acsemanticVersion = props?.accessControlLambdaConfig?.semanticVersion ?? '1.0.2';
@@ -200,17 +199,17 @@ export class ComprehendS3olab extends cdk.Construct {
     const adminRole = new AdminRole(this, 'Admin', {
       objectLambdaAccessPointName: adminRoleConfig.objectLambdaAccessPointName,
       policyName: adminRoleConfig.policyName,
-      iamRoleName: adminRoleConfig.iamRoleName
+      iamRoleName: adminRoleConfig.iamRoleName,
     });
     const billingRole = new BillingRole(this, 'Billing', {
       objectLambdaAccessPointName: billingRoleConfig.objectLambdaAccessPointName,
       policyName: billingRoleConfig.policyName,
-      iamRoleName: billingRoleConfig.iamRoleName
+      iamRoleName: billingRoleConfig.iamRoleName,
     });
     const custSupportRole = new CustSupportRole(this, 'CustSupport', {
       objectLambdaAccessPointName: custSupportRoleConfig.objectLambdaAccessPointName,
       policyName: custSupportRoleConfig.policyName,
-      iamRoleName: custSupportRoleConfig.iamRoleName
+      iamRoleName: custSupportRoleConfig.iamRoleName,
     });
 
     // S3 buckets
@@ -276,7 +275,7 @@ export class ComprehendS3olab extends cdk.Construct {
       generalPartialLambdaName: 'PiiAccessControlFunction',
       adminPartialLambdaName: 'admin-Comprehe-PiiRedactionFunction',
       billingPartialLambdaName: 'billing-Compre-PiiRedactionFunction',
-      custSupportPartialLambdaName: 'customersuppor-PiiRedactionFunction'
+      custSupportPartialLambdaName: 'customersuppor-PiiRedactionFunction',
     });
     lambdaArnCaptor.node.addDependency(accessControlLambda);
     lambdaArnCaptor.node.addDependency(adminRedactLambda);
@@ -382,7 +381,7 @@ export class ComprehendS3olab extends cdk.Construct {
     const surveyFilePath = path.join(__dirname, 'files/access_control');
     const redactionFilePath = path.join(__dirname, 'files/redaction');
     console.log(`surveyFilePath: ${surveyFilePath}`);
-    console.log(`redactionFilePath: ${redactionFilePath}`)
+    console.log(`redactionFilePath: ${redactionFilePath}`);
     if (fs.existsSync(surveyFilePath)) {
       const deployFiles = new s3delpoy.BucketDeployment(this, 'DeploySurveyResultFiles', {
         sources: [s3delpoy.Source.asset(surveyFilePath)],
@@ -468,22 +467,22 @@ export class ComprehendS3olab extends cdk.Construct {
 
   /**
    * Gets properties related to the IAM roles.
-   * 
+   *
    * @param roleName the name of the corresponding IAM role.
    * @param roleConfig the corresponding parameter setting for one of the IAM role.
    * @returns the property group.
    */
-  private getIamRoleConfig = (roleName: string, roleConfig?: CommonIamRoleProps) => {
+  private getIamRoleConfig = (roleName: string, roleConfig?: GeneralRoleProps | AdminRoleProps | BillingRoleProps | CustSupportRoleProps) => {
     return {
       policyName: roleConfig?.policyName ?? this._getDefaultPolicyName(roleName),
       objectLambdaAccessPointName: roleConfig?.objectLambdaAccessPointName ?? this._getObjectLambdaAccessPointName(roleName),
-      iamRoleName: roleConfig?.policyName ?? this._getRoleName(roleName)
-    }
+      iamRoleName: roleConfig?.policyName ?? this._getRoleName(roleName),
+    };
   }
 
   /**
    * Returns the policy name according to the IAM role.
-   * 
+   *
    * @param roleName the name of the corresponding IAM role.
    */
   private _getDefaultPolicyName(roleName: string): string {
@@ -493,14 +492,14 @@ export class ComprehendS3olab extends cdk.Construct {
       case IamRoleName.BILLING: return 'billing-role-s3olap-policy';
       case IamRoleName.CUST_SUPPORT: return 'customersupport-role-s3olap-policy';
       default:
-        console.log('Check the name of the IAM role, there might be a problematci spelling.')
+        console.log('Check the name of the IAM role, there might be a problematci spelling.');
         return 'undefined';
     }
   }
 
   /**
    * Returns the corresponding name for the access point of the S3 Object Lambda according to the IAM role.
-   * 
+   *
    * @param roleName the name of the corresponding IAM role.
    */
   private _getObjectLambdaAccessPointName(roleName: string): string {
@@ -510,14 +509,14 @@ export class ComprehendS3olab extends cdk.Construct {
       case IamRoleName.BILLING: return 'billing-s3olap-call-transcripts-known-pii';
       case IamRoleName.CUST_SUPPORT: return 'custsupport-s3olap-call-transcripts-known-pii';
       default:
-        console.log('Check the name of the IAM role, there might be a problematci spelling.')
+        console.log('Check the name of the IAM role, there might be a problematci spelling.');
         return 'undefined';
     }
   }
 
   /**
    * Returns the corresponding name for the IAM role.
-   * 
+   *
    * @param roleName the name of the corresponding IAM role.
    */
   private _getRoleName(roleName: string): string {
@@ -527,7 +526,7 @@ export class ComprehendS3olab extends cdk.Construct {
       case IamRoleName.BILLING: return 'RedactionBillingRole';
       case IamRoleName.CUST_SUPPORT: return 'RedactionCustSupportRole';
       default:
-        console.log('Check the name of the IAM role, there might be a problematci spelling.')
+        console.log('Check the name of the IAM role, there might be a problematci spelling.');
         return 'undefined';
     }
   }

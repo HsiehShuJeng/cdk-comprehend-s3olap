@@ -1,23 +1,7 @@
 import * as iam from '@aws-cdk/aws-iam';
 import * as cdk from '@aws-cdk/core';
 
-
-export interface CommonIamRoleProps {
-  /**
-   * The name of the IAM policy for the IAM role.
-   */
-  readonly policyName?: string;
-  /**
-   * The name of the object Lambda access point, which will be the same as the S3 acceess point for the S3 bucket in the demostration.
-   */
-  readonly objectLambdaAccessPointName?: string;
-  /**
-   * The name of the IAM role.
-   */
-  readonly iamRoleName?: string;
-}
-
-export interface GeneralRoleProps extends CommonIamRoleProps {
+export interface GeneralRoleProps {
   /**
    * The name of the IAM policy for the IAM role.
    *
@@ -142,10 +126,10 @@ export class GeneralRole extends cdk.Construct {
 }
 
 
-export interface AdminRoleProps extends CommonIamRoleProps {
+export interface AdminRoleProps {
   /**
    * The name of the IAM policy for the IAM role.
-   * 
+   *
    * @default 'admin-role-s3olap-policy'
    */
   readonly policyName?: string;
@@ -258,10 +242,10 @@ export class AdminRole extends cdk.Construct {
   }
 }
 
-export interface BillingRoleProps extends CommonIamRoleProps {
+export interface BillingRoleProps {
   /**
    * The name of the IAM policy for the IAM role.
-   * 
+   *
    * @default 'billing-role-s3olap-policy'
    */
   readonly policyName?: string;
@@ -374,10 +358,10 @@ export class BillingRole extends cdk.Construct {
   }
 }
 
-export interface CustSupportRoleProps extends CommonIamRoleProps {
+export interface CustSupportRoleProps {
   /**
    * The name of the IAM policy for the IAM role.
-   * 
+   *
    * @default 'customersupport-role-s3olap-policy'
    */
   readonly policyName?: string;
