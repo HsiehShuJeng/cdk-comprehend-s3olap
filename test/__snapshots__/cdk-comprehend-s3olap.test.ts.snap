@@ -148,7 +148,7 @@ Object {
         "Bucket": Object {
           "Ref": "ComprehendS3olabSurveyResultBucketAED4B852",
         },
-        "Name": "accessctl-s3-ap-survey-results-unknown-pii-q0gghe",
+        "Name": "accessctl-s3-ap-survey-results-unknown-pii-atwtey",
       },
       "Type": "AWS::S3::AccessPoint",
     },
@@ -179,7 +179,7 @@ Object {
                 Object {
                   "Ref": "AWS::AccountId",
                 },
-                ":accesspoint/admin-s3-access-point-call-transcripts-known-pii-40d8o1",
+                ":accesspoint/admin-s3-access-point-call-transcripts-known-pii-hjs01x",
               ],
             ],
           },
@@ -620,7 +620,7 @@ Object {
         "Bucket": Object {
           "Ref": "ComprehendS3olabTranscriptBucket53AA37B3",
         },
-        "Name": "admin-s3-access-point-call-transcripts-known-pii-40d8o1",
+        "Name": "admin-s3-access-point-call-transcripts-known-pii-hjs01x",
       },
       "Type": "AWS::S3::AccessPoint",
     },
@@ -651,7 +651,7 @@ Object {
                 Object {
                   "Ref": "AWS::AccountId",
                 },
-                ":accesspoint/billing-s3-access-point-call-transcripts-known-pii-hg8eel",
+                ":accesspoint/billing-s3-access-point-call-transcripts-known-pii-48byi8",
               ],
             ],
           },
@@ -1092,7 +1092,7 @@ Object {
         "Bucket": Object {
           "Ref": "ComprehendS3olabTranscriptBucket53AA37B3",
         },
-        "Name": "billing-s3-access-point-call-transcripts-known-pii-hg8eel",
+        "Name": "billing-s3-access-point-call-transcripts-known-pii-48byi8",
       },
       "Type": "AWS::S3::AccessPoint",
     },
@@ -1484,6 +1484,13 @@ Object {
       "Type": "Custom::LogRetention",
     },
     "ComprehendS3olabCustomerSupportLambdaAccessPoint80111B00": Object {
+      "DependsOn": Array [
+        "ComprehendS3olabCustomSupportLambdaArnCaptorCustomResourceRoleC17C1626",
+        "ComprehendS3olabCustomSupportLambdaArnCaptorCustSupportGeneralSearchUnit669DC929",
+        "ComprehendS3olabCustomSupportLambdaArnCaptorLambdaArnExpertCE7DE813",
+        "ComprehendS3olabCustomSupportLambdaArnCaptorProviderframeworkonEventLogRetentionA78675C1",
+        "ComprehendS3olabCustomSupportLambdaArnCaptorProviderframeworkonEventB3809E68",
+      ],
       "Properties": Object {
         "Name": "custsupport-s3olap-call-transcripts-known-pii",
         "ObjectLambdaConfiguration": Object {
@@ -1503,7 +1510,7 @@ Object {
                 Object {
                   "Ref": "AWS::AccountId",
                 },
-                ":accesspoint/cs-s3-access-point-call-transcripts-known-pii-qpqgbx",
+                ":accesspoint/cs-s3-access-point-call-transcripts-known-pii-6usd1d",
               ],
             ],
           },
@@ -1557,7 +1564,7 @@ Object {
         "Bucket": Object {
           "Ref": "ComprehendS3olabTranscriptBucket53AA37B3",
         },
-        "Name": "cs-s3-access-point-call-transcripts-known-pii-qpqgbx",
+        "Name": "cs-s3-access-point-call-transcripts-known-pii-6usd1d",
       },
       "Type": "AWS::S3::AccessPoint",
     },
@@ -1712,7 +1719,7 @@ Object {
                 Object {
                   "Ref": "AWS::AccountId",
                 },
-                ":accesspoint/accessctl-s3-ap-survey-results-unknown-pii-q0gghe",
+                ":accesspoint/accessctl-s3-ap-survey-results-unknown-pii-atwtey",
               ],
             ],
           },
@@ -2102,13 +2109,6 @@ Object {
       "Type": "AWS::Serverless::Application",
     },
     "ComprehendS3olabServerlessRedactLambdaCustSupportComprehendPiiAccessControlS3ObjectLambda376EF5E8": Object {
-      "DependsOn": Array [
-        "ComprehendS3olabCustomSupportLambdaArnCaptorCustomResourceRoleC17C1626",
-        "ComprehendS3olabCustomSupportLambdaArnCaptorCustSupportGeneralSearchUnit669DC929",
-        "ComprehendS3olabCustomSupportLambdaArnCaptorLambdaArnExpertCE7DE813",
-        "ComprehendS3olabCustomSupportLambdaArnCaptorProviderframeworkonEventLogRetentionA78675C1",
-        "ComprehendS3olabCustomSupportLambdaArnCaptorProviderframeworkonEventB3809E68",
-      ],
       "Properties": Object {
         "Location": Object {
           "ApplicationId": "arn:aws:serverlessrepo:us-east-1:839782855223:applications/ComprehendPiiRedactionS3ObjectLambda",
@@ -2142,7 +2142,7 @@ Object {
         "ComprehendS3olabServerlessLambdaComprehendPiiAccessControlS3ObjectLambdaC1DAEB36",
       ],
       "Properties": Object {
-        "BucketName": "survey-results-unknown-pii-i60fo8",
+        "BucketName": "survey-results-unknown-pii-03npcp",
       },
       "Type": "AWS::S3::Bucket",
       "UpdateReplacePolicy": "Delete",
@@ -2315,7 +2315,7 @@ Object {
         "ComprehendS3olabServerlessRedactLambdaCustSupportComprehendPiiAccessControlS3ObjectLambda376EF5E8",
       ],
       "Properties": Object {
-        "BucketName": "call-transcripts-known-pii-puzoql",
+        "BucketName": "call-transcripts-known-pii-r5gfqt",
       },
       "Type": "AWS::S3::Bucket",
       "UpdateReplacePolicy": "Delete",

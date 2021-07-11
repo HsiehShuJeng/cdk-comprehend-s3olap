@@ -146,7 +146,7 @@ export class ComprehendS3olab extends cdk.Construct {
     const adminRoleConfig = this.getIamRoleConfig(IamRoleName.ADMIN, props?.adminRoleConfig);
     const billingRoleConfig = this.getIamRoleConfig(IamRoleName.BILLING, props?.billingRoleConfig);
     const custSupportRoleConfig = this.getIamRoleConfig(IamRoleName.CUST_SUPPORT, props?.custSupportRoleConfig);
-    // s3 bucekt and its access point
+    // s3 bucekt and its access points
     const surveyBucketPrefix = props.surveyBucketPrefix ?? this.generateS3Prefix(6);
     const transcriptsBucketPrefix = props.transcriptsBucketPrefix ?? this.generateS3Prefix(6);
     const s3AccessPointNames: s3AccessPointNames = {
@@ -417,7 +417,7 @@ export class ComprehendS3olab extends cdk.Construct {
     accessControlObjectLambda.node.addDependency(generalLambdaArnCaptor);
     adminObjectLambda.node.addDependency(adminLambdaArnCaptor);
     billingObjectLambda.node.addDependency(billingLambdaArnCaptor);
-    custSupportRedactLambda.node.addDependency(customSupportLambdaArnCaptor);
+    customerSupportObjectLambda.node.addDependency(customSupportLambdaArnCaptor);
   }
 
   private generateS3Prefix(length: number): string {
