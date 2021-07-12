@@ -23,7 +23,7 @@ const project = new AwsCdkConstructLibrary({
   cdkVersion: '1.112.0',
   defaultReleaseBranch: 'main',
   name: 'cdk-comprehend-s3olap',
-  repositoryUrl: 'git@scott:HsiehShuJeng/cdk-comprehend-s3olap.git',
+  repositoryUrl: 'https://github.com/HsiehShuJeng/cdk-comprehend-s3olap.git',
   projectType: ProjectType.LIB,
 
   devDeps: ['esbuild'],

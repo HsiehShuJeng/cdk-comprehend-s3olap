@@ -2,7 +2,7 @@
   "name": "cdk-comprehend-s3olap",
   "repository": {
     "type": "git",
-    "url": "git@scott:HsiehShuJeng/cdk-comprehend-s3olap.git"
+    "url": "https://github.com/HsiehShuJeng/cdk-comprehend-s3olap.git"
   },
   "scripts": {
     "clobber": "npx projen clobber",
