@@ -107,6 +107,14 @@ export interface ComprehendS3olabProps {
    * @default true
    */
   readonly generateRandomCharacters?: boolean;
+  /**
+   * The directory path where `files/access_control/*.txt` and `files/redaction/*.txt` will be put.
+   *
+   * DO NOT INCLUDE `/` in the end.
+   *
+   * @default __dirname
+   */
+  readonly exampleFileDir?: string;
 }
 
 /**
@@ -147,6 +155,7 @@ export class ComprehendS3olab extends cdk.Construct {
   public readonly customerSupportLambdaArn: string;
   constructor(scope: cdk.Construct, id: string, props: ComprehendS3olabProps) {
     super(scope, id);
+    const exampleFileDir = props?.exampleFileDir ?? __dirname;
     const generateRandomCharacters = props?.generateRandomCharacters ?? true;
     // prerequisites for IAM roles
     const generalRoleConfig = this.getIamRoleConfig(IamRoleName.GENERAL, props?.generalRoleConfig);
@@ -222,7 +231,7 @@ export class ComprehendS3olab extends cdk.Construct {
 
     // S3 buckets
     const surveyBucket = new s3.Bucket(this, 'SurveyResultBucket', {
-      bucketName: (generateRandomCharacters) ? `survey-results-unknown-pii-${surveyBucketPrefix}`: 'survey-results-unknown-pii-123456',
+      bucketName: (generateRandomCharacters) ? `survey-results-unknown-pii-${surveyBucketPrefix}` : 'survey-results-unknown-pii-123456',
       removalPolicy: cdk.RemovalPolicy.DESTROY,
       autoDeleteObjects: true,
     });
@@ -246,7 +255,7 @@ export class ComprehendS3olab extends cdk.Construct {
       },
     ));
     const transcriptBucket = new s3.Bucket(this, 'TranscriptBucket', {
-      bucketName: (generateRandomCharacters) ? `call-transcripts-known-pii-${transcriptsBucketPrefix}`: 'call-transcripts-known-pii-1234456',
+      bucketName: (generateRandomCharacters) ? `call-transcripts-known-pii-${transcriptsBucketPrefix}` : 'call-transcripts-known-pii-1234456',
       removalPolicy: cdk.RemovalPolicy.DESTROY,
       autoDeleteObjects: true,
     });
@@ -397,8 +406,8 @@ export class ComprehendS3olab extends cdk.Construct {
     });
 
     // Automatic uploading
-    const surveyFilePath = path.join(__dirname, 'files/access_control');
-    const redactionFilePath = path.join(__dirname, 'files/redaction');
+    const surveyFilePath = path.join(exampleFileDir, 'files/access_control');
+    const redactionFilePath = path.join(exampleFileDir, 'files/redaction');
     console.log(`surveyFilePath: ${surveyFilePath}`);
     console.log(`redactionFilePath: ${redactionFilePath}`);
     if (fs.existsSync(surveyFilePath)) {
