@@ -8,10 +8,8 @@ test('comprehend-s3olap test', () => {
   const stack = new cdk.Stack(app, 'ker-ker');
   new ComprehendS3olab(stack, 'ComprehendS3olab', {});
 
-
   expect(SynthUtils.toCloudFormation(stack)).toMatchSnapshot();
   expect(SynthUtils.toCloudFormation(stack)).toCountResources('AWS::Serverless::Application', 4);
-
 
   expect(SynthUtils.toCloudFormation(stack)).toCountResources('AWS::IAM::Role', 11);
   expect(SynthUtils.toCloudFormation(stack)).toHaveResource('AWS::IAM::Role', {

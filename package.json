@@ -95,8 +95,8 @@
     "aws-s3objectlambda",
     "aws-sam",
     "cdk",
+    "lambda",
     "machine-learning",
-    "object-lambda",
     "pii",
     "s3",
     "scott.hsieh"
