@@ -1820,11 +1820,6 @@ caseless@~0.12.0:
   resolved "https://registry.yarnpkg.com/caseless/-/caseless-0.12.0.tgz#1b681c21ff84033c826543090689420d187151dc"
   integrity sha1-G2gcIf+EAzyCZUMJBolCDRhxUdw=
 
-cfn-response@^1.0.1:
-  version "1.0.1"
-  resolved "https://registry.yarnpkg.com/cfn-response/-/cfn-response-1.0.1.tgz#a8ec03950c0683c51495e8ca680d9dc0b884b137"
-  integrity sha1-qOwDlQwGg8UUlejKaA2dwLiEsTc=
-
 chalk@^2.0.0, chalk@^2.4.2:
   version "2.4.2"
   resolved "https://registry.yarnpkg.com/chalk/-/chalk-2.4.2.tgz#cd42541677a54333cf541a49108c1432b44c9424"

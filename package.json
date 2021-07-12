@@ -82,12 +82,10 @@
     "@aws-cdk/aws-sam": "^1.112.0",
     "@aws-cdk/core": "^1.112.0",
     "@aws-cdk/custom-resources": "^1.112.0",
-    "aws-sdk": "^2.943.0",
-    "cfn-response": "^1.0.1"
+    "aws-sdk": "^2.943.0"
   },
   "bundledDependencies": [
-    "aws-sdk",
-    "cfn-response"
+    "aws-sdk"
   ],
   "keywords": [
     "AWS::S3ObjectLambda",
