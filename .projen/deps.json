@@ -98,6 +98,10 @@
       "type": "bundled"
     },
     {
+      "name": "esbuild",
+      "type": "bundled"
+    },
+    {
       "name": "@aws-cdk/aws-iam",
       "version": "^1.112.0",
       "type": "peer"
