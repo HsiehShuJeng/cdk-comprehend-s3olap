@@ -24,7 +24,7 @@ export enum IamRoleName {
   CUST_SUPPORT = 'CustSupport'
 }
 
-export interface s3AccessPointNames {
+export interface S3AccessPointNames {
   /**
    * The name of the S3 aceess point for the general role in the access control case.
    *
@@ -67,7 +67,7 @@ export interface ComprehendS3olabProps {
   /**
    * The names of the S3 access points for the access control case and redaction case.
    */
-  readonly s3AccessPointNames?: s3AccessPointNames;
+  readonly s3AccessPointNames?: S3AccessPointNames;
   /**
    * The parameters needed for the `ComprehendPiiAccessControlS3ObjectLambda` function.
    *
@@ -156,7 +156,7 @@ export class ComprehendS3olab extends cdk.Construct {
     // s3 bucekt and its access points
     const surveyBucketPrefix = props.surveyBucketPrefix ?? this.generateS3Prefix(6);
     const transcriptsBucketPrefix = props.transcriptsBucketPrefix ?? this.generateS3Prefix(6);
-    const s3AccessPointNames: s3AccessPointNames = {
+    const s3AccessPointNames: S3AccessPointNames = {
       general: props?.s3AccessPointNames?.general ?? ((generateRandomCharacters) ? `accessctl-s3-ap-survey-results-unknown-pii-${this.generateS3Prefix(6)}` : 'accessctl-s3-ap-survey-results-unknown-pii'),
       admin: props?.s3AccessPointNames?.admin ?? ((generateRandomCharacters) ? `admin-s3-access-point-call-transcripts-known-pii-${this.generateS3Prefix(6)}` : 'admin-s3-access-point-call-transcripts-known-pii'),
       billing: props?.s3AccessPointNames?.billing ?? ((generateRandomCharacters) ? `bill-s3-access-point-call-transcripts-known-pii-${this.generateS3Prefix(6)}` : 'bill-s3-access-point-call-transcripts-known-pii'),
