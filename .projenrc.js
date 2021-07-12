@@ -13,7 +13,7 @@ const project = new AwsCdkConstructLibrary({
     'machine-learning',
     'AWS::S3ObjectLambda',
     'aws-s3objectlambda',
-    'lambda'
+    'lambda',
   ],
 
   catalog: {

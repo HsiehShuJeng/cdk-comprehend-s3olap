@@ -101,6 +101,12 @@ export interface ComprehendS3olabProps {
    * The manageable properties for the customer support IAM role in the redaction case.
    */
   readonly custSupportRoleConfig?: CustSupportRoleProps;
+  /**
+   * For distinguish test and normal deployment.
+   *
+   * @default true
+   */
+  readonly generateRandomCharacters?: boolean;
 }
 
 /**
@@ -141,6 +147,7 @@ export class ComprehendS3olab extends cdk.Construct {
   public readonly customerSupportLambdaArn: string;
   constructor(scope: cdk.Construct, id: string, props: ComprehendS3olabProps) {
     super(scope, id);
+    const generateRandomCharacters = props?.generateRandomCharacters ?? true;
     // prerequisites for IAM roles
     const generalRoleConfig = this.getIamRoleConfig(IamRoleName.GENERAL, props?.generalRoleConfig);
     const adminRoleConfig = this.getIamRoleConfig(IamRoleName.ADMIN, props?.adminRoleConfig);
@@ -150,10 +157,10 @@ export class ComprehendS3olab extends cdk.Construct {
     const surveyBucketPrefix = props.surveyBucketPrefix ?? this.generateS3Prefix(6);
     const transcriptsBucketPrefix = props.transcriptsBucketPrefix ?? this.generateS3Prefix(6);
     const s3AccessPointNames: s3AccessPointNames = {
-      general: props?.s3AccessPointNames?.general ?? 'accessctl-s3-ap-survey-results-unknown-pii',
-      admin: props?.s3AccessPointNames?.admin ?? 'admin-s3-access-point-call-transcripts-known-pii',
-      billing: props?.s3AccessPointNames?.billing ?? 'bill-s3-access-point-call-transcripts-known-pii',
-      customerSupport: props?.s3AccessPointNames?.customerSupport ?? 'cs-s3-access-point-call-transcripts-known-pii',
+      general: props?.s3AccessPointNames?.general ?? ((generateRandomCharacters) ? `accessctl-s3-ap-survey-results-unknown-pii-${this.generateS3Prefix(6)}` : 'accessctl-s3-ap-survey-results-unknown-pii'),
+      admin: props?.s3AccessPointNames?.admin ?? ((generateRandomCharacters) ? `admin-s3-access-point-call-transcripts-known-pii-${this.generateS3Prefix(6)}` : 'admin-s3-access-point-call-transcripts-known-pii'),
+      billing: props?.s3AccessPointNames?.billing ?? ((generateRandomCharacters) ? `bill-s3-access-point-call-transcripts-known-pii-${this.generateS3Prefix(6)}` : 'bill-s3-access-point-call-transcripts-known-pii'),
+      customerSupport: props?.s3AccessPointNames?.customerSupport ?? ((generateRandomCharacters) ? `cs-s3-access-point-call-transcripts-known-pii-${this.generateS3Prefix(6)}` : 'cs-s3-access-point-call-transcripts-known-pii'),
     };
     // object Lambda
     const acsemanticVersion = props?.accessControlLambdaConfig?.semanticVersion ?? '1.0.2';
@@ -300,19 +307,19 @@ export class ComprehendS3olab extends cdk.Construct {
     // S3 access points
     const generalAccessPoint = new s3.CfnAccessPoint(this, 'AccessControlS3AccessPoint', {
       bucket: surveyBucket.bucketName,
-      name: `${s3AccessPointNames.general}-${this.generateS3Prefix(6)}`.substring(0, 50),
+      name: s3AccessPointNames.general.substring(0, 50),
     });
     const adminAccessPoint = new s3.CfnAccessPoint(this, 'AdminS3AccessPoint', {
       bucket: transcriptBucket.bucketName,
-      name: `${s3AccessPointNames.admin}-${this.generateS3Prefix(6)}`.substring(0, 50),
+      name: s3AccessPointNames.admin.substring(0, 50),
     });
     const billingAccessPoint = new s3.CfnAccessPoint(this, 'BillingS3AccessPoint', {
       bucket: transcriptBucket.bucketName,
-      name: `${s3AccessPointNames.billing}-${this.generateS3Prefix(6)}`.substring(0, 50),
+      name: s3AccessPointNames.billing.substring(0, 50),
     });
     const customerSupportAccessPoint = new s3.CfnAccessPoint(this, 'CustomerSupportS3AccessPoint', {
       bucket: transcriptBucket.bucketName,
-      name: `${s3AccessPointNames.customerSupport}-${this.generateS3Prefix(6)}`.substring(0, 50),
+      name: s3AccessPointNames.customerSupport.substring(0, 50),
     });
 
     // S3ObjectLambda resources
@@ -421,7 +428,7 @@ export class ComprehendS3olab extends cdk.Construct {
     customerSupportObjectLambda.node.addDependency(customSupportLambdaArnCaptor);
   }
 
-  private generateS3Prefix(length: number): string {
+  public generateS3Prefix(length: number): string {
     var result = '';
     const characters = 'abcdefghijklmnopqrstuvwxyz0123456789';
     const charactersLength = characters.length;
