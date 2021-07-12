@@ -6,7 +6,7 @@ import { ComprehendS3olab } from '../src/cdk-comprehend-s3olap';
 test('comprehend-s3olap test', () => {
   const app = new cdk.App();
   const stack = new cdk.Stack(app, 'ker-ker');
-  new ComprehendS3olab(stack, 'ComprehendS3olab', {});
+  new ComprehendS3olab(stack, 'ComprehendS3olab', { generateRandomCharacters: false });
 
   expect(SynthUtils.toCloudFormation(stack)).toMatchSnapshot();
   expect(SynthUtils.toCloudFormation(stack)).toCountResources('AWS::Serverless::Application', 4);
