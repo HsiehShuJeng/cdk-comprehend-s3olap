@@ -28,7 +28,7 @@ const project = new AwsCdkConstructLibrary({
   projectType: ProjectType.LIB,
 
   devDeps: ['esbuild'],
-  bundledDeps: ['aws-sdk', 'cfn-response'],
+  bundledDeps: ['aws-sdk'],
   cdkDependencies: [
     '@aws-cdk/core',
     '@aws-cdk/custom-resources',
