@@ -3,6 +3,18 @@
 exports[`comprehend-s3olap test 1`] = `
 Object {
   "Parameters": Object {
+    "AssetParameters13033e268154776fbdf548e8722d3dcdb6d05aecd7746436066ca93d8e474f3fArtifactHash1645B83D": Object {
+      "Description": "Artifact hash for asset \\"13033e268154776fbdf548e8722d3dcdb6d05aecd7746436066ca93d8e474f3f\\"",
+      "Type": "String",
+    },
+    "AssetParameters13033e268154776fbdf548e8722d3dcdb6d05aecd7746436066ca93d8e474f3fS3Bucket29039BB1": Object {
+      "Description": "S3 bucket for asset \\"13033e268154776fbdf548e8722d3dcdb6d05aecd7746436066ca93d8e474f3f\\"",
+      "Type": "String",
+    },
+    "AssetParameters13033e268154776fbdf548e8722d3dcdb6d05aecd7746436066ca93d8e474f3fS3VersionKeyDB0A02C4": Object {
+      "Description": "S3 key for asset version \\"13033e268154776fbdf548e8722d3dcdb6d05aecd7746436066ca93d8e474f3f\\"",
+      "Type": "String",
+    },
     "AssetParameters43079f879513e0d85eeb42ddfe71e5ead66edf1ee02c33bb165d7c2f926030c4ArtifactHashCB97A4BE": Object {
       "Description": "Artifact hash for asset \\"43079f879513e0d85eeb42ddfe71e5ead66edf1ee02c33bb165d7c2f926030c4\\"",
       "Type": "String",
@@ -25,18 +37,6 @@ Object {
     },
     "AssetParameters4cd61014b71160e8c66fe167e43710d5ba068b80b134e9bd84508cf9238b2392S3VersionKeyFAF93626": Object {
       "Description": "S3 key for asset version \\"4cd61014b71160e8c66fe167e43710d5ba068b80b134e9bd84508cf9238b2392\\"",
-      "Type": "String",
-    },
-    "AssetParameters4ebf85f35e12c2ca2547eb78579bcbb191051726a32ef083e36f7a1008bf36f9ArtifactHash1C5BA532": Object {
-      "Description": "Artifact hash for asset \\"4ebf85f35e12c2ca2547eb78579bcbb191051726a32ef083e36f7a1008bf36f9\\"",
-      "Type": "String",
-    },
-    "AssetParameters4ebf85f35e12c2ca2547eb78579bcbb191051726a32ef083e36f7a1008bf36f9S3Bucket90986341": Object {
-      "Description": "S3 bucket for asset \\"4ebf85f35e12c2ca2547eb78579bcbb191051726a32ef083e36f7a1008bf36f9\\"",
-      "Type": "String",
-    },
-    "AssetParameters4ebf85f35e12c2ca2547eb78579bcbb191051726a32ef083e36f7a1008bf36f9S3VersionKey2999C7F6": Object {
-      "Description": "S3 key for asset version \\"4ebf85f35e12c2ca2547eb78579bcbb191051726a32ef083e36f7a1008bf36f9\\"",
       "Type": "String",
     },
     "AssetParameters67b7823b74bc135986aa72f889d6a8da058d0c4a20cbc2dfc6f78995fdd2fc24ArtifactHashBA91B77F": Object {
@@ -148,7 +148,7 @@ Object {
         "Bucket": Object {
           "Ref": "ComprehendS3olabSurveyResultBucketAED4B852",
         },
-        "Name": "accessctl-s3-ap-survey-results-unknown-pii-zivqok",
+        "Name": "accessctl-s3-ap-survey-results-unknown-pii-r8edwb",
       },
       "Type": "AWS::S3::AccessPoint",
     },
@@ -179,7 +179,7 @@ Object {
                 Object {
                   "Ref": "AWS::AccountId",
                 },
-                ":accesspoint/admin-s3-access-point-call-transcripts-known-pii-k",
+                ":accesspoint/admin-s3-access-point-call-transcripts-known-pii-6",
               ],
             ],
           },
@@ -226,7 +226,7 @@ Object {
       "Properties": Object {
         "Code": Object {
           "S3Bucket": Object {
-            "Ref": "AssetParameters4ebf85f35e12c2ca2547eb78579bcbb191051726a32ef083e36f7a1008bf36f9S3Bucket90986341",
+            "Ref": "AssetParameters13033e268154776fbdf548e8722d3dcdb6d05aecd7746436066ca93d8e474f3fS3Bucket29039BB1",
           },
           "S3Key": Object {
             "Fn::Join": Array [
@@ -239,7 +239,7 @@ Object {
                       "Fn::Split": Array [
                         "||",
                         Object {
-                          "Ref": "AssetParameters4ebf85f35e12c2ca2547eb78579bcbb191051726a32ef083e36f7a1008bf36f9S3VersionKey2999C7F6",
+                          "Ref": "AssetParameters13033e268154776fbdf548e8722d3dcdb6d05aecd7746436066ca93d8e474f3fS3VersionKeyDB0A02C4",
                         },
                       ],
                     },
@@ -252,7 +252,7 @@ Object {
                       "Fn::Split": Array [
                         "||",
                         Object {
-                          "Ref": "AssetParameters4ebf85f35e12c2ca2547eb78579bcbb191051726a32ef083e36f7a1008bf36f9S3VersionKey2999C7F6",
+                          "Ref": "AssetParameters13033e268154776fbdf548e8722d3dcdb6d05aecd7746436066ca93d8e474f3fS3VersionKeyDB0A02C4",
                         },
                       ],
                     },
@@ -621,7 +621,7 @@ Object {
         "Bucket": Object {
           "Ref": "ComprehendS3olabTranscriptBucket53AA37B3",
         },
-        "Name": "admin-s3-access-point-call-transcripts-known-pii-k",
+        "Name": "admin-s3-access-point-call-transcripts-known-pii-6",
       },
       "Type": "AWS::S3::AccessPoint",
     },
@@ -633,7 +633,7 @@ Object {
       "Properties": Object {
         "Code": Object {
           "S3Bucket": Object {
-            "Ref": "AssetParameters4ebf85f35e12c2ca2547eb78579bcbb191051726a32ef083e36f7a1008bf36f9S3Bucket90986341",
+            "Ref": "AssetParameters13033e268154776fbdf548e8722d3dcdb6d05aecd7746436066ca93d8e474f3fS3Bucket29039BB1",
           },
           "S3Key": Object {
             "Fn::Join": Array [
@@ -646,7 +646,7 @@ Object {
                       "Fn::Split": Array [
                         "||",
                         Object {
-                          "Ref": "AssetParameters4ebf85f35e12c2ca2547eb78579bcbb191051726a32ef083e36f7a1008bf36f9S3VersionKey2999C7F6",
+                          "Ref": "AssetParameters13033e268154776fbdf548e8722d3dcdb6d05aecd7746436066ca93d8e474f3fS3VersionKeyDB0A02C4",
                         },
                       ],
                     },
@@ -659,7 +659,7 @@ Object {
                       "Fn::Split": Array [
                         "||",
                         Object {
-                          "Ref": "AssetParameters4ebf85f35e12c2ca2547eb78579bcbb191051726a32ef083e36f7a1008bf36f9S3VersionKey2999C7F6",
+                          "Ref": "AssetParameters13033e268154776fbdf548e8722d3dcdb6d05aecd7746436066ca93d8e474f3fS3VersionKeyDB0A02C4",
                         },
                       ],
                     },
@@ -916,7 +916,7 @@ Object {
                 Object {
                   "Ref": "AWS::AccountId",
                 },
-                ":accesspoint/bill-s3-access-point-call-transcripts-known-pii-7g",
+                ":accesspoint/bill-s3-access-point-call-transcripts-known-pii-cj",
               ],
             ],
           },
@@ -1094,7 +1094,7 @@ Object {
         "Bucket": Object {
           "Ref": "ComprehendS3olabTranscriptBucket53AA37B3",
         },
-        "Name": "bill-s3-access-point-call-transcripts-known-pii-7g",
+        "Name": "bill-s3-access-point-call-transcripts-known-pii-cj",
       },
       "Type": "AWS::S3::AccessPoint",
     },
@@ -1230,7 +1230,7 @@ Object {
       "Properties": Object {
         "Code": Object {
           "S3Bucket": Object {
-            "Ref": "AssetParameters4ebf85f35e12c2ca2547eb78579bcbb191051726a32ef083e36f7a1008bf36f9S3Bucket90986341",
+            "Ref": "AssetParameters13033e268154776fbdf548e8722d3dcdb6d05aecd7746436066ca93d8e474f3fS3Bucket29039BB1",
           },
           "S3Key": Object {
             "Fn::Join": Array [
@@ -1243,7 +1243,7 @@ Object {
                       "Fn::Split": Array [
                         "||",
                         Object {
-                          "Ref": "AssetParameters4ebf85f35e12c2ca2547eb78579bcbb191051726a32ef083e36f7a1008bf36f9S3VersionKey2999C7F6",
+                          "Ref": "AssetParameters13033e268154776fbdf548e8722d3dcdb6d05aecd7746436066ca93d8e474f3fS3VersionKeyDB0A02C4",
                         },
                       ],
                     },
@@ -1256,7 +1256,7 @@ Object {
                       "Fn::Split": Array [
                         "||",
                         Object {
-                          "Ref": "AssetParameters4ebf85f35e12c2ca2547eb78579bcbb191051726a32ef083e36f7a1008bf36f9S3VersionKey2999C7F6",
+                          "Ref": "AssetParameters13033e268154776fbdf548e8722d3dcdb6d05aecd7746436066ca93d8e474f3fS3VersionKeyDB0A02C4",
                         },
                       ],
                     },
@@ -1513,7 +1513,7 @@ Object {
                 Object {
                   "Ref": "AWS::AccountId",
                 },
-                ":accesspoint/cs-s3-access-point-call-transcripts-known-pii-yi1p",
+                ":accesspoint/cs-s3-access-point-call-transcripts-known-pii-86gn",
               ],
             ],
           },
@@ -1567,7 +1567,7 @@ Object {
         "Bucket": Object {
           "Ref": "ComprehendS3olabTranscriptBucket53AA37B3",
         },
-        "Name": "cs-s3-access-point-call-transcripts-known-pii-yi1p",
+        "Name": "cs-s3-access-point-call-transcripts-known-pii-86gn",
       },
       "Type": "AWS::S3::AccessPoint",
     },
@@ -1579,7 +1579,7 @@ Object {
       "Properties": Object {
         "Code": Object {
           "S3Bucket": Object {
-            "Ref": "AssetParameters4ebf85f35e12c2ca2547eb78579bcbb191051726a32ef083e36f7a1008bf36f9S3Bucket90986341",
+            "Ref": "AssetParameters13033e268154776fbdf548e8722d3dcdb6d05aecd7746436066ca93d8e474f3fS3Bucket29039BB1",
           },
           "S3Key": Object {
             "Fn::Join": Array [
@@ -1592,7 +1592,7 @@ Object {
                       "Fn::Split": Array [
                         "||",
                         Object {
-                          "Ref": "AssetParameters4ebf85f35e12c2ca2547eb78579bcbb191051726a32ef083e36f7a1008bf36f9S3VersionKey2999C7F6",
+                          "Ref": "AssetParameters13033e268154776fbdf548e8722d3dcdb6d05aecd7746436066ca93d8e474f3fS3VersionKeyDB0A02C4",
                         },
                       ],
                     },
@@ -1605,7 +1605,7 @@ Object {
                       "Fn::Split": Array [
                         "||",
                         Object {
-                          "Ref": "AssetParameters4ebf85f35e12c2ca2547eb78579bcbb191051726a32ef083e36f7a1008bf36f9S3VersionKey2999C7F6",
+                          "Ref": "AssetParameters13033e268154776fbdf548e8722d3dcdb6d05aecd7746436066ca93d8e474f3fS3VersionKeyDB0A02C4",
                         },
                       ],
                     },
@@ -1986,7 +1986,7 @@ Object {
                 Object {
                   "Ref": "AWS::AccountId",
                 },
-                ":accesspoint/accessctl-s3-ap-survey-results-unknown-pii-zivqok",
+                ":accesspoint/accessctl-s3-ap-survey-results-unknown-pii-r8edwb",
               ],
             ],
           },
@@ -2152,7 +2152,7 @@ Object {
         "ComprehendS3olabServerlessLambdaComprehendPiiAccessControlS3ObjectLambdaC1DAEB36",
       ],
       "Properties": Object {
-        "BucketName": "survey-results-unknown-pii-zyiszj",
+        "BucketName": "survey-results-unknown-pii-qt6juj",
       },
       "Type": "AWS::S3::Bucket",
       "UpdateReplacePolicy": "Delete",
@@ -2325,7 +2325,7 @@ Object {
         "ComprehendS3olabServerlessRedactLambdaCustSupportComprehendPiiAccessControlS3ObjectLambda376EF5E8",
       ],
       "Properties": Object {
-        "BucketName": "call-transcripts-known-pii-lq0p6o",
+        "BucketName": "call-transcripts-known-pii-bnv1me",
       },
       "Type": "AWS::S3::Bucket",
       "UpdateReplacePolicy": "Delete",
