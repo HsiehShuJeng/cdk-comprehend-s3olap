@@ -2152,7 +2152,7 @@ Object {
         "ComprehendS3olabServerlessLambdaComprehendPiiAccessControlS3ObjectLambdaC1DAEB36",
       ],
       "Properties": Object {
-        "BucketName": "survey-results-unknown-pii-yozw3q",
+        "BucketName": "survey-results-unknown-pii-123456",
       },
       "Type": "AWS::S3::Bucket",
       "UpdateReplacePolicy": "Delete",
@@ -2325,7 +2325,7 @@ Object {
         "ComprehendS3olabServerlessRedactLambdaCustSupportComprehendPiiAccessControlS3ObjectLambda376EF5E8",
       ],
       "Properties": Object {
-        "BucketName": "call-transcripts-known-pii-kpie18",
+        "BucketName": "call-transcripts-known-pii-1234456",
       },
       "Type": "AWS::S3::Bucket",
       "UpdateReplacePolicy": "Delete",

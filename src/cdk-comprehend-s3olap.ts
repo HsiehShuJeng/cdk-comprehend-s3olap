@@ -222,7 +222,7 @@ export class ComprehendS3olab extends cdk.Construct {
 
     // S3 buckets
     const surveyBucket = new s3.Bucket(this, 'SurveyResultBucket', {
-      bucketName: `survey-results-unknown-pii-${surveyBucketPrefix}`,
+      bucketName: (generateRandomCharacters) ? `survey-results-unknown-pii-${surveyBucketPrefix}`: 'survey-results-unknown-pii-123456',
       removalPolicy: cdk.RemovalPolicy.DESTROY,
       autoDeleteObjects: true,
     });
@@ -246,7 +246,7 @@ export class ComprehendS3olab extends cdk.Construct {
       },
     ));
     const transcriptBucket = new s3.Bucket(this, 'TranscriptBucket', {
-      bucketName: `call-transcripts-known-pii-${transcriptsBucketPrefix}`,
+      bucketName: (generateRandomCharacters) ? `call-transcripts-known-pii-${transcriptsBucketPrefix}`: 'call-transcripts-known-pii-1234456',
       removalPolicy: cdk.RemovalPolicy.DESTROY,
       autoDeleteObjects: true,
     });
