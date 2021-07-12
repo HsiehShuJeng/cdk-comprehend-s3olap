@@ -17,6 +17,7 @@ const project = new AwsCdkConstructLibrary({
   ],
 
   catalog: {
+    twitter: 'fantasticHsieh',
     announce: true,
   },
 
