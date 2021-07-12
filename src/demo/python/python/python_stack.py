@@ -1,9 +1,7 @@
 from aws_cdk import core as cdk
 from cdk_comprehend_s3olap import ComprehendS3olab
 
-
 class PythonStack(cdk.Stack):
-
     def __init__(self, scope: cdk.Construct, construct_id: str, **kwargs) -> None:
         super().__init__(scope, construct_id, **kwargs)
 
@@ -30,4 +28,3 @@ class PythonStack(cdk.Stack):
         cdk.CfnOutput(self, "OS3ObjectLambdaAdminArn", value=s3olab.s3object_lambda_admin_arn)
         cdk.CfnOutput(self, "OS3ObjectLambdaBillingArn", value=s3olab.s3object_lambda_billing_arn)
         cdk.CfnOutput(self, "OS3ObjectLambdaCustomerSupportArn", value=s3olab.customer_support_lambda_arn)
-        

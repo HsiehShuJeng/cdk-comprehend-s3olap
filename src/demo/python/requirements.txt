@@ -1,2 +1,1 @@
-aws-cdk.core
-cdk-comprehend-s3olap
+-e .
