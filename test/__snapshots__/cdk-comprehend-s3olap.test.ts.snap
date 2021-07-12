@@ -148,7 +148,7 @@ Object {
         "Bucket": Object {
           "Ref": "ComprehendS3olabSurveyResultBucketAED4B852",
         },
-        "Name": "accessctl-s3-ap-survey-results-unknown-pii-r8edwb",
+        "Name": "accessctl-s3-ap-survey-results-unknown-pii-i9cxpq",
       },
       "Type": "AWS::S3::AccessPoint",
     },
@@ -179,7 +179,7 @@ Object {
                 Object {
                   "Ref": "AWS::AccountId",
                 },
-                ":accesspoint/admin-s3-access-point-call-transcripts-known-pii-6",
+                ":accesspoint/admin-s3-access-point-call-transcripts-known-pii-h",
               ],
             ],
           },
@@ -621,7 +621,7 @@ Object {
         "Bucket": Object {
           "Ref": "ComprehendS3olabTranscriptBucket53AA37B3",
         },
-        "Name": "admin-s3-access-point-call-transcripts-known-pii-6",
+        "Name": "admin-s3-access-point-call-transcripts-known-pii-h",
       },
       "Type": "AWS::S3::AccessPoint",
     },
@@ -916,7 +916,7 @@ Object {
                 Object {
                   "Ref": "AWS::AccountId",
                 },
-                ":accesspoint/bill-s3-access-point-call-transcripts-known-pii-cj",
+                ":accesspoint/bill-s3-access-point-call-transcripts-known-pii-3g",
               ],
             ],
           },
@@ -1094,7 +1094,7 @@ Object {
         "Bucket": Object {
           "Ref": "ComprehendS3olabTranscriptBucket53AA37B3",
         },
-        "Name": "bill-s3-access-point-call-transcripts-known-pii-cj",
+        "Name": "bill-s3-access-point-call-transcripts-known-pii-3g",
       },
       "Type": "AWS::S3::AccessPoint",
     },
@@ -1513,7 +1513,7 @@ Object {
                 Object {
                   "Ref": "AWS::AccountId",
                 },
-                ":accesspoint/cs-s3-access-point-call-transcripts-known-pii-86gn",
+                ":accesspoint/cs-s3-access-point-call-transcripts-known-pii-ndxq",
               ],
             ],
           },
@@ -1567,7 +1567,7 @@ Object {
         "Bucket": Object {
           "Ref": "ComprehendS3olabTranscriptBucket53AA37B3",
         },
-        "Name": "cs-s3-access-point-call-transcripts-known-pii-86gn",
+        "Name": "cs-s3-access-point-call-transcripts-known-pii-ndxq",
       },
       "Type": "AWS::S3::AccessPoint",
     },
@@ -1986,7 +1986,7 @@ Object {
                 Object {
                   "Ref": "AWS::AccountId",
                 },
-                ":accesspoint/accessctl-s3-ap-survey-results-unknown-pii-r8edwb",
+                ":accesspoint/accessctl-s3-ap-survey-results-unknown-pii-i9cxpq",
               ],
             ],
           },
@@ -2152,7 +2152,7 @@ Object {
         "ComprehendS3olabServerlessLambdaComprehendPiiAccessControlS3ObjectLambdaC1DAEB36",
       ],
       "Properties": Object {
-        "BucketName": "survey-results-unknown-pii-qt6juj",
+        "BucketName": "survey-results-unknown-pii-1nqbln",
       },
       "Type": "AWS::S3::Bucket",
       "UpdateReplacePolicy": "Delete",
@@ -2325,7 +2325,7 @@ Object {
         "ComprehendS3olabServerlessRedactLambdaCustSupportComprehendPiiAccessControlS3ObjectLambda376EF5E8",
       ],
       "Properties": Object {
-        "BucketName": "call-transcripts-known-pii-bnv1me",
+        "BucketName": "call-transcripts-known-pii-jttbhh",
       },
       "Type": "AWS::S3::Bucket",
       "UpdateReplacePolicy": "Delete",
