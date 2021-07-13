@@ -23,6 +23,6 @@ public class JavaTest {
         JsonNode actual = JSON.valueToTree(app.synth().getStackArtifact(stack.getArtifactId()).getTemplate());
 
         // Update once resources have been added to the stack
-        assertThat(actual.get("Resources")).isNull();
+        assertThat(actual.get("Resources")).isNotEmpty();
     }
 }

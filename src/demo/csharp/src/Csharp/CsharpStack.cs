@@ -24,7 +24,7 @@ namespace Csharp
                     MaskMode = "REPLACE_WITH_PII_ENTITY_TYPE",
                     PiiEntityTypes = "BANK_ACCOUNT_NUMBER,BANK_ROUTING,CREDIT_DEBIT_CVV,CREDIT_DEBIT_EXPIRY,CREDIT_DEBIT_NUMBER,SSN"
                 },
-                
+                ExampleFileDir = "/opt/learning/cdk-comprehend-s3olap/src/demo/csharp"
             });
 
             new CfnOutput(this, "OPiiAccessControlLambdaArn", new CfnOutputProps { Value = S3olab.PiiAccessConrtolLambdaArn });

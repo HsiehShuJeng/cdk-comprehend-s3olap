@@ -127,7 +127,8 @@ class PythonStack(cdk.Stack):
             cusrt_support_redaction_lambda_config={
                 "mask_mode": "REPLACE_WITH_PII_ENTITY_TYPE",
                 "pii_entity_types": " BANK_ACCOUNT_NUMBER,BANK_ROUTING,CREDIT_DEBIT_CVV,CREDIT_DEBIT_EXPIRY,CREDIT_DEBIT_NUMBER,SSN"
-            }
+            },
+            example_file_dir="/opt/learning/cdk-comprehend-s3olap/src/demo/python"
         )
 
         cdk.CfnOutput(self, "OPiiAccessControlLambdaArn", value=s3olab.pii_access_conrtol_lambda_arn)
@@ -143,7 +144,7 @@ class PythonStack(cdk.Stack):
 You could also refer to [here](https://github.com/HsiehShuJeng/cdk-comprehend-s3olap/tree/main/src/demo/java).  
 ```bash
 $ cdk init --language java
-$ mvn package
+$ mvn package # If you include the construct, you need to tweak the test case for Java in order to package with success via Maven.
 ```xml
 .
 .
@@ -207,6 +208,7 @@ public class JavaStack extends Stack {
                 .maskMode("REPLACE_WITH_PII_ENTITY_TYPE")
                 .piiEntityTypes("BANK_ACCOUNT_NUMBER,BANK_ROUTING,CREDIT_DEBIT_CVV,CREDIT_DEBIT_EXPIRY,CREDIT_DEBIT_NUMBER,SSN")
                 .build())
+            .exampleFileDir("/opt/learning/cdk-comprehend-s3olap/src/demo/java")
             .build()
             );
       
@@ -225,7 +227,7 @@ public class JavaStack extends Stack {
 You could also refer to [here](https://github.com/HsiehShuJeng/cdk-comprehend-s3olap/tree/main/src/demo/csharp).  
 ```bash
 $ cdk init --language csharp
-$ dotnet add src/Csharp package Comprehend.S3olap --version 0.0.7
+$ dotnet add src/Csharp package Comprehend.S3olap --version 0.0.8
 ```
 ```cs
 using Amazon.CDK;
@@ -253,7 +255,8 @@ namespace Csharp
                 {
                     MaskMode = "REPLACE_WITH_PII_ENTITY_TYPE",
                     PiiEntityTypes = "BANK_ACCOUNT_NUMBER,BANK_ROUTING,CREDIT_DEBIT_CVV,CREDIT_DEBIT_EXPIRY,CREDIT_DEBIT_NUMBER,SSN"
-                }
+                },
+                ExampleFileDir = "/opt/learning/cdk-comprehend-s3olap/src/demo/csharp"
             });
 
             new CfnOutput(this, "OPiiAccessControlLambdaArn", new CfnOutputProps { Value = S3olab.PiiAccessConrtolLambdaArn });
@@ -272,7 +275,7 @@ namespace Csharp
 # Some Notes  
 1. You should see similar items as the following diagram displays after deploying the constrcut.  
 ![image](https://raw.githubusercontent.com/HsiehShuJeng/cdk-comprehend-s3olap/main/images/s3olap_console.png)   
-2. After creating the foundation with success, you could switch roles that the consrtcut creates for you and see how Amazon S3 Object Lambda works.  
+2. After creating the foundation with success, you could switch roles that the consrtcut creates for you and see how **Amazon S3 Object Lambda** works. For what switching roles is, please refer to [here](https://docs.aws.amazon.com/IAM/latest/UserGuide/id_roles_use_switch-role-console.html) for the detail.    
 ![image](https://raw.githubusercontent.com/HsiehShuJeng/cdk-comprehend-s3olap/main/images/switch_roles.png)  
-3. You explore Amazon S3 Object Lambda through the Object Lambda access points and open or download the text files.  
-4. Lambda code that incorporates with Amazon Comprehend could be see [here](https://github.com/aws-samples/amazon-comprehend-examples/tree/master/s3_object_lambda_pii_protection_blog).  
+3. You explore **Amazon S3 Object Lambda** through the Object Lambda access points on the AWS Console and open or download the text files via one of the IAM roles.    
+4. Lambda code that incorporates with **Amazon Comprehend** could be see [here](https://github.com/aws-samples/amazon-comprehend-examples/tree/master/s3_object_lambda_pii_protection_blog).  

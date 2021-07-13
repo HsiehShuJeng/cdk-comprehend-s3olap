@@ -20,7 +20,7 @@ setuptools.setup(
 
     install_requires=[
         "aws-cdk.core==1.112.0",
-        "cdk-comprehend-s3olap==0.0.4"
+        "cdk-comprehend-s3olap==0.0.8"
     ],
 
     python_requires=">=3.6",

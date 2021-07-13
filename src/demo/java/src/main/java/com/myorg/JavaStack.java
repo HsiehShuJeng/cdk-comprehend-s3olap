@@ -32,6 +32,7 @@ public class JavaStack extends Stack {
                 .maskMode("REPLACE_WITH_PII_ENTITY_TYPE")
                 .piiEntityTypes("BANK_ACCOUNT_NUMBER,BANK_ROUTING,CREDIT_DEBIT_CVV,CREDIT_DEBIT_EXPIRY,CREDIT_DEBIT_NUMBER,SSN")
                 .build())
+            .exampleFileDir("/opt/learning/cdk-comprehend-s3olap/src/demo/java")
             .build()
             );
       

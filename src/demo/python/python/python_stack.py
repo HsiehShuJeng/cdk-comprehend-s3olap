@@ -17,7 +17,8 @@ class PythonStack(cdk.Stack):
             cusrt_support_redaction_lambda_config={
                 "mask_mode": "REPLACE_WITH_PII_ENTITY_TYPE",
                 "pii_entity_types": " BANK_ACCOUNT_NUMBER,BANK_ROUTING,CREDIT_DEBIT_CVV,CREDIT_DEBIT_EXPIRY,CREDIT_DEBIT_NUMBER,SSN"
-            }
+            },
+            example_file_dir="/opt/learning/cdk-comprehend-s3olap/src/demo/python"
         )
 
         cdk.CfnOutput(self, "OPiiAccessControlLambdaArn", value=s3olab.pii_access_conrtol_lambda_arn)

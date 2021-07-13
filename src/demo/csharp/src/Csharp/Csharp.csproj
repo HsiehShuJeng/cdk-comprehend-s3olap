@@ -10,7 +10,7 @@
   <ItemGroup>
     <!-- CDK Construct Library dependencies -->
     <PackageReference Include="Amazon.CDK" Version="1.112.0" />
-    <PackageReference Include="Comprehend.S3olap" Version="0.0.7" />
+    <PackageReference Include="Comprehend.S3olap" Version="0.0.8" />
 
     <!-- jsii Roslyn analyzers (un-comment to obtain compile-time checks for missing required props
     <PackageReference Include="Amazon.Jsii.Analyzers" Version="*" PrivateAssets="all" />
