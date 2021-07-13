@@ -179,6 +179,7 @@ new ComprehendS3olab(scope: Construct, id: string, props: ComprehendS3olabProps)
   * **billingRoleConfig** (<code>[BillingRoleProps](#cdk-comprehend-s3olap-billingroleprops)</code>)  The manageable properties for the billing IAM role in the redaction case. __*Optional*__
   * **cusrtSupportRedactionLambdaConfig** (<code>[RedactionLambdaProps](#cdk-comprehend-s3olap-redactionlambdaprops)</code>)  The parameters of the `ComprehendPiiRedactionS3ObjectLambda` function for the `CustSupportRole`. __*Optional*__
   * **custSupportRoleConfig** (<code>[CustSupportRoleProps](#cdk-comprehend-s3olap-custsupportroleprops)</code>)  The manageable properties for the customer support IAM role in the redaction case. __*Optional*__
+  * **exampleFileDir** (<code>string</code>)  The directory path where `files/access_control/*.txt` and `files/redaction/*.txt` will be put. __*Default*__: __dirname
   * **generalRoleConfig** (<code>[GeneralRoleProps](#cdk-comprehend-s3olap-generalroleprops)</code>)  The manageable properties for the IAM role used to access the `survey-results.txt` data. __*Optional*__
   * **generateRandomCharacters** (<code>boolean</code>)  For distinguish test and normal deployment. __*Default*__: true
   * **s3AccessPointNames** (<code>[S3AccessPointNames](#cdk-comprehend-s3olap-s3accesspointnames)</code>)  The names of the S3 access points for the access control case and redaction case. __*Optional*__
@@ -445,6 +446,7 @@ Name | Type | Description
 **billingRoleConfig**? | <code>[BillingRoleProps](#cdk-comprehend-s3olap-billingroleprops)</code> | The manageable properties for the billing IAM role in the redaction case.<br/>__*Optional*__
 **cusrtSupportRedactionLambdaConfig**? | <code>[RedactionLambdaProps](#cdk-comprehend-s3olap-redactionlambdaprops)</code> | The parameters of the `ComprehendPiiRedactionS3ObjectLambda` function for the `CustSupportRole`.<br/>__*Optional*__
 **custSupportRoleConfig**? | <code>[CustSupportRoleProps](#cdk-comprehend-s3olap-custsupportroleprops)</code> | The manageable properties for the customer support IAM role in the redaction case.<br/>__*Optional*__
+**exampleFileDir**? | <code>string</code> | The directory path where `files/access_control/*.txt` and `files/redaction/*.txt` will be put.<br/>__*Default*__: __dirname
 **generalRoleConfig**? | <code>[GeneralRoleProps](#cdk-comprehend-s3olap-generalroleprops)</code> | The manageable properties for the IAM role used to access the `survey-results.txt` data.<br/>__*Optional*__
 **generateRandomCharacters**? | <code>boolean</code> | For distinguish test and normal deployment.<br/>__*Default*__: true
 **s3AccessPointNames**? | <code>[S3AccessPointNames](#cdk-comprehend-s3olap-s3accesspointnames)</code> | The names of the S3 access points for the access control case and redaction case.<br/>__*Optional*__
