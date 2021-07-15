@@ -82,7 +82,7 @@
     "@aws-cdk/aws-sam": "^1.112.0",
     "@aws-cdk/core": "^1.112.0",
     "@aws-cdk/custom-resources": "^1.112.0",
-    "aws-sdk": "^2.945.0",
+    "aws-sdk": "^2.946.0",
     "esbuild": "^0.12.15"
   },
   "bundledDependencies": [
