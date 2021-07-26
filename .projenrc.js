@@ -3,6 +3,7 @@ const { AwsCdkConstructLibrary, NpmAccess, ProjectType } = require('projen');
 const project = new AwsCdkConstructLibrary({
   author: 'scott.hsieh',
   authorName: 'Shu-Jeng Hsieh',
+  description: 'A constrcut for PII and redaction scenarios with Amazon Comprehend and S3 Object Lambda',
   authorAddress: 'https://fantasticsie.medium.com/',
   keywords: [
     'amazon-comprehhend',

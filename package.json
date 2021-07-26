@@ -1,5 +1,6 @@
 {
   "name": "cdk-comprehend-s3olap",
+  "description": "A constrcut for PII and redaction scenarios with Amazon Comprehend and S3 Object Lambda",
   "repository": {
     "type": "git",
     "url": "https://github.com/HsiehShuJeng/cdk-comprehend-s3olap.git"
