@@ -39,9 +39,9 @@
     "@aws-cdk/assert": "^1.112.0",
     "@types/jest": "^26.0.24",
     "@types/node": "^10.17.0",
-    "@typescript-eslint/eslint-plugin": "^4.28.4",
-    "@typescript-eslint/parser": "^4.28.4",
-    "esbuild": "^0.12.15",
+    "@typescript-eslint/eslint-plugin": "^4.28.5",
+    "@typescript-eslint/parser": "^4.28.5",
+    "esbuild": "^0.12.16",
     "eslint": "^7.31.0",
     "eslint-import-resolver-node": "^0.3.4",
     "eslint-import-resolver-typescript": "^2.4.0",
@@ -83,8 +83,8 @@
     "@aws-cdk/aws-sam": "^1.112.0",
     "@aws-cdk/core": "^1.112.0",
     "@aws-cdk/custom-resources": "^1.112.0",
-    "aws-sdk": "^2.953.0",
-    "esbuild": "^0.12.15"
+    "aws-sdk": "^2.954.0",
+    "esbuild": "^0.12.16"
   },
   "bundledDependencies": [
     "aws-sdk",
