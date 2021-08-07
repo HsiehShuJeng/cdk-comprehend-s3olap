@@ -316,26 +316,31 @@ export class ComprehendS3olab extends cdk.Construct {
     // S3 access points
     const generalAccessPoint = new s3.CfnAccessPoint(this, 'AccessControlS3AccessPoint', {
       bucket: surveyBucket.bucketName,
-      name: s3AccessPointNames.general.substring(0, 50),
+      // name: s3AccessPointNames.general.substring(0, 50),
     });
+    generalAccessPoint.addPropertyOverride('Name', s3AccessPointNames.general.substring(0, 50));
+    generalAccessPoint.addOverride;
     const adminAccessPoint = new s3.CfnAccessPoint(this, 'AdminS3AccessPoint', {
       bucket: transcriptBucket.bucketName,
-      name: s3AccessPointNames.admin.substring(0, 50),
+      // name: s3AccessPointNames.admin.substring(0, 50),
     });
+    adminAccessPoint.addPropertyOverride('Name', s3AccessPointNames.admin.substring(0, 50));
     const billingAccessPoint = new s3.CfnAccessPoint(this, 'BillingS3AccessPoint', {
       bucket: transcriptBucket.bucketName,
-      name: s3AccessPointNames.billing.substring(0, 50),
+      // name: s3AccessPointNames.billing.substring(0, 50),
     });
+    adminAccessPoint.addPropertyOverride('Name', s3AccessPointNames.billing.substring(0, 50));
     const customerSupportAccessPoint = new s3.CfnAccessPoint(this, 'CustomerSupportS3AccessPoint', {
       bucket: transcriptBucket.bucketName,
-      name: s3AccessPointNames.customerSupport.substring(0, 50),
+      // name: s3AccessPointNames.customerSupport.substring(0, 50),
     });
+    customerSupportAccessPoint.addPropertyOverride('Name', s3AccessPointNames.customerSupport.substring(0, 50));
 
     // S3ObjectLambda resources
     const accessControlObjectLambda = new s3objectlambda.CfnAccessPoint(this, 'GeneralLambdaAccessPoint', {
       name: generalRoleConfig.objectLambdaAccessPointName,
       objectLambdaConfiguration: {
-        supportingAccessPoint: `arn:${cdk.Aws.PARTITION}:s3:${cdk.Aws.REGION}:${cdk.Aws.ACCOUNT_ID}:accesspoint/${generalAccessPoint.name!}`,
+        supportingAccessPoint: `arn:${cdk.Aws.PARTITION}:s3:${cdk.Aws.REGION}:${cdk.Aws.ACCOUNT_ID}:accesspoint/${generalAccessPoint.attrName}`,
         transformationConfigurations: [
           {
             actions: ['GetObject'],
@@ -353,7 +358,7 @@ export class ComprehendS3olab extends cdk.Construct {
     const adminObjectLambda = new s3objectlambda.CfnAccessPoint(this, 'AdminLambdaAccessPoint', {
       name: adminRoleConfig.objectLambdaAccessPointName,
       objectLambdaConfiguration: {
-        supportingAccessPoint: `arn:${cdk.Aws.PARTITION}:s3:${cdk.Aws.REGION}:${cdk.Aws.ACCOUNT_ID}:accesspoint/${adminAccessPoint.name!}`,
+        supportingAccessPoint: `arn:${cdk.Aws.PARTITION}:s3:${cdk.Aws.REGION}:${cdk.Aws.ACCOUNT_ID}:accesspoint/${adminAccessPoint.attrName}`,
         transformationConfigurations: [
           {
             actions: ['GetObject'],
@@ -371,7 +376,7 @@ export class ComprehendS3olab extends cdk.Construct {
     const billingObjectLambda = new s3objectlambda.CfnAccessPoint(this, 'BillingLambdaAccessPoint', {
       name: billingRoleConfig.objectLambdaAccessPointName,
       objectLambdaConfiguration: {
-        supportingAccessPoint: `arn:${cdk.Aws.PARTITION}:s3:${cdk.Aws.REGION}:${cdk.Aws.ACCOUNT_ID}:accesspoint/${billingAccessPoint.name!}`,
+        supportingAccessPoint: `arn:${cdk.Aws.PARTITION}:s3:${cdk.Aws.REGION}:${cdk.Aws.ACCOUNT_ID}:accesspoint/${billingAccessPoint.attrName}`,
         transformationConfigurations: [
           {
             actions: ['GetObject'],
@@ -389,7 +394,7 @@ export class ComprehendS3olab extends cdk.Construct {
     const customerSupportObjectLambda = new s3objectlambda.CfnAccessPoint(this, 'CustomerSupportLambdaAccessPoint', {
       name: custSupportRoleConfig.objectLambdaAccessPointName,
       objectLambdaConfiguration: {
-        supportingAccessPoint: `arn:${cdk.Aws.PARTITION}:s3:${cdk.Aws.REGION}:${cdk.Aws.ACCOUNT_ID}:accesspoint/${customerSupportAccessPoint.name!}`,
+        supportingAccessPoint: `arn:${cdk.Aws.PARTITION}:s3:${cdk.Aws.REGION}:${cdk.Aws.ACCOUNT_ID}:accesspoint/${customerSupportAccessPoint.attrName}`,
         transformationConfigurations: [
           {
             actions: ['GetObject'],
