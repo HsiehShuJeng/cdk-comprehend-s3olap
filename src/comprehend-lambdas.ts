@@ -1,5 +1,6 @@
-import * as sam from '@aws-cdk/aws-sam';
-import * as cdk from '@aws-cdk/core';
+import * as sam from 'aws-cdk-lib/aws-sam';
+import * as cdk from 'aws-cdk-lib/core';
+import { Construct } from 'constructs';
 
 export interface AccessConrtolLambdaProps {
   /**
@@ -82,7 +83,7 @@ export interface AccessConrtolLambdaProps {
   readonly unsupportedFileHandling?: string;
 }
 
-export class AccessConrtolLambda extends cdk.Construct {
+export class AccessConrtolLambda extends Construct {
   /**
    * The name of the underlying resoure in the serverless application.
    *
@@ -93,7 +94,7 @@ export class AccessConrtolLambda extends cdk.Construct {
    * The entity of the serverless application.
    */
   private readonly samApplication: sam.CfnApplication;
-  constructor(scope: cdk.Construct, id: string, props: AccessConrtolLambdaProps) {
+  constructor(scope: Construct, id: string, props: AccessConrtolLambdaProps) {
     super(scope, id);
     const semanticVersion = props.semanticVersion ?? '1.0.2';
     const confidenceThreshold = props.confidenceThreshold ?? '0.5';
@@ -237,7 +238,7 @@ export interface RedactionLambdaProps {
   readonly publishCloudWatchMetrics?: string;
 }
 
-export class RedactionLambda extends cdk.Construct {
+export class RedactionLambda extends Construct {
   /**
    * The name of the underlying resoure in the serverless application.
    *
@@ -248,7 +249,7 @@ export class RedactionLambda extends cdk.Construct {
    * The entity of the serverless application.
    */
   private readonly samApplication: sam.CfnApplication;
-  constructor(scope: cdk.Construct, id: string, props?: RedactionLambdaProps) {
+  constructor(scope: Construct, id: string, props?: RedactionLambdaProps) {
     super(scope, id);
     const semanticVersion = props?.semanticVersion ?? '1.0.2';
     const logLevel = props?.logLevel ?? 'INFO';

@@ -1,6 +1,6 @@
-const { AwsCdkConstructLibrary, NpmAccess, ProjectType } = require('projen');
+const projen = require('projen');
 
-const project = new AwsCdkConstructLibrary({
+const project = new projen.awscdk.AwsCdkConstructLibrary({
   author: 'scott.hsieh',
   authorName: 'Shu-Jeng Hsieh',
   description: 'A constrcut for PII and redaction scenarios with Amazon Comprehend and S3 Object Lambda',
@@ -17,66 +17,53 @@ const project = new AwsCdkConstructLibrary({
     'lambda',
   ],
 
-  catalog: {
-    twitter: 'fantasticHsieh',
-    announce: true,
-  },
-
-  cdkVersion: '1.112.0',
+  cdkVersion: '2.27.0',
+  majorVersion: 2,
   defaultReleaseBranch: 'main',
   name: 'cdk-comprehend-s3olap',
   repositoryUrl: 'https://github.com/HsiehShuJeng/cdk-comprehend-s3olap.git',
-  projectType: ProjectType.LIB,
-
-  devDeps: ['esbuild'],
-  bundledDeps: ['aws-sdk', 'esbuild'],
-  cdkDependencies: [
-    '@aws-cdk/core',
-    '@aws-cdk/custom-resources',
-    '@aws-cdk/aws-iam',
-    '@aws-cdk/aws-lambda',
-    '@aws-cdk/aws-lambda-nodejs',
-    '@aws-cdk/aws-logs',
-    '@aws-cdk/aws-sam',
-    '@aws-cdk/aws-s3',
-    '@aws-cdk/aws-s3-deployment',
-    '@aws-cdk/aws-s3objectlambda',
+  deps: [
+    'aws-cdk-lib',
+    'constructs@^10.0.5',
   ],
-  cdkAssert: true,
-  npmAccess: NpmAccess.PUBLIC,
-
+  devDeps: [
+    'aws-cdk-lib',
+    'constructs@^10.0.5',
+    'esbuild',
+  ],
+  peerDeps: [
+    'aws-cdk-lib',
+    'constructs@^10.0.5',
+  ],
+  bundledDeps: ['aws-sdk', 'esbuild'],
   eslint: true,
   tsconfig: { compilerOptions: { lib: ['es2018', 'dom'] } }, //check https://bityl.co/7fHf
-  projenUpgradeSecret: 'PROJEN_UPGRADE_SECRET',
+  dependabotOptions: {
+    workflowOptions: {
+      labels: ['auto-approve', 'auto-merge'],
+    },
+  },
   autoApproveOptions: {
     secret: 'GITHUB_TOKEN',
     allowedUsernames: ['HsiehShuJeng'],
   },
-  depsUpgradeAutoMerge: true,
-
-  // publish to npm
   releaseToNpm: true,
-  releaseWorkflow: true,
-  releaseEveryCommit: true, //will run the release GitHub Action on each push to the defined
-
-  // publish to PyPi
   publishToPypi: {
     distName: 'cdk_comprehend_s3olap',
     module: 'cdk_comprehend_s3olap',
   },
-
-  // publish to Maven
   publishToMaven: {
     mavenGroupId: 'io.github.hsiehshujeng',
     mavenArtifactId: 'cdk-comprehend-s3olap',
     javaPackage: 'io.github.hsiehshujeng.cdk.comprehend.s3olap',
     mavenEndpoint: 'https://s01.oss.sonatype.org', // check https://central.sonatype.org/publish/release/#login-into-ossrh
   },
-
-  // publish to dotnet
   publishToNuget: {
     dotNetNamespace: 'ScottHsieh.Cdk',
     packageId: 'Comprehend.S3olap',
+  },
+  publishToGo: {
+    moduleName: 'github.com/HsiehShuJeng/cdk-comprehend-s3olap-go',
   },
 });
 project.eslint.addOverride({

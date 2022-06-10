@@ -1,16 +1,15 @@
-import { SynthUtils } from '@aws-cdk/assert';
-import '@aws-cdk/assert/jest';
-import * as cdk from '@aws-cdk/core';
+import { Template } from 'aws-cdk-lib/assertions';
+import * as cdk from 'aws-cdk-lib/core';
 import { AccessConrtolLambda } from '../src/comprehend-lambdas';
 
 test('Comprehend Lambda test', () => {
   const app = new cdk.App();
   const stack = new cdk.Stack(app, 'ker-ker');
   new AccessConrtolLambda(stack, 'AccessControlLambda', {});
+  const template = Template.fromStack(stack);
 
-  expect(SynthUtils.toCloudFormation(stack)).toMatchSnapshot();
-  expect(SynthUtils.toCloudFormation(stack)).toCountResources('AWS::Serverless::Application', 1);
-  expect(SynthUtils.toCloudFormation(stack)).toHaveResource('AWS::Serverless::Application', {
+  template.resourceCountIs('AWS::Serverless::Application', 1);
+  template.hasResourceProperties('AWS::Serverless::Application', {
     Location: {
       ApplicationId: 'arn:aws:serverlessrepo:us-east-1:839782855223:applications/ComprehendPiiAccessControlS3ObjectLambda',
       SemanticVersion: '1.0.2',

@@ -1,5 +1,6 @@
-import * as iam from '@aws-cdk/aws-iam';
-import * as cdk from '@aws-cdk/core';
+import * as cdk from 'aws-cdk-lib';
+import * as iam from 'aws-cdk-lib/aws-iam';
+import { Construct } from 'constructs';
 
 export interface GeneralRoleProps {
   /**
@@ -27,7 +28,7 @@ export interface GeneralRoleProps {
  *
  * Explores how the S3 Object Lambda works.
  */
-export class GeneralRole extends cdk.Construct {
+export class GeneralRole extends Construct {
   /**
      * The ARN of the IAM role.
      *
@@ -43,7 +44,7 @@ export class GeneralRole extends cdk.Construct {
      *
      */
   public readonly roleId: string;
-  constructor(scope: cdk.Construct, id: string, props: GeneralRoleProps) {
+  constructor(scope: Construct, id: string, props: GeneralRoleProps) {
     super(scope, id);
     const policyName = props.policyName ?? 'general-role-s3olap-policy';
     const objectLambdaAccessPointName = props.objectLambdaAccessPointName ?? 'accessctl-s3olap-survey-results-unknown-pii';
@@ -147,7 +148,7 @@ export interface AdminRoleProps {
   readonly iamRoleName?: string;
 }
 
-export class AdminRole extends cdk.Construct {
+export class AdminRole extends Construct {
   /**
    * The ARN of the IAM role.
    */
@@ -160,7 +161,7 @@ export class AdminRole extends cdk.Construct {
    * The unique string identifying the role.
    */
   public readonly roleId: string;
-  constructor(scope: cdk.Construct, id: string, props?: AdminRoleProps) {
+  constructor(scope: Construct, id: string, props?: AdminRoleProps) {
     super(scope, id);
     const policyName = props?.policyName ?? 'admin-role-s3olap-policy';
     const objectLambdaAccessPointName = props?.objectLambdaAccessPointName ?? 'admin-s3olap-call-transcripts-known-pii';
@@ -263,7 +264,7 @@ export interface BillingRoleProps {
   readonly iamRoleName?: string;
 }
 
-export class BillingRole extends cdk.Construct {
+export class BillingRole extends Construct {
   /**
    * The ARN of the IAM role.
    */
@@ -276,7 +277,7 @@ export class BillingRole extends cdk.Construct {
    * The unique string identifying the role.
    */
   public readonly roleId: string;
-  constructor(scope: cdk.Construct, id: string, props?: AdminRoleProps) {
+  constructor(scope: Construct, id: string, props?: AdminRoleProps) {
     super(scope, id);
     const policyName = props?.policyName ?? 'billing-role-s3olap-policy';
     const objectLambdaAccessPointName = props?.objectLambdaAccessPointName ?? 'billing-s3olap-call-transcripts-known-pii';
@@ -379,7 +380,7 @@ export interface CustSupportRoleProps {
   readonly iamRoleName?: string;
 }
 
-export class CustSupportRole extends cdk.Construct {
+export class CustSupportRole extends Construct {
   /**
    * The ARN of the IAM role.
    */
@@ -392,7 +393,7 @@ export class CustSupportRole extends cdk.Construct {
    * The unique string identifying the role.
    */
   public readonly roleId: string;
-  constructor(scope: cdk.Construct, id: string, props?: AdminRoleProps) {
+  constructor(scope: Construct, id: string, props?: AdminRoleProps) {
     super(scope, id);
     const policyName = props?.policyName ?? 'customersupport-role-s3olap-policy';
     const objectLambdaAccessPointName = props?.objectLambdaAccessPointName ?? 'custsupport-s3olap-call-transcripts-known-pii';

@@ -1,9 +1,10 @@
 #!/usr/bin/env node
-import * as cdk from '@aws-cdk/core';
+import * as cdk from 'aws-cdk-lib';
+import { Construct } from 'constructs';
 import { ComprehendS3olab } from '../../cdk-comprehend-s3olap';
 
 class TypescriptStack extends cdk.Stack {
-  constructor(scope: cdk.Construct, id: string, props?: cdk.StackProps) {
+  constructor(scope: Construct, id: string, props?: cdk.StackProps) {
     super(scope, id, props);
     const s3olab = new ComprehendS3olab(this, 'PiiDemo', {
       adminRedactionLambdaConfig: {

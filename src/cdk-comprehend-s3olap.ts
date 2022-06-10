@@ -1,14 +1,15 @@
 import * as fs from 'fs';
 import * as path from 'path';
-import * as iam from '@aws-cdk/aws-iam';
-import { Runtime } from '@aws-cdk/aws-lambda';
-import * as lambda from '@aws-cdk/aws-lambda-nodejs';
-import * as logs from '@aws-cdk/aws-logs';
-import * as s3 from '@aws-cdk/aws-s3';
-import * as s3delpoy from '@aws-cdk/aws-s3-deployment';
-import * as s3objectlambda from '@aws-cdk/aws-s3objectlambda';
-import * as cdk from '@aws-cdk/core';
-import * as cr from '@aws-cdk/custom-resources';
+import * as cdk from 'aws-cdk-lib';
+import * as iam from 'aws-cdk-lib/aws-iam';
+import { Runtime } from 'aws-cdk-lib/aws-lambda';
+import * as lambda from 'aws-cdk-lib/aws-lambda-nodejs';
+import * as logs from 'aws-cdk-lib/aws-logs';
+import * as s3 from 'aws-cdk-lib/aws-s3';
+import * as s3delpoy from 'aws-cdk-lib/aws-s3-deployment';
+import * as s3objectlambda from 'aws-cdk-lib/aws-s3objectlambda';
+import * as cr from 'aws-cdk-lib/custom-resources';
+import { Construct } from 'constructs';
 import { AccessConrtolLambda, AccessConrtolLambdaProps, RedactionLambda, RedactionLambdaProps } from './comprehend-lambdas';
 import {
   GeneralRole, GeneralRoleProps,
@@ -120,7 +121,7 @@ export interface ComprehendS3olabProps {
 /**
  * Creates the foundation necessary to deploy the S3 Object Lambda Acceess Control Use Case.
  */
-export class ComprehendS3olab extends cdk.Construct {
+export class ComprehendS3olab extends Construct {
   /**
    * The ARN of the S3 Object Lambda for access control.
    */
@@ -153,7 +154,7 @@ export class ComprehendS3olab extends cdk.Construct {
  * The ARN of the Lambda function combined with Amazon Comprehend for thie customer support role in the redaction case.
  */
   public readonly customerSupportLambdaArn: string;
-  constructor(scope: cdk.Construct, id: string, props: ComprehendS3olabProps) {
+  constructor(scope: Construct, id: string, props: ComprehendS3olabProps) {
     super(scope, id);
     const exampleFileDir = props?.exampleFileDir ?? __dirname;
     const generateRandomCharacters = props?.generateRandomCharacters ?? true;
@@ -496,7 +497,7 @@ export class ComprehendS3olab extends cdk.Construct {
       containsPiiEntitiesThreadCount: containsPiiEntitiesThreadCount,
       publishCloudWatchMetrics: publishCloudWatchMetrics,
     });
-  }
+  };
 
   /**
    * Gets properties related to the IAM roles.
@@ -511,7 +512,7 @@ export class ComprehendS3olab extends cdk.Construct {
       objectLambdaAccessPointName: roleConfig?.objectLambdaAccessPointName ?? this._getObjectLambdaAccessPointName(roleName),
       iamRoleName: roleConfig?.policyName ?? this._getRoleName(roleName),
     };
-  }
+  };
 
   /**
    * Returns the policy name according to the IAM role.
@@ -577,14 +578,14 @@ export interface LambdaArnCaptorResourceProps {
   readonly partialLambdaName: string;
 }
 
-export class LambdaArnCaptorCustomResource extends cdk.Construct {
+export class LambdaArnCaptorCustomResource extends Construct {
   /**
    * The ARN of the general Lambda function created from the serverless application.
    *
    * @see https://github.com/aws/aws-cdk/issues/8760
    */
   public readonly lambdaArn: string;
-  constructor(scope: cdk.Construct, id: string, props: LambdaArnCaptorResourceProps) {
+  constructor(scope: Construct, id: string, props: LambdaArnCaptorResourceProps) {
     super(scope, id);
     const customResourceRole = new iam.Role(this, 'CRRole', {
       assumedBy: new iam.ServicePrincipal('lambda.amazonaws.com'),

@@ -41,8 +41,8 @@ Name|Description
 
 
 
-__Implements__: [IConstruct](#constructs-iconstruct), [IConstruct](#aws-cdk-core-iconstruct), [IConstruct](#constructs-iconstruct), [IDependable](#aws-cdk-core-idependable)
-__Extends__: [Construct](#aws-cdk-core-construct)
+__Implements__: [IConstruct](#constructs-iconstruct), [IDependable](#constructs-idependable)
+__Extends__: [Construct](#constructs-construct)
 
 ### Initializer
 
@@ -53,7 +53,7 @@ __Extends__: [Construct](#aws-cdk-core-construct)
 new AccessConrtolLambda(scope: Construct, id: string, props: AccessConrtolLambdaProps)
 ```
 
-* **scope** (<code>[Construct](#aws-cdk-core-construct)</code>)  *No description*
+* **scope** (<code>[Construct](#constructs-construct)</code>)  *No description*
 * **id** (<code>string</code>)  *No description*
 * **props** (<code>[AccessConrtolLambdaProps](#cdk-comprehend-s3olap-accessconrtollambdaprops)</code>)  *No description*
   * **confidenceThreshold** (<code>string</code>)  The minimum prediction confidence score above which PII classification and detection would be considered as final answer. __*Default*__: '0.5'
@@ -85,8 +85,8 @@ Name | Type | Description
 
 
 
-__Implements__: [IConstruct](#constructs-iconstruct), [IConstruct](#aws-cdk-core-iconstruct), [IConstruct](#constructs-iconstruct), [IDependable](#aws-cdk-core-idependable)
-__Extends__: [Construct](#aws-cdk-core-construct)
+__Implements__: [IConstruct](#constructs-iconstruct), [IDependable](#constructs-idependable)
+__Extends__: [Construct](#constructs-construct)
 
 ### Initializer
 
@@ -97,7 +97,7 @@ __Extends__: [Construct](#aws-cdk-core-construct)
 new AdminRole(scope: Construct, id: string, props?: AdminRoleProps)
 ```
 
-* **scope** (<code>[Construct](#aws-cdk-core-construct)</code>)  *No description*
+* **scope** (<code>[Construct](#constructs-construct)</code>)  *No description*
 * **id** (<code>string</code>)  *No description*
 * **props** (<code>[AdminRoleProps](#cdk-comprehend-s3olap-adminroleprops)</code>)  *No description*
   * **iamRoleName** (<code>string</code>)  The name of the IAM role. __*Default*__: 'RedactionAdminRole'
@@ -121,8 +121,8 @@ Name | Type | Description
 
 
 
-__Implements__: [IConstruct](#constructs-iconstruct), [IConstruct](#aws-cdk-core-iconstruct), [IConstruct](#constructs-iconstruct), [IDependable](#aws-cdk-core-idependable)
-__Extends__: [Construct](#aws-cdk-core-construct)
+__Implements__: [IConstruct](#constructs-iconstruct), [IDependable](#constructs-idependable)
+__Extends__: [Construct](#constructs-construct)
 
 ### Initializer
 
@@ -133,7 +133,7 @@ __Extends__: [Construct](#aws-cdk-core-construct)
 new BillingRole(scope: Construct, id: string, props?: AdminRoleProps)
 ```
 
-* **scope** (<code>[Construct](#aws-cdk-core-construct)</code>)  *No description*
+* **scope** (<code>[Construct](#constructs-construct)</code>)  *No description*
 * **id** (<code>string</code>)  *No description*
 * **props** (<code>[AdminRoleProps](#cdk-comprehend-s3olap-adminroleprops)</code>)  *No description*
   * **iamRoleName** (<code>string</code>)  The name of the IAM role. __*Default*__: 'RedactionAdminRole'
@@ -157,8 +157,8 @@ Name | Type | Description
 
 Creates the foundation necessary to deploy the S3 Object Lambda Acceess Control Use Case.
 
-__Implements__: [IConstruct](#constructs-iconstruct), [IConstruct](#aws-cdk-core-iconstruct), [IConstruct](#constructs-iconstruct), [IDependable](#aws-cdk-core-idependable)
-__Extends__: [Construct](#aws-cdk-core-construct)
+__Implements__: [IConstruct](#constructs-iconstruct), [IDependable](#constructs-idependable)
+__Extends__: [Construct](#constructs-construct)
 
 ### Initializer
 
@@ -169,7 +169,7 @@ __Extends__: [Construct](#aws-cdk-core-construct)
 new ComprehendS3olab(scope: Construct, id: string, props: ComprehendS3olabProps)
 ```
 
-* **scope** (<code>[Construct](#aws-cdk-core-construct)</code>)  *No description*
+* **scope** (<code>[Construct](#constructs-construct)</code>)  *No description*
 * **id** (<code>string</code>)  *No description*
 * **props** (<code>[ComprehendS3olabProps](#cdk-comprehend-s3olap-comprehends3olabprops)</code>)  *No description*
   * **accessControlLambdaConfig** (<code>[AccessConrtolLambdaProps](#cdk-comprehend-s3olap-accessconrtollambdaprops)</code>)  The parameters needed for the `ComprehendPiiAccessControlS3ObjectLambda` function. __*Optional*__
@@ -224,8 +224,8 @@ __Returns__:
 
 
 
-__Implements__: [IConstruct](#constructs-iconstruct), [IConstruct](#aws-cdk-core-iconstruct), [IConstruct](#constructs-iconstruct), [IDependable](#aws-cdk-core-idependable)
-__Extends__: [Construct](#aws-cdk-core-construct)
+__Implements__: [IConstruct](#constructs-iconstruct), [IDependable](#constructs-idependable)
+__Extends__: [Construct](#constructs-construct)
 
 ### Initializer
 
@@ -236,7 +236,7 @@ __Extends__: [Construct](#aws-cdk-core-construct)
 new CustSupportRole(scope: Construct, id: string, props?: AdminRoleProps)
 ```
 
-* **scope** (<code>[Construct](#aws-cdk-core-construct)</code>)  *No description*
+* **scope** (<code>[Construct](#constructs-construct)</code>)  *No description*
 * **id** (<code>string</code>)  *No description*
 * **props** (<code>[AdminRoleProps](#cdk-comprehend-s3olap-adminroleprops)</code>)  *No description*
   * **iamRoleName** (<code>string</code>)  The name of the IAM role. __*Default*__: 'RedactionAdminRole'
@@ -262,8 +262,8 @@ The role that you are going to assume (switch role).
 
 Explores how the S3 Object Lambda works.
 
-__Implements__: [IConstruct](#constructs-iconstruct), [IConstruct](#aws-cdk-core-iconstruct), [IConstruct](#constructs-iconstruct), [IDependable](#aws-cdk-core-idependable)
-__Extends__: [Construct](#aws-cdk-core-construct)
+__Implements__: [IConstruct](#constructs-iconstruct), [IDependable](#constructs-idependable)
+__Extends__: [Construct](#constructs-construct)
 
 ### Initializer
 
@@ -274,7 +274,7 @@ __Extends__: [Construct](#aws-cdk-core-construct)
 new GeneralRole(scope: Construct, id: string, props: GeneralRoleProps)
 ```
 
-* **scope** (<code>[Construct](#aws-cdk-core-construct)</code>)  *No description*
+* **scope** (<code>[Construct](#constructs-construct)</code>)  *No description*
 * **id** (<code>string</code>)  *No description*
 * **props** (<code>[GeneralRoleProps](#cdk-comprehend-s3olap-generalroleprops)</code>)  *No description*
   * **iamRoleName** (<code>string</code>)  The name of the IAM role. __*Default*__: 'GeneralRole'
@@ -298,8 +298,8 @@ Name | Type | Description
 
 
 
-__Implements__: [IConstruct](#constructs-iconstruct), [IConstruct](#aws-cdk-core-iconstruct), [IConstruct](#constructs-iconstruct), [IDependable](#aws-cdk-core-idependable)
-__Extends__: [Construct](#aws-cdk-core-construct)
+__Implements__: [IConstruct](#constructs-iconstruct), [IDependable](#constructs-idependable)
+__Extends__: [Construct](#constructs-construct)
 
 ### Initializer
 
@@ -310,7 +310,7 @@ __Extends__: [Construct](#aws-cdk-core-construct)
 new LambdaArnCaptorCustomResource(scope: Construct, id: string, props: LambdaArnCaptorResourceProps)
 ```
 
-* **scope** (<code>[Construct](#aws-cdk-core-construct)</code>)  *No description*
+* **scope** (<code>[Construct](#constructs-construct)</code>)  *No description*
 * **id** (<code>string</code>)  *No description*
 * **props** (<code>[LambdaArnCaptorResourceProps](#cdk-comprehend-s3olap-lambdaarncaptorresourceprops)</code>)  *No description*
   * **partialLambdaName** (<code>string</code>)  The partial fixed name of the gemeral Lambda function created from the serverless application. 
@@ -331,8 +331,8 @@ Name | Type | Description
 
 
 
-__Implements__: [IConstruct](#constructs-iconstruct), [IConstruct](#aws-cdk-core-iconstruct), [IConstruct](#constructs-iconstruct), [IDependable](#aws-cdk-core-idependable)
-__Extends__: [Construct](#aws-cdk-core-construct)
+__Implements__: [IConstruct](#constructs-iconstruct), [IDependable](#constructs-idependable)
+__Extends__: [Construct](#constructs-construct)
 
 ### Initializer
 
@@ -343,7 +343,7 @@ __Extends__: [Construct](#aws-cdk-core-construct)
 new RedactionLambda(scope: Construct, id: string, props?: RedactionLambdaProps)
 ```
 
-* **scope** (<code>[Construct](#aws-cdk-core-construct)</code>)  *No description*
+* **scope** (<code>[Construct](#constructs-construct)</code>)  *No description*
 * **id** (<code>string</code>)  *No description*
 * **props** (<code>[RedactionLambdaProps](#cdk-comprehend-s3olap-redactionlambdaprops)</code>)  *No description*
   * **confidenceThreshold** (<code>string</code>)  The minimum prediction confidence score above which PII classification and detection would be considered as final answer. __*Default*__: '0.5'

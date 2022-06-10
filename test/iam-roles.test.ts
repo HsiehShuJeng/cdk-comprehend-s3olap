@@ -1,6 +1,5 @@
-import { SynthUtils } from '@aws-cdk/assert';
-import '@aws-cdk/assert/jest';
-import * as cdk from '@aws-cdk/core';
+import * as cdk from 'aws-cdk-lib';
+import { Template } from 'aws-cdk-lib/assertions';
 import { GeneralRole, AdminRole, BillingRole, CustSupportRole } from '../src/iam-roles';
 
 test('IAM roles test', () => {
@@ -10,10 +9,10 @@ test('IAM roles test', () => {
   new AdminRole(stack, 'AdminRole');
   new BillingRole(stack, 'BillingRole');
   new CustSupportRole(stack, 'CustSupportRole');
+  const template = Template.fromStack(stack);
 
-  expect(SynthUtils.toCloudFormation(stack)).toMatchSnapshot();
-  expect(SynthUtils.toCloudFormation(stack)).toCountResources('AWS::IAM::Role', 4);
-  expect(SynthUtils.toCloudFormation(stack)).toHaveResource('AWS::IAM::Role', {
+  template.resourceCountIs('AWS::IAM::Role', 4);
+  template.hasResourceProperties('AWS::IAM::Role', {
     RoleName: 'GeneralRole',
     AssumeRolePolicyDocument: {
       Statement: [
@@ -134,7 +133,7 @@ test('IAM roles test', () => {
       },
     ],
   });
-  expect(SynthUtils.toCloudFormation(stack)).toHaveResource('AWS::IAM::Role', {
+  template.hasResourceProperties('AWS::IAM::Role', {
     RoleName: 'RedactionAdminRole',
     AssumeRolePolicyDocument: {
       Statement: [
@@ -255,7 +254,7 @@ test('IAM roles test', () => {
       },
     ],
   });
-  expect(SynthUtils.toCloudFormation(stack)).toHaveResource('AWS::IAM::Role', {
+  template.hasResourceProperties('AWS::IAM::Role', {
     RoleName: 'RedactionBillingRole',
     AssumeRolePolicyDocument: {
       Statement: [
@@ -376,7 +375,7 @@ test('IAM roles test', () => {
       },
     ],
   });
-  expect(SynthUtils.toCloudFormation(stack)).toHaveResource('AWS::IAM::Role', {
+  template.hasResourceProperties('AWS::IAM::Role', {
     RoleName: 'RedactionCustSupportRole',
     AssumeRolePolicyDocument: {
       Statement: [

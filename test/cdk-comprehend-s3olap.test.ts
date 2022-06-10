@@ -1,6 +1,5 @@
-import { SynthUtils } from '@aws-cdk/assert';
-import '@aws-cdk/assert/jest';
-import * as cdk from '@aws-cdk/core';
+import * as cdk from 'aws-cdk-lib';
+import { Template } from 'aws-cdk-lib/assertions';
 // import { ComprehendS3olab } from '../src/cdk-comprehend-s3olap';
 
 /**
@@ -9,9 +8,10 @@ import * as cdk from '@aws-cdk/core';
 test('comprehend-s3olap test', () => {
   const app = new cdk.App();
   const stack = new cdk.Stack(app, 'ker-ker');
+  const template = Template.fromStack(stack);
+  console.log(JSON.stringify(template));
   // new ComprehendS3olab(stack, 'ComprehendS3olab', { generateRandomCharacters: false });
 
-  expect(SynthUtils.toCloudFormation(stack)).toMatchSnapshot();
   // expect(SynthUtils.toCloudFormation(stack)).toCountResources('AWS::Serverless::Application', 4);
 
   // expect(SynthUtils.toCloudFormation(stack)).toCountResources('AWS::IAM::Role', 11);
