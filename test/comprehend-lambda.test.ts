@@ -1,5 +1,5 @@
 import { Template } from 'aws-cdk-lib/assertions';
-import * as cdk from 'aws-cdk-lib/core';
+import * as cdk from 'aws-cdk-lib';
 import { AccessConrtolLambda } from '../src/comprehend-lambdas';
 
 test('Comprehend Lambda test', () => {
