@@ -38,7 +38,7 @@ const project = new projen.awscdk.AwsCdkConstructLibrary({
   bundledDeps: ['aws-sdk', 'esbuild'],
   eslint: true,
   tsconfig: { compilerOptions: { lib: ['es2018', 'dom'] } }, //check https://bityl.co/7fHf
-  dependabotOptions: {
+  depsUpgradeOptions: {
     workflowOptions: {
       labels: ['auto-approve', 'auto-merge'],
     },
