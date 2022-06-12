@@ -1,7 +1,11 @@
-# cdk-comprehend-s3olap
-This construct creates the foundation for developers to explore the combination of Amazon S3 Object Lambda and Amazon Comprehend for PII scenarios and it is designed with flexibility, i.e, the developers could tweak arguments via CDK to see how AWS services work and behave.  
-
+# cdk-comprehend-s3olap  
 [![License](https://img.shields.io/badge/License-Apache%202.0-green)](https://opensource.org/licenses/Apache-2.0) [![Release](https://github.com/HsiehShuJeng/cdk-comprehend-s3olap/actions/workflows/release.yml/badge.svg)](https://github.com/HsiehShuJeng/cdk-comprehend-s3olap/actions/workflows/release.yml) [![npm downloads](https://img.shields.io/npm/dt/cdk-comprehend-s3olap?label=npm%20downloads&style=plastic)](https://img.shields.io/npm/dt/cdk-comprehend-s3olap?label=npm%20downloads&style=plastic) [![pypi downloads](https://img.shields.io/pypi/dm/cdk-comprehend-s3olap?label=pypi%20downloads&style=plastic)](https://img.shields.io/pypi/dm/cdk-comprehend-s3olap?label=pypi%20downloads&style=plastic) [![NuGet downloads](https://img.shields.io/nuget/dt/Comprehend.S3olap?label=NuGet%20downloads&style=plastic)](https://img.shields.io/nuget/dt/Comprehend.S3olap?label=NuGet%20downloads&style=plastic) [![repo languages](https://img.shields.io/github/languages/count/HsiehShuJeng/cdk-comprehend-s3olap?label=repo%20languages&style=plastic)](https://img.shields.io/github/languages/count/HsiehShuJeng/cdk-comprehend-s3olap?label=repo%20languages&style=plastic)  
+
+| npm (JS/TS) | PyPI (Python) | Maven (Java) | Go | NuGet |
+| --- | --- | --- | --- | --- |
+| [Link](https://www.npmjs.com/package/cdk-comprehend-s3olap) | [Link](https://pypi.org/project/cdk_comprehend_s3olap/) | [Link](https://search.maven.org/artifact/io.github.hsiehshujeng/cdk-comprehend-s3olap) | [Link](https://github.com/HsiehShuJeng/cdk-comprehend-s3olap-go) | [Link](https://www.nuget.org/packages/Comprehend.S3olap/) |   
+
+This construct creates the foundation for developers to explore the combination of Amazon S3 Object Lambda and Amazon Comprehend for PII scenarios and it is designed with flexibility, i.e, the developers could tweak arguments via CDK to see how AWS services work and behave.  
 
 # Table of Contents  
 - [Serverless Architecture](#serverless-architecture)  
