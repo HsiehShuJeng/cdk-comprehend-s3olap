@@ -70,7 +70,7 @@
   },
   "dependencies": {
     "aws-cdk-lib": "^2.30.0",
-    "aws-sdk": "^2.1167.0",
+    "aws-sdk": "^2.1168.0",
     "constructs": "^10.0.5",
     "esbuild": "^0.14.48"
   },
