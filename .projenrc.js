@@ -91,13 +91,49 @@ const javaDemoExclustions = [
   '*.iml',
 ];
 const commonExclusions = ['cdk.context.json', 'yarn-error.log', 'cdk.out', '.cdk.staging', '.DS_Store'];
-project.npmignore.exclude(...commonExclusions);
-project.gitignore.exclude(...commonExclusions);
-project.npmignore.exclude(...mavenExclusions);
-project.gitignore.exclude(...mavenExclusions);
-project.npmignore.exclude(...pythonDemoExclustions);
-project.gitignore.exclude(...pythonDemoExclustions);
-project.npmignore.exclude(...javaDemoExclustions);
-project.gitignore.exclude(...javaDemoExclustions);
+const exclusionLists = [
+  commonExclusions,
+  mavenExclusions,
+  pythonDemoExclustions,
+  javaDemoExclustions,
+];
+excludeFilesFrom(project, exclusionLists);
+const approveOverridingSteps = {
+  'jobs.approve.steps.0.uses': 'hmarr/auto-approve-action@v3.2.1',
+};
+setupWorkflow('auto-approve', undefined, approveOverridingSteps);
+
 project.package.addPackageResolutions('got@12.3.0');
 project.synth();
+
+/**
+ * Exclude files from the project's .npmignore and .gitignore.
+ *
+ * @param {Object} pjObject - The project object to apply the exclusions.
+ * @param {Array<Array<string>>} exclusionList - An array of arrays, where each inner array contains a list of file patterns to exclude.
+ */
+function excludeFilesFrom(pjObject, exclusionList) {
+  for (const exclusions of exclusionList) {
+    pjObject.npmignore.exclude(...exclusions);
+    pjObject.gitignore.exclude(...exclusions);
+  }
+}
+
+/**
+ * Set up a GitHub Actions workflow with the specified environment variables and step overrides.
+ *
+ * @param {string} workflowName - The name of the workflow to configure.
+ * @param {Object} [envOverrides] - An object containing environment variables to override in the workflow.
+ * @param {Object} stepsOverrides - An object where each key is a step identifier (e.g., 'jobs.build.steps.2') and each value is an object containing the step configuration to override.
+ */
+function setupWorkflow(workflowName, envOverrides, stepsOverrides) {
+  const workflow = project.github.tryFindWorkflow(workflowName);
+
+  for (const [step, override] of Object.entries(stepsOverrides)) {
+    workflow.file.addOverride(step, override);
+  }
+
+  if (envOverrides) {
+    workflow.file.addOverride(`jobs.${workflowName}.env`, envOverrides);
+  }
+}
