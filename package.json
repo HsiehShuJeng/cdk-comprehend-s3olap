@@ -55,7 +55,7 @@
     "jsii-docgen": "^1.8.110",
     "jsii-pacmak": "^1.98.0",
     "jsii-rosetta": "1.x",
-    "projen": "^0.82.1",
+    "projen": "^0.82.2",
     "standard-version": "^9",
     "ts-jest": "^27",
     "typescript": "^4.9.5"
@@ -66,7 +66,7 @@
   },
   "dependencies": {
     "aws-cdk-lib": "^2.93.0",
-    "aws-sdk": "^2.1629.0",
+    "aws-sdk": "^2.1630.0",
     "constructs": "^10.0.5",
     "esbuild": "^0.21.4"
   },
