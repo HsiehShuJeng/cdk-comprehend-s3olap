@@ -37,6 +37,7 @@ const project = new projen.awscdk.AwsCdkConstructLibrary({
   ],
   bundledDeps: ['aws-sdk', 'esbuild'],
   eslint: true,
+  jsiiVersion: '5.4.x',
   tsconfig: { compilerOptions: { lib: ['es2018', 'dom'] } }, //check https://bityl.co/7fHf
   depsUpgradeOptions: {
     workflowOptions: {
