@@ -12,10 +12,10 @@ import * as cr from 'aws-cdk-lib/custom-resources';
 import { Construct } from 'constructs';
 import { AccessConrtolLambda, AccessConrtolLambdaProps, RedactionLambda, RedactionLambdaProps } from './comprehend-lambdas';
 import {
-  GeneralRole, GeneralRoleProps,
   AdminRole, AdminRoleProps,
   BillingRole, BillingRoleProps,
   CustSupportRole, CustSupportRoleProps,
+  GeneralRole, GeneralRoleProps,
 } from './iam-roles';
 
 export enum IamRoleName {
@@ -621,7 +621,7 @@ export class LambdaArnCaptorCustomResource extends Construct {
       entry: fs.existsSync(path.join(__dirname, 'resources/lambda-arn-helper.ts')) ? path.join(__dirname, 'resources/lambda-arn-helper.ts') : path.join(__dirname, 'resources/lambda-arn-helper.js'),
       handler: 'lambdaHandler',
       timeout: cdk.Duration.minutes(2),
-      runtime: Runtime.NODEJS_14_X,
+      runtime: Runtime.NODEJS_20_X,
       bundling: {
         minify: false,
         sourceMap: true,
