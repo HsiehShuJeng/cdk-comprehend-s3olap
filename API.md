@@ -1,558 +1,2295 @@
-# API Reference
+# API Reference <a name="API Reference" id="api-reference"></a>
 
-**Classes**
+## Constructs <a name="Constructs" id="Constructs"></a>
 
-Name|Description
-----|-----------
-[AccessConrtolLambda](#cdk-comprehend-s3olap-accessconrtollambda)|*No description*
-[AdminRole](#cdk-comprehend-s3olap-adminrole)|*No description*
-[BillingRole](#cdk-comprehend-s3olap-billingrole)|*No description*
-[ComprehendS3olab](#cdk-comprehend-s3olap-comprehends3olab)|Creates the foundation necessary to deploy the S3 Object Lambda Acceess Control Use Case.
-[CustSupportRole](#cdk-comprehend-s3olap-custsupportrole)|*No description*
-[GeneralRole](#cdk-comprehend-s3olap-generalrole)|The role that you are going to assume (switch role).
-[LambdaArnCaptorCustomResource](#cdk-comprehend-s3olap-lambdaarncaptorcustomresource)|*No description*
-[RedactionLambda](#cdk-comprehend-s3olap-redactionlambda)|*No description*
+### AccessConrtolLambda <a name="AccessConrtolLambda" id="cdk-comprehend-s3olap.AccessConrtolLambda"></a>
 
+#### Initializers <a name="Initializers" id="cdk-comprehend-s3olap.AccessConrtolLambda.Initializer"></a>
 
-**Structs**
+```typescript
+import { AccessConrtolLambda } from 'cdk-comprehend-s3olap'
 
-Name|Description
-----|-----------
-[AccessConrtolLambdaProps](#cdk-comprehend-s3olap-accessconrtollambdaprops)|*No description*
-[AdminRoleProps](#cdk-comprehend-s3olap-adminroleprops)|*No description*
-[BillingRoleProps](#cdk-comprehend-s3olap-billingroleprops)|*No description*
-[ComprehendS3olabProps](#cdk-comprehend-s3olap-comprehends3olabprops)|*No description*
-[CustSupportRoleProps](#cdk-comprehend-s3olap-custsupportroleprops)|*No description*
-[GeneralRoleProps](#cdk-comprehend-s3olap-generalroleprops)|*No description*
-[LambdaArnCaptorResourceProps](#cdk-comprehend-s3olap-lambdaarncaptorresourceprops)|*No description*
-[RedactionLambdaProps](#cdk-comprehend-s3olap-redactionlambdaprops)|*No description*
-[S3AccessPointNames](#cdk-comprehend-s3olap-s3accesspointnames)|*No description*
-
-
-**Enums**
-
-Name|Description
-----|-----------
-[IamRoleName](#cdk-comprehend-s3olap-iamrolename)|*No description*
-
-
-
-## class AccessConrtolLambda  <a id="cdk-comprehend-s3olap-accessconrtollambda"></a>
-
-
-
-__Implements__: [IConstruct](#constructs-iconstruct), [IDependable](#constructs-idependable)
-__Extends__: [Construct](#constructs-construct)
-
-### Initializer
-
-
-
-
-```ts
 new AccessConrtolLambda(scope: Construct, id: string, props: AccessConrtolLambdaProps)
 ```
 
-* **scope** (<code>[Construct](#constructs-construct)</code>)  *No description*
-* **id** (<code>string</code>)  *No description*
-* **props** (<code>[AccessConrtolLambdaProps](#cdk-comprehend-s3olap-accessconrtollambdaprops)</code>)  *No description*
-  * **confidenceThreshold** (<code>string</code>)  The minimum prediction confidence score above which PII classification and detection would be considered as final answer. __*Default*__: '0.5'
-  * **containsPiiEntitiesThreadCount** (<code>string</code>)  Number of threads to use for calling Comprehend's ContainsPiiEntities API. __*Default*__: '20'
-  * **defaultLanguageCode** (<code>string</code>)  Default language of the text to be processed. __*Default*__: 'en'
-  * **documentMaxSize** (<code>string</code>)  Default maximum document size (in bytes) that this function can process otherwise will throw exception for too large document size. __*Default*__: '102400'
-  * **documentMaxSizeContainsPiiEntities** (<code>string</code>)  Maximum document size (in bytes) to be used for making calls to Comprehend's ContainsPiiEntities API. __*Default*__: '50000'
-  * **isPartialObjectSupported** (<code>string</code>)  Whether to support partial objects or not. __*Default*__: 'false'
-  * **logLevel** (<code>string</code>)  Log level for Lambda function logging, e.g., ERROR, INFO, DEBUG, etc. __*Default*__: 'INFO'
-  * **maxCharsOverlap** (<code>string</code>)  Maximum characters to overlap among segments of a document in case chunking is needed because of maximum document size limit. __*Default*__: '200'
-  * **piiEntityTypes** (<code>string</code>)  List of comma separated PII entity types to be considered for access control. __*Default*__: 'ALL'
-  * **publishCloudWatchMetrics** (<code>string</code>)  True if publish metrics to Cloudwatch, false otherwise. __*Default*__: 'true'
-  * **semanticVersion** (<code>string</code>)  The version of the serverless application. __*Default*__: '1.0.2'
-  * **subsegmentOverlappingTokens** (<code>string</code>)  Number of tokens/words to overlap among segments of a document in case chunking is needed because of maximum document size limit. __*Default*__: '20'
-  * **unsupportedFileHandling** (<code>string</code>)  Handling logic for Unsupported files. __*Default*__: 'FAIL'
+| **Name** | **Type** | **Description** |
+| --- | --- | --- |
+| <code><a href="#cdk-comprehend-s3olap.AccessConrtolLambda.Initializer.parameter.scope">scope</a></code> | <code>constructs.Construct</code> | *No description.* |
+| <code><a href="#cdk-comprehend-s3olap.AccessConrtolLambda.Initializer.parameter.id">id</a></code> | <code>string</code> | *No description.* |
+| <code><a href="#cdk-comprehend-s3olap.AccessConrtolLambda.Initializer.parameter.props">props</a></code> | <code><a href="#cdk-comprehend-s3olap.AccessConrtolLambdaProps">AccessConrtolLambdaProps</a></code> | *No description.* |
+
+---
+
+##### `scope`<sup>Required</sup> <a name="scope" id="cdk-comprehend-s3olap.AccessConrtolLambda.Initializer.parameter.scope"></a>
+
+- *Type:* constructs.Construct
+
+---
+
+##### `id`<sup>Required</sup> <a name="id" id="cdk-comprehend-s3olap.AccessConrtolLambda.Initializer.parameter.id"></a>
+
+- *Type:* string
+
+---
+
+##### `props`<sup>Required</sup> <a name="props" id="cdk-comprehend-s3olap.AccessConrtolLambda.Initializer.parameter.props"></a>
+
+- *Type:* <a href="#cdk-comprehend-s3olap.AccessConrtolLambdaProps">AccessConrtolLambdaProps</a>
+
+---
+
+#### Methods <a name="Methods" id="Methods"></a>
+
+| **Name** | **Description** |
+| --- | --- |
+| <code><a href="#cdk-comprehend-s3olap.AccessConrtolLambda.toString">toString</a></code> | Returns a string representation of this construct. |
+
+---
+
+##### `toString` <a name="toString" id="cdk-comprehend-s3olap.AccessConrtolLambda.toString"></a>
+
+```typescript
+public toString(): string
+```
+
+Returns a string representation of this construct.
+
+#### Static Functions <a name="Static Functions" id="Static Functions"></a>
+
+| **Name** | **Description** |
+| --- | --- |
+| <code><a href="#cdk-comprehend-s3olap.AccessConrtolLambda.isConstruct">isConstruct</a></code> | Checks if `x` is a construct. |
+
+---
+
+##### `isConstruct` <a name="isConstruct" id="cdk-comprehend-s3olap.AccessConrtolLambda.isConstruct"></a>
+
+```typescript
+import { AccessConrtolLambda } from 'cdk-comprehend-s3olap'
+
+AccessConrtolLambda.isConstruct(x: any)
+```
+
+Checks if `x` is a construct.
+
+Use this method instead of `instanceof` to properly detect `Construct`
+instances, even when the construct library is symlinked.
+
+Explanation: in JavaScript, multiple copies of the `constructs` library on
+disk are seen as independent, completely different libraries. As a
+consequence, the class `Construct` in each copy of the `constructs` library
+is seen as a different class, and an instance of one class will not test as
+`instanceof` the other class. `npm install` will not create installations
+like this, but users may manually symlink construct libraries together or
+use a monorepo tool: in those cases, multiple copies of the `constructs`
+library can be accidentally installed, and `instanceof` will behave
+unpredictably. It is safest to avoid using `instanceof`, and using
+this type-testing method instead.
+
+###### `x`<sup>Required</sup> <a name="x" id="cdk-comprehend-s3olap.AccessConrtolLambda.isConstruct.parameter.x"></a>
+
+- *Type:* any
+
+Any object.
+
+---
+
+#### Properties <a name="Properties" id="Properties"></a>
+
+| **Name** | **Type** | **Description** |
+| --- | --- | --- |
+| <code><a href="#cdk-comprehend-s3olap.AccessConrtolLambda.property.node">node</a></code> | <code>constructs.Node</code> | The tree node. |
+| <code><a href="#cdk-comprehend-s3olap.AccessConrtolLambda.property.stackName">stackName</a></code> | <code>string</code> | The name of the underlying resoure in the serverless application. |
+
+---
+
+##### `node`<sup>Required</sup> <a name="node" id="cdk-comprehend-s3olap.AccessConrtolLambda.property.node"></a>
+
+```typescript
+public readonly node: Node;
+```
+
+- *Type:* constructs.Node
+
+The tree node.
+
+---
+
+##### `stackName`<sup>Required</sup> <a name="stackName" id="cdk-comprehend-s3olap.AccessConrtolLambda.property.stackName"></a>
+
+```typescript
+public readonly stackName: string;
+```
+
+- *Type:* string
+
+The name of the underlying resoure in the serverless application.
+
+---
 
 
+### AdminRole <a name="AdminRole" id="cdk-comprehend-s3olap.AdminRole"></a>
 
-### Properties
+#### Initializers <a name="Initializers" id="cdk-comprehend-s3olap.AdminRole.Initializer"></a>
 
+```typescript
+import { AdminRole } from 'cdk-comprehend-s3olap'
 
-Name | Type | Description 
------|------|-------------
-**stackName** | <code>string</code> | The name of the underlying resoure in the serverless application.
-
-
-
-## class AdminRole  <a id="cdk-comprehend-s3olap-adminrole"></a>
-
-
-
-__Implements__: [IConstruct](#constructs-iconstruct), [IDependable](#constructs-idependable)
-__Extends__: [Construct](#constructs-construct)
-
-### Initializer
-
-
-
-
-```ts
 new AdminRole(scope: Construct, id: string, props?: AdminRoleProps)
 ```
 
-* **scope** (<code>[Construct](#constructs-construct)</code>)  *No description*
-* **id** (<code>string</code>)  *No description*
-* **props** (<code>[AdminRoleProps](#cdk-comprehend-s3olap-adminroleprops)</code>)  *No description*
-  * **iamRoleName** (<code>string</code>)  The name of the IAM role. __*Default*__: 'RedactionAdminRole'
-  * **objectLambdaAccessPointName** (<code>string</code>)  The name of the object Lambda access point, which will be the same as the S3 acceess point for the S3 bucket in the demostration. __*Default*__: 'admin-s3olap-call-transcripts-known-pii'
-  * **policyName** (<code>string</code>)  The name of the IAM policy for the IAM role. __*Default*__: 'admin-role-s3olap-policy'
+| **Name** | **Type** | **Description** |
+| --- | --- | --- |
+| <code><a href="#cdk-comprehend-s3olap.AdminRole.Initializer.parameter.scope">scope</a></code> | <code>constructs.Construct</code> | *No description.* |
+| <code><a href="#cdk-comprehend-s3olap.AdminRole.Initializer.parameter.id">id</a></code> | <code>string</code> | *No description.* |
+| <code><a href="#cdk-comprehend-s3olap.AdminRole.Initializer.parameter.props">props</a></code> | <code><a href="#cdk-comprehend-s3olap.AdminRoleProps">AdminRoleProps</a></code> | *No description.* |
+
+---
+
+##### `scope`<sup>Required</sup> <a name="scope" id="cdk-comprehend-s3olap.AdminRole.Initializer.parameter.scope"></a>
+
+- *Type:* constructs.Construct
+
+---
+
+##### `id`<sup>Required</sup> <a name="id" id="cdk-comprehend-s3olap.AdminRole.Initializer.parameter.id"></a>
+
+- *Type:* string
+
+---
+
+##### `props`<sup>Optional</sup> <a name="props" id="cdk-comprehend-s3olap.AdminRole.Initializer.parameter.props"></a>
+
+- *Type:* <a href="#cdk-comprehend-s3olap.AdminRoleProps">AdminRoleProps</a>
+
+---
+
+#### Methods <a name="Methods" id="Methods"></a>
+
+| **Name** | **Description** |
+| --- | --- |
+| <code><a href="#cdk-comprehend-s3olap.AdminRole.toString">toString</a></code> | Returns a string representation of this construct. |
+
+---
+
+##### `toString` <a name="toString" id="cdk-comprehend-s3olap.AdminRole.toString"></a>
+
+```typescript
+public toString(): string
+```
+
+Returns a string representation of this construct.
+
+#### Static Functions <a name="Static Functions" id="Static Functions"></a>
+
+| **Name** | **Description** |
+| --- | --- |
+| <code><a href="#cdk-comprehend-s3olap.AdminRole.isConstruct">isConstruct</a></code> | Checks if `x` is a construct. |
+
+---
+
+##### `isConstruct` <a name="isConstruct" id="cdk-comprehend-s3olap.AdminRole.isConstruct"></a>
+
+```typescript
+import { AdminRole } from 'cdk-comprehend-s3olap'
+
+AdminRole.isConstruct(x: any)
+```
+
+Checks if `x` is a construct.
+
+Use this method instead of `instanceof` to properly detect `Construct`
+instances, even when the construct library is symlinked.
+
+Explanation: in JavaScript, multiple copies of the `constructs` library on
+disk are seen as independent, completely different libraries. As a
+consequence, the class `Construct` in each copy of the `constructs` library
+is seen as a different class, and an instance of one class will not test as
+`instanceof` the other class. `npm install` will not create installations
+like this, but users may manually symlink construct libraries together or
+use a monorepo tool: in those cases, multiple copies of the `constructs`
+library can be accidentally installed, and `instanceof` will behave
+unpredictably. It is safest to avoid using `instanceof`, and using
+this type-testing method instead.
+
+###### `x`<sup>Required</sup> <a name="x" id="cdk-comprehend-s3olap.AdminRole.isConstruct.parameter.x"></a>
+
+- *Type:* any
+
+Any object.
+
+---
+
+#### Properties <a name="Properties" id="Properties"></a>
+
+| **Name** | **Type** | **Description** |
+| --- | --- | --- |
+| <code><a href="#cdk-comprehend-s3olap.AdminRole.property.node">node</a></code> | <code>constructs.Node</code> | The tree node. |
+| <code><a href="#cdk-comprehend-s3olap.AdminRole.property.roleArn">roleArn</a></code> | <code>string</code> | The ARN of the IAM role. |
+| <code><a href="#cdk-comprehend-s3olap.AdminRole.property.roleId">roleId</a></code> | <code>string</code> | The unique string identifying the role. |
+| <code><a href="#cdk-comprehend-s3olap.AdminRole.property.roleName">roleName</a></code> | <code>string</code> | The name of the IAM role. |
+
+---
+
+##### `node`<sup>Required</sup> <a name="node" id="cdk-comprehend-s3olap.AdminRole.property.node"></a>
+
+```typescript
+public readonly node: Node;
+```
+
+- *Type:* constructs.Node
+
+The tree node.
+
+---
+
+##### `roleArn`<sup>Required</sup> <a name="roleArn" id="cdk-comprehend-s3olap.AdminRole.property.roleArn"></a>
+
+```typescript
+public readonly roleArn: string;
+```
+
+- *Type:* string
+
+The ARN of the IAM role.
+
+---
+
+##### `roleId`<sup>Required</sup> <a name="roleId" id="cdk-comprehend-s3olap.AdminRole.property.roleId"></a>
+
+```typescript
+public readonly roleId: string;
+```
+
+- *Type:* string
+
+The unique string identifying the role.
+
+---
+
+##### `roleName`<sup>Required</sup> <a name="roleName" id="cdk-comprehend-s3olap.AdminRole.property.roleName"></a>
+
+```typescript
+public readonly roleName: string;
+```
+
+- *Type:* string
+
+The name of the IAM role.
+
+---
 
 
+### BillingRole <a name="BillingRole" id="cdk-comprehend-s3olap.BillingRole"></a>
 
-### Properties
+#### Initializers <a name="Initializers" id="cdk-comprehend-s3olap.BillingRole.Initializer"></a>
 
+```typescript
+import { BillingRole } from 'cdk-comprehend-s3olap'
 
-Name | Type | Description 
------|------|-------------
-**roleArn** | <code>string</code> | The ARN of the IAM role.
-**roleId** | <code>string</code> | The unique string identifying the role.
-**roleName** | <code>string</code> | The name of the IAM role.
-
-
-
-## class BillingRole  <a id="cdk-comprehend-s3olap-billingrole"></a>
-
-
-
-__Implements__: [IConstruct](#constructs-iconstruct), [IDependable](#constructs-idependable)
-__Extends__: [Construct](#constructs-construct)
-
-### Initializer
-
-
-
-
-```ts
 new BillingRole(scope: Construct, id: string, props?: AdminRoleProps)
 ```
 
-* **scope** (<code>[Construct](#constructs-construct)</code>)  *No description*
-* **id** (<code>string</code>)  *No description*
-* **props** (<code>[AdminRoleProps](#cdk-comprehend-s3olap-adminroleprops)</code>)  *No description*
-  * **iamRoleName** (<code>string</code>)  The name of the IAM role. __*Default*__: 'RedactionAdminRole'
-  * **objectLambdaAccessPointName** (<code>string</code>)  The name of the object Lambda access point, which will be the same as the S3 acceess point for the S3 bucket in the demostration. __*Default*__: 'admin-s3olap-call-transcripts-known-pii'
-  * **policyName** (<code>string</code>)  The name of the IAM policy for the IAM role. __*Default*__: 'admin-role-s3olap-policy'
+| **Name** | **Type** | **Description** |
+| --- | --- | --- |
+| <code><a href="#cdk-comprehend-s3olap.BillingRole.Initializer.parameter.scope">scope</a></code> | <code>constructs.Construct</code> | *No description.* |
+| <code><a href="#cdk-comprehend-s3olap.BillingRole.Initializer.parameter.id">id</a></code> | <code>string</code> | *No description.* |
+| <code><a href="#cdk-comprehend-s3olap.BillingRole.Initializer.parameter.props">props</a></code> | <code><a href="#cdk-comprehend-s3olap.AdminRoleProps">AdminRoleProps</a></code> | *No description.* |
+
+---
+
+##### `scope`<sup>Required</sup> <a name="scope" id="cdk-comprehend-s3olap.BillingRole.Initializer.parameter.scope"></a>
+
+- *Type:* constructs.Construct
+
+---
+
+##### `id`<sup>Required</sup> <a name="id" id="cdk-comprehend-s3olap.BillingRole.Initializer.parameter.id"></a>
+
+- *Type:* string
+
+---
+
+##### `props`<sup>Optional</sup> <a name="props" id="cdk-comprehend-s3olap.BillingRole.Initializer.parameter.props"></a>
+
+- *Type:* <a href="#cdk-comprehend-s3olap.AdminRoleProps">AdminRoleProps</a>
+
+---
+
+#### Methods <a name="Methods" id="Methods"></a>
+
+| **Name** | **Description** |
+| --- | --- |
+| <code><a href="#cdk-comprehend-s3olap.BillingRole.toString">toString</a></code> | Returns a string representation of this construct. |
+
+---
+
+##### `toString` <a name="toString" id="cdk-comprehend-s3olap.BillingRole.toString"></a>
+
+```typescript
+public toString(): string
+```
+
+Returns a string representation of this construct.
+
+#### Static Functions <a name="Static Functions" id="Static Functions"></a>
+
+| **Name** | **Description** |
+| --- | --- |
+| <code><a href="#cdk-comprehend-s3olap.BillingRole.isConstruct">isConstruct</a></code> | Checks if `x` is a construct. |
+
+---
+
+##### `isConstruct` <a name="isConstruct" id="cdk-comprehend-s3olap.BillingRole.isConstruct"></a>
+
+```typescript
+import { BillingRole } from 'cdk-comprehend-s3olap'
+
+BillingRole.isConstruct(x: any)
+```
+
+Checks if `x` is a construct.
+
+Use this method instead of `instanceof` to properly detect `Construct`
+instances, even when the construct library is symlinked.
+
+Explanation: in JavaScript, multiple copies of the `constructs` library on
+disk are seen as independent, completely different libraries. As a
+consequence, the class `Construct` in each copy of the `constructs` library
+is seen as a different class, and an instance of one class will not test as
+`instanceof` the other class. `npm install` will not create installations
+like this, but users may manually symlink construct libraries together or
+use a monorepo tool: in those cases, multiple copies of the `constructs`
+library can be accidentally installed, and `instanceof` will behave
+unpredictably. It is safest to avoid using `instanceof`, and using
+this type-testing method instead.
+
+###### `x`<sup>Required</sup> <a name="x" id="cdk-comprehend-s3olap.BillingRole.isConstruct.parameter.x"></a>
+
+- *Type:* any
+
+Any object.
+
+---
+
+#### Properties <a name="Properties" id="Properties"></a>
+
+| **Name** | **Type** | **Description** |
+| --- | --- | --- |
+| <code><a href="#cdk-comprehend-s3olap.BillingRole.property.node">node</a></code> | <code>constructs.Node</code> | The tree node. |
+| <code><a href="#cdk-comprehend-s3olap.BillingRole.property.roleArn">roleArn</a></code> | <code>string</code> | The ARN of the IAM role. |
+| <code><a href="#cdk-comprehend-s3olap.BillingRole.property.roleId">roleId</a></code> | <code>string</code> | The unique string identifying the role. |
+| <code><a href="#cdk-comprehend-s3olap.BillingRole.property.roleName">roleName</a></code> | <code>string</code> | The name of the IAM role. |
+
+---
+
+##### `node`<sup>Required</sup> <a name="node" id="cdk-comprehend-s3olap.BillingRole.property.node"></a>
+
+```typescript
+public readonly node: Node;
+```
+
+- *Type:* constructs.Node
+
+The tree node.
+
+---
+
+##### `roleArn`<sup>Required</sup> <a name="roleArn" id="cdk-comprehend-s3olap.BillingRole.property.roleArn"></a>
+
+```typescript
+public readonly roleArn: string;
+```
+
+- *Type:* string
+
+The ARN of the IAM role.
+
+---
+
+##### `roleId`<sup>Required</sup> <a name="roleId" id="cdk-comprehend-s3olap.BillingRole.property.roleId"></a>
+
+```typescript
+public readonly roleId: string;
+```
+
+- *Type:* string
+
+The unique string identifying the role.
+
+---
+
+##### `roleName`<sup>Required</sup> <a name="roleName" id="cdk-comprehend-s3olap.BillingRole.property.roleName"></a>
+
+```typescript
+public readonly roleName: string;
+```
+
+- *Type:* string
+
+The name of the IAM role.
+
+---
 
 
-
-### Properties
-
-
-Name | Type | Description 
------|------|-------------
-**roleArn** | <code>string</code> | The ARN of the IAM role.
-**roleId** | <code>string</code> | The unique string identifying the role.
-**roleName** | <code>string</code> | The name of the IAM role.
-
-
-
-## class ComprehendS3olab  <a id="cdk-comprehend-s3olap-comprehends3olab"></a>
+### ComprehendS3olab <a name="ComprehendS3olab" id="cdk-comprehend-s3olap.ComprehendS3olab"></a>
 
 Creates the foundation necessary to deploy the S3 Object Lambda Acceess Control Use Case.
 
-__Implements__: [IConstruct](#constructs-iconstruct), [IDependable](#constructs-idependable)
-__Extends__: [Construct](#constructs-construct)
+#### Initializers <a name="Initializers" id="cdk-comprehend-s3olap.ComprehendS3olab.Initializer"></a>
 
-### Initializer
+```typescript
+import { ComprehendS3olab } from 'cdk-comprehend-s3olap'
 
-
-
-
-```ts
 new ComprehendS3olab(scope: Construct, id: string, props: ComprehendS3olabProps)
 ```
 
-* **scope** (<code>[Construct](#constructs-construct)</code>)  *No description*
-* **id** (<code>string</code>)  *No description*
-* **props** (<code>[ComprehendS3olabProps](#cdk-comprehend-s3olap-comprehends3olabprops)</code>)  *No description*
-  * **accessControlLambdaConfig** (<code>[AccessConrtolLambdaProps](#cdk-comprehend-s3olap-accessconrtollambdaprops)</code>)  The parameters needed for the `ComprehendPiiAccessControlS3ObjectLambda` function. __*Optional*__
-  * **adminRedactionLambdaConfig** (<code>[RedactionLambdaProps](#cdk-comprehend-s3olap-redactionlambdaprops)</code>)  The parameters of the `ComprehendPiiRedactionS3ObjectLambda` function for the `AdminRole`. __*Optional*__
-  * **adminRoleConfig** (<code>[AdminRoleProps](#cdk-comprehend-s3olap-adminroleprops)</code>)  The manageable properties for the administrator IAM role in the redaction case. __*Optional*__
-  * **billingRedactionLambdaConfig** (<code>[RedactionLambdaProps](#cdk-comprehend-s3olap-redactionlambdaprops)</code>)  The parameters of the `ComprehendPiiRedactionS3ObjectLambda` function for the `BillingRole`. __*Optional*__
-  * **billingRoleConfig** (<code>[BillingRoleProps](#cdk-comprehend-s3olap-billingroleprops)</code>)  The manageable properties for the billing IAM role in the redaction case. __*Optional*__
-  * **cusrtSupportRedactionLambdaConfig** (<code>[RedactionLambdaProps](#cdk-comprehend-s3olap-redactionlambdaprops)</code>)  The parameters of the `ComprehendPiiRedactionS3ObjectLambda` function for the `CustSupportRole`. __*Optional*__
-  * **custSupportRoleConfig** (<code>[CustSupportRoleProps](#cdk-comprehend-s3olap-custsupportroleprops)</code>)  The manageable properties for the customer support IAM role in the redaction case. __*Optional*__
-  * **exampleFileDir** (<code>string</code>)  The directory path where `files/access_control/*.txt` and `files/redaction/*.txt` will be put. __*Default*__: __dirname
-  * **generalRoleConfig** (<code>[GeneralRoleProps](#cdk-comprehend-s3olap-generalroleprops)</code>)  The manageable properties for the IAM role used to access the `survey-results.txt` data. __*Optional*__
-  * **generateRandomCharacters** (<code>boolean</code>)  For distinguish test and normal deployment. __*Default*__: true
-  * **s3AccessPointNames** (<code>[S3AccessPointNames](#cdk-comprehend-s3olap-s3accesspointnames)</code>)  The names of the S3 access points for the access control case and redaction case. __*Optional*__
-  * **surveyBucketPrefix** (<code>string</code>)  The prefix attached to the name of the S3 bucket where you are going to explore the S3 Object Lambda pertaining to the access control case. __*Default*__: 6 random words
-  * **transcriptsBucketPrefix** (<code>string</code>)  The prefix attached to the name of the S3 bucket where you are going to explore the S3 Object Lambda pertaining to the redaction case. __*Default*__: 6 random words
+| **Name** | **Type** | **Description** |
+| --- | --- | --- |
+| <code><a href="#cdk-comprehend-s3olap.ComprehendS3olab.Initializer.parameter.scope">scope</a></code> | <code>constructs.Construct</code> | *No description.* |
+| <code><a href="#cdk-comprehend-s3olap.ComprehendS3olab.Initializer.parameter.id">id</a></code> | <code>string</code> | *No description.* |
+| <code><a href="#cdk-comprehend-s3olap.ComprehendS3olab.Initializer.parameter.props">props</a></code> | <code><a href="#cdk-comprehend-s3olap.ComprehendS3olabProps">ComprehendS3olabProps</a></code> | *No description.* |
 
+---
 
+##### `scope`<sup>Required</sup> <a name="scope" id="cdk-comprehend-s3olap.ComprehendS3olab.Initializer.parameter.scope"></a>
 
-### Properties
+- *Type:* constructs.Construct
 
+---
 
-Name | Type | Description 
------|------|-------------
-**adminLambdaArn** | <code>string</code> | The ARN of the Lambda function combined with Amazon Comprehend for thie administrator role in the redaction case.
-**billingLambdaArn** | <code>string</code> | The ARN of the Lambda function combined with Amazon Comprehend for thie billing role in the redaction case.
-**customerSupportLambdaArn** | <code>string</code> | The ARN of the Lambda function combined with Amazon Comprehend for thie customer support role in the redaction case.
-**piiAccessConrtolLambdaArn** | <code>string</code> | The ARN of the Lambda function combined with Amazon Comprehend for the general case.
-**s3objectLambdaAccessControlArn** | <code>string</code> | The ARN of the S3 Object Lambda for access control.
-**s3objectLambdaAdminArn** | <code>string</code> | The ARN of the S3 Object Lambda for the admin role in the redaction case.
-**s3objectLambdaBillingArn** | <code>string</code> | The ARN of the S3 Object Lambda for the billing role in the redaction case.
-**s3objectLambdaCustomerSupportArn** | <code>string</code> | The ARN of the S3 Object Lambda for the customer support role in the redaction case.
+##### `id`<sup>Required</sup> <a name="id" id="cdk-comprehend-s3olap.ComprehendS3olab.Initializer.parameter.id"></a>
 
-### Methods
+- *Type:* string
 
+---
 
-#### generateS3Prefix(length) <a id="cdk-comprehend-s3olap-comprehends3olab-generates3prefix"></a>
+##### `props`<sup>Required</sup> <a name="props" id="cdk-comprehend-s3olap.ComprehendS3olab.Initializer.parameter.props"></a>
 
+- *Type:* <a href="#cdk-comprehend-s3olap.ComprehendS3olabProps">ComprehendS3olabProps</a>
 
+---
 
-```ts
-generateS3Prefix(length: number): string
+#### Methods <a name="Methods" id="Methods"></a>
+
+| **Name** | **Description** |
+| --- | --- |
+| <code><a href="#cdk-comprehend-s3olap.ComprehendS3olab.toString">toString</a></code> | Returns a string representation of this construct. |
+| <code><a href="#cdk-comprehend-s3olap.ComprehendS3olab.generateS3Prefix">generateS3Prefix</a></code> | *No description.* |
+
+---
+
+##### `toString` <a name="toString" id="cdk-comprehend-s3olap.ComprehendS3olab.toString"></a>
+
+```typescript
+public toString(): string
 ```
 
-* **length** (<code>number</code>)  *No description*
+Returns a string representation of this construct.
 
-__Returns__:
-* <code>string</code>
+##### `generateS3Prefix` <a name="generateS3Prefix" id="cdk-comprehend-s3olap.ComprehendS3olab.generateS3Prefix"></a>
+
+```typescript
+public generateS3Prefix(length: number): string
+```
+
+###### `length`<sup>Required</sup> <a name="length" id="cdk-comprehend-s3olap.ComprehendS3olab.generateS3Prefix.parameter.length"></a>
+
+- *Type:* number
+
+---
+
+#### Static Functions <a name="Static Functions" id="Static Functions"></a>
+
+| **Name** | **Description** |
+| --- | --- |
+| <code><a href="#cdk-comprehend-s3olap.ComprehendS3olab.isConstruct">isConstruct</a></code> | Checks if `x` is a construct. |
+
+---
+
+##### `isConstruct` <a name="isConstruct" id="cdk-comprehend-s3olap.ComprehendS3olab.isConstruct"></a>
+
+```typescript
+import { ComprehendS3olab } from 'cdk-comprehend-s3olap'
+
+ComprehendS3olab.isConstruct(x: any)
+```
+
+Checks if `x` is a construct.
+
+Use this method instead of `instanceof` to properly detect `Construct`
+instances, even when the construct library is symlinked.
+
+Explanation: in JavaScript, multiple copies of the `constructs` library on
+disk are seen as independent, completely different libraries. As a
+consequence, the class `Construct` in each copy of the `constructs` library
+is seen as a different class, and an instance of one class will not test as
+`instanceof` the other class. `npm install` will not create installations
+like this, but users may manually symlink construct libraries together or
+use a monorepo tool: in those cases, multiple copies of the `constructs`
+library can be accidentally installed, and `instanceof` will behave
+unpredictably. It is safest to avoid using `instanceof`, and using
+this type-testing method instead.
+
+###### `x`<sup>Required</sup> <a name="x" id="cdk-comprehend-s3olap.ComprehendS3olab.isConstruct.parameter.x"></a>
+
+- *Type:* any
+
+Any object.
+
+---
+
+#### Properties <a name="Properties" id="Properties"></a>
+
+| **Name** | **Type** | **Description** |
+| --- | --- | --- |
+| <code><a href="#cdk-comprehend-s3olap.ComprehendS3olab.property.node">node</a></code> | <code>constructs.Node</code> | The tree node. |
+| <code><a href="#cdk-comprehend-s3olap.ComprehendS3olab.property.adminLambdaArn">adminLambdaArn</a></code> | <code>string</code> | The ARN of the Lambda function combined with Amazon Comprehend for thie administrator role in the redaction case. |
+| <code><a href="#cdk-comprehend-s3olap.ComprehendS3olab.property.billingLambdaArn">billingLambdaArn</a></code> | <code>string</code> | The ARN of the Lambda function combined with Amazon Comprehend for thie billing role in the redaction case. |
+| <code><a href="#cdk-comprehend-s3olap.ComprehendS3olab.property.customerSupportLambdaArn">customerSupportLambdaArn</a></code> | <code>string</code> | The ARN of the Lambda function combined with Amazon Comprehend for thie customer support role in the redaction case. |
+| <code><a href="#cdk-comprehend-s3olap.ComprehendS3olab.property.piiAccessConrtolLambdaArn">piiAccessConrtolLambdaArn</a></code> | <code>string</code> | The ARN of the Lambda function combined with Amazon Comprehend for the general case. |
+| <code><a href="#cdk-comprehend-s3olap.ComprehendS3olab.property.s3objectLambdaAccessControlArn">s3objectLambdaAccessControlArn</a></code> | <code>string</code> | The ARN of the S3 Object Lambda for access control. |
+| <code><a href="#cdk-comprehend-s3olap.ComprehendS3olab.property.s3objectLambdaAdminArn">s3objectLambdaAdminArn</a></code> | <code>string</code> | The ARN of the S3 Object Lambda for the admin role in the redaction case. |
+| <code><a href="#cdk-comprehend-s3olap.ComprehendS3olab.property.s3objectLambdaBillingArn">s3objectLambdaBillingArn</a></code> | <code>string</code> | The ARN of the S3 Object Lambda for the billing role in the redaction case. |
+| <code><a href="#cdk-comprehend-s3olap.ComprehendS3olab.property.s3objectLambdaCustomerSupportArn">s3objectLambdaCustomerSupportArn</a></code> | <code>string</code> | The ARN of the S3 Object Lambda for the customer support role in the redaction case. |
+
+---
+
+##### `node`<sup>Required</sup> <a name="node" id="cdk-comprehend-s3olap.ComprehendS3olab.property.node"></a>
+
+```typescript
+public readonly node: Node;
+```
+
+- *Type:* constructs.Node
+
+The tree node.
+
+---
+
+##### `adminLambdaArn`<sup>Required</sup> <a name="adminLambdaArn" id="cdk-comprehend-s3olap.ComprehendS3olab.property.adminLambdaArn"></a>
+
+```typescript
+public readonly adminLambdaArn: string;
+```
+
+- *Type:* string
+
+The ARN of the Lambda function combined with Amazon Comprehend for thie administrator role in the redaction case.
+
+---
+
+##### `billingLambdaArn`<sup>Required</sup> <a name="billingLambdaArn" id="cdk-comprehend-s3olap.ComprehendS3olab.property.billingLambdaArn"></a>
+
+```typescript
+public readonly billingLambdaArn: string;
+```
+
+- *Type:* string
+
+The ARN of the Lambda function combined with Amazon Comprehend for thie billing role in the redaction case.
+
+---
+
+##### `customerSupportLambdaArn`<sup>Required</sup> <a name="customerSupportLambdaArn" id="cdk-comprehend-s3olap.ComprehendS3olab.property.customerSupportLambdaArn"></a>
+
+```typescript
+public readonly customerSupportLambdaArn: string;
+```
+
+- *Type:* string
+
+The ARN of the Lambda function combined with Amazon Comprehend for thie customer support role in the redaction case.
+
+---
+
+##### `piiAccessConrtolLambdaArn`<sup>Required</sup> <a name="piiAccessConrtolLambdaArn" id="cdk-comprehend-s3olap.ComprehendS3olab.property.piiAccessConrtolLambdaArn"></a>
+
+```typescript
+public readonly piiAccessConrtolLambdaArn: string;
+```
+
+- *Type:* string
+
+The ARN of the Lambda function combined with Amazon Comprehend for the general case.
+
+---
+
+##### `s3objectLambdaAccessControlArn`<sup>Required</sup> <a name="s3objectLambdaAccessControlArn" id="cdk-comprehend-s3olap.ComprehendS3olab.property.s3objectLambdaAccessControlArn"></a>
+
+```typescript
+public readonly s3objectLambdaAccessControlArn: string;
+```
+
+- *Type:* string
+
+The ARN of the S3 Object Lambda for access control.
+
+---
+
+##### `s3objectLambdaAdminArn`<sup>Required</sup> <a name="s3objectLambdaAdminArn" id="cdk-comprehend-s3olap.ComprehendS3olab.property.s3objectLambdaAdminArn"></a>
+
+```typescript
+public readonly s3objectLambdaAdminArn: string;
+```
+
+- *Type:* string
+
+The ARN of the S3 Object Lambda for the admin role in the redaction case.
+
+---
+
+##### `s3objectLambdaBillingArn`<sup>Required</sup> <a name="s3objectLambdaBillingArn" id="cdk-comprehend-s3olap.ComprehendS3olab.property.s3objectLambdaBillingArn"></a>
+
+```typescript
+public readonly s3objectLambdaBillingArn: string;
+```
+
+- *Type:* string
+
+The ARN of the S3 Object Lambda for the billing role in the redaction case.
+
+---
+
+##### `s3objectLambdaCustomerSupportArn`<sup>Required</sup> <a name="s3objectLambdaCustomerSupportArn" id="cdk-comprehend-s3olap.ComprehendS3olab.property.s3objectLambdaCustomerSupportArn"></a>
+
+```typescript
+public readonly s3objectLambdaCustomerSupportArn: string;
+```
+
+- *Type:* string
+
+The ARN of the S3 Object Lambda for the customer support role in the redaction case.
+
+---
 
 
+### CustSupportRole <a name="CustSupportRole" id="cdk-comprehend-s3olap.CustSupportRole"></a>
 
-## class CustSupportRole  <a id="cdk-comprehend-s3olap-custsupportrole"></a>
+#### Initializers <a name="Initializers" id="cdk-comprehend-s3olap.CustSupportRole.Initializer"></a>
 
+```typescript
+import { CustSupportRole } from 'cdk-comprehend-s3olap'
 
-
-__Implements__: [IConstruct](#constructs-iconstruct), [IDependable](#constructs-idependable)
-__Extends__: [Construct](#constructs-construct)
-
-### Initializer
-
-
-
-
-```ts
 new CustSupportRole(scope: Construct, id: string, props?: AdminRoleProps)
 ```
 
-* **scope** (<code>[Construct](#constructs-construct)</code>)  *No description*
-* **id** (<code>string</code>)  *No description*
-* **props** (<code>[AdminRoleProps](#cdk-comprehend-s3olap-adminroleprops)</code>)  *No description*
-  * **iamRoleName** (<code>string</code>)  The name of the IAM role. __*Default*__: 'RedactionAdminRole'
-  * **objectLambdaAccessPointName** (<code>string</code>)  The name of the object Lambda access point, which will be the same as the S3 acceess point for the S3 bucket in the demostration. __*Default*__: 'admin-s3olap-call-transcripts-known-pii'
-  * **policyName** (<code>string</code>)  The name of the IAM policy for the IAM role. __*Default*__: 'admin-role-s3olap-policy'
+| **Name** | **Type** | **Description** |
+| --- | --- | --- |
+| <code><a href="#cdk-comprehend-s3olap.CustSupportRole.Initializer.parameter.scope">scope</a></code> | <code>constructs.Construct</code> | *No description.* |
+| <code><a href="#cdk-comprehend-s3olap.CustSupportRole.Initializer.parameter.id">id</a></code> | <code>string</code> | *No description.* |
+| <code><a href="#cdk-comprehend-s3olap.CustSupportRole.Initializer.parameter.props">props</a></code> | <code><a href="#cdk-comprehend-s3olap.AdminRoleProps">AdminRoleProps</a></code> | *No description.* |
+
+---
+
+##### `scope`<sup>Required</sup> <a name="scope" id="cdk-comprehend-s3olap.CustSupportRole.Initializer.parameter.scope"></a>
+
+- *Type:* constructs.Construct
+
+---
+
+##### `id`<sup>Required</sup> <a name="id" id="cdk-comprehend-s3olap.CustSupportRole.Initializer.parameter.id"></a>
+
+- *Type:* string
+
+---
+
+##### `props`<sup>Optional</sup> <a name="props" id="cdk-comprehend-s3olap.CustSupportRole.Initializer.parameter.props"></a>
+
+- *Type:* <a href="#cdk-comprehend-s3olap.AdminRoleProps">AdminRoleProps</a>
+
+---
+
+#### Methods <a name="Methods" id="Methods"></a>
+
+| **Name** | **Description** |
+| --- | --- |
+| <code><a href="#cdk-comprehend-s3olap.CustSupportRole.toString">toString</a></code> | Returns a string representation of this construct. |
+
+---
+
+##### `toString` <a name="toString" id="cdk-comprehend-s3olap.CustSupportRole.toString"></a>
+
+```typescript
+public toString(): string
+```
+
+Returns a string representation of this construct.
+
+#### Static Functions <a name="Static Functions" id="Static Functions"></a>
+
+| **Name** | **Description** |
+| --- | --- |
+| <code><a href="#cdk-comprehend-s3olap.CustSupportRole.isConstruct">isConstruct</a></code> | Checks if `x` is a construct. |
+
+---
+
+##### `isConstruct` <a name="isConstruct" id="cdk-comprehend-s3olap.CustSupportRole.isConstruct"></a>
+
+```typescript
+import { CustSupportRole } from 'cdk-comprehend-s3olap'
+
+CustSupportRole.isConstruct(x: any)
+```
+
+Checks if `x` is a construct.
+
+Use this method instead of `instanceof` to properly detect `Construct`
+instances, even when the construct library is symlinked.
+
+Explanation: in JavaScript, multiple copies of the `constructs` library on
+disk are seen as independent, completely different libraries. As a
+consequence, the class `Construct` in each copy of the `constructs` library
+is seen as a different class, and an instance of one class will not test as
+`instanceof` the other class. `npm install` will not create installations
+like this, but users may manually symlink construct libraries together or
+use a monorepo tool: in those cases, multiple copies of the `constructs`
+library can be accidentally installed, and `instanceof` will behave
+unpredictably. It is safest to avoid using `instanceof`, and using
+this type-testing method instead.
+
+###### `x`<sup>Required</sup> <a name="x" id="cdk-comprehend-s3olap.CustSupportRole.isConstruct.parameter.x"></a>
+
+- *Type:* any
+
+Any object.
+
+---
+
+#### Properties <a name="Properties" id="Properties"></a>
+
+| **Name** | **Type** | **Description** |
+| --- | --- | --- |
+| <code><a href="#cdk-comprehend-s3olap.CustSupportRole.property.node">node</a></code> | <code>constructs.Node</code> | The tree node. |
+| <code><a href="#cdk-comprehend-s3olap.CustSupportRole.property.roleArn">roleArn</a></code> | <code>string</code> | The ARN of the IAM role. |
+| <code><a href="#cdk-comprehend-s3olap.CustSupportRole.property.roleId">roleId</a></code> | <code>string</code> | The unique string identifying the role. |
+| <code><a href="#cdk-comprehend-s3olap.CustSupportRole.property.roleName">roleName</a></code> | <code>string</code> | The name of the IAM role. |
+
+---
+
+##### `node`<sup>Required</sup> <a name="node" id="cdk-comprehend-s3olap.CustSupportRole.property.node"></a>
+
+```typescript
+public readonly node: Node;
+```
+
+- *Type:* constructs.Node
+
+The tree node.
+
+---
+
+##### `roleArn`<sup>Required</sup> <a name="roleArn" id="cdk-comprehend-s3olap.CustSupportRole.property.roleArn"></a>
+
+```typescript
+public readonly roleArn: string;
+```
+
+- *Type:* string
+
+The ARN of the IAM role.
+
+---
+
+##### `roleId`<sup>Required</sup> <a name="roleId" id="cdk-comprehend-s3olap.CustSupportRole.property.roleId"></a>
+
+```typescript
+public readonly roleId: string;
+```
+
+- *Type:* string
+
+The unique string identifying the role.
+
+---
+
+##### `roleName`<sup>Required</sup> <a name="roleName" id="cdk-comprehend-s3olap.CustSupportRole.property.roleName"></a>
+
+```typescript
+public readonly roleName: string;
+```
+
+- *Type:* string
+
+The name of the IAM role.
+
+---
 
 
-
-### Properties
-
-
-Name | Type | Description 
------|------|-------------
-**roleArn** | <code>string</code> | The ARN of the IAM role.
-**roleId** | <code>string</code> | The unique string identifying the role.
-**roleName** | <code>string</code> | The name of the IAM role.
-
-
-
-## class GeneralRole  <a id="cdk-comprehend-s3olap-generalrole"></a>
+### GeneralRole <a name="GeneralRole" id="cdk-comprehend-s3olap.GeneralRole"></a>
 
 The role that you are going to assume (switch role).
 
 Explores how the S3 Object Lambda works.
 
-__Implements__: [IConstruct](#constructs-iconstruct), [IDependable](#constructs-idependable)
-__Extends__: [Construct](#constructs-construct)
+#### Initializers <a name="Initializers" id="cdk-comprehend-s3olap.GeneralRole.Initializer"></a>
 
-### Initializer
+```typescript
+import { GeneralRole } from 'cdk-comprehend-s3olap'
 
-
-
-
-```ts
 new GeneralRole(scope: Construct, id: string, props: GeneralRoleProps)
 ```
 
-* **scope** (<code>[Construct](#constructs-construct)</code>)  *No description*
-* **id** (<code>string</code>)  *No description*
-* **props** (<code>[GeneralRoleProps](#cdk-comprehend-s3olap-generalroleprops)</code>)  *No description*
-  * **iamRoleName** (<code>string</code>)  The name of the IAM role. __*Default*__: 'GeneralRole'
-  * **objectLambdaAccessPointName** (<code>string</code>)  The name of the object Lambda access point, which will be the same as the S3 acceess point for the S3 bucket in the demostration. __*Default*__: 'accessctl-s3olap-survey-results-unknown-pii'
-  * **policyName** (<code>string</code>)  The name of the IAM policy for the IAM role. __*Default*__: 'general-role-s3olap-policy'
+| **Name** | **Type** | **Description** |
+| --- | --- | --- |
+| <code><a href="#cdk-comprehend-s3olap.GeneralRole.Initializer.parameter.scope">scope</a></code> | <code>constructs.Construct</code> | *No description.* |
+| <code><a href="#cdk-comprehend-s3olap.GeneralRole.Initializer.parameter.id">id</a></code> | <code>string</code> | *No description.* |
+| <code><a href="#cdk-comprehend-s3olap.GeneralRole.Initializer.parameter.props">props</a></code> | <code><a href="#cdk-comprehend-s3olap.GeneralRoleProps">GeneralRoleProps</a></code> | *No description.* |
+
+---
+
+##### `scope`<sup>Required</sup> <a name="scope" id="cdk-comprehend-s3olap.GeneralRole.Initializer.parameter.scope"></a>
+
+- *Type:* constructs.Construct
+
+---
+
+##### `id`<sup>Required</sup> <a name="id" id="cdk-comprehend-s3olap.GeneralRole.Initializer.parameter.id"></a>
+
+- *Type:* string
+
+---
+
+##### `props`<sup>Required</sup> <a name="props" id="cdk-comprehend-s3olap.GeneralRole.Initializer.parameter.props"></a>
+
+- *Type:* <a href="#cdk-comprehend-s3olap.GeneralRoleProps">GeneralRoleProps</a>
+
+---
+
+#### Methods <a name="Methods" id="Methods"></a>
+
+| **Name** | **Description** |
+| --- | --- |
+| <code><a href="#cdk-comprehend-s3olap.GeneralRole.toString">toString</a></code> | Returns a string representation of this construct. |
+
+---
+
+##### `toString` <a name="toString" id="cdk-comprehend-s3olap.GeneralRole.toString"></a>
+
+```typescript
+public toString(): string
+```
+
+Returns a string representation of this construct.
+
+#### Static Functions <a name="Static Functions" id="Static Functions"></a>
+
+| **Name** | **Description** |
+| --- | --- |
+| <code><a href="#cdk-comprehend-s3olap.GeneralRole.isConstruct">isConstruct</a></code> | Checks if `x` is a construct. |
+
+---
+
+##### `isConstruct` <a name="isConstruct" id="cdk-comprehend-s3olap.GeneralRole.isConstruct"></a>
+
+```typescript
+import { GeneralRole } from 'cdk-comprehend-s3olap'
+
+GeneralRole.isConstruct(x: any)
+```
+
+Checks if `x` is a construct.
+
+Use this method instead of `instanceof` to properly detect `Construct`
+instances, even when the construct library is symlinked.
+
+Explanation: in JavaScript, multiple copies of the `constructs` library on
+disk are seen as independent, completely different libraries. As a
+consequence, the class `Construct` in each copy of the `constructs` library
+is seen as a different class, and an instance of one class will not test as
+`instanceof` the other class. `npm install` will not create installations
+like this, but users may manually symlink construct libraries together or
+use a monorepo tool: in those cases, multiple copies of the `constructs`
+library can be accidentally installed, and `instanceof` will behave
+unpredictably. It is safest to avoid using `instanceof`, and using
+this type-testing method instead.
+
+###### `x`<sup>Required</sup> <a name="x" id="cdk-comprehend-s3olap.GeneralRole.isConstruct.parameter.x"></a>
+
+- *Type:* any
+
+Any object.
+
+---
+
+#### Properties <a name="Properties" id="Properties"></a>
+
+| **Name** | **Type** | **Description** |
+| --- | --- | --- |
+| <code><a href="#cdk-comprehend-s3olap.GeneralRole.property.node">node</a></code> | <code>constructs.Node</code> | The tree node. |
+| <code><a href="#cdk-comprehend-s3olap.GeneralRole.property.roleArn">roleArn</a></code> | <code>string</code> | The ARN of the IAM role. |
+| <code><a href="#cdk-comprehend-s3olap.GeneralRole.property.roleId">roleId</a></code> | <code>string</code> | The unique string identifying the role. |
+| <code><a href="#cdk-comprehend-s3olap.GeneralRole.property.roleName">roleName</a></code> | <code>string</code> | The name of the IAM role. |
+
+---
+
+##### `node`<sup>Required</sup> <a name="node" id="cdk-comprehend-s3olap.GeneralRole.property.node"></a>
+
+```typescript
+public readonly node: Node;
+```
+
+- *Type:* constructs.Node
+
+The tree node.
+
+---
+
+##### `roleArn`<sup>Required</sup> <a name="roleArn" id="cdk-comprehend-s3olap.GeneralRole.property.roleArn"></a>
+
+```typescript
+public readonly roleArn: string;
+```
+
+- *Type:* string
+
+The ARN of the IAM role.
+
+---
+
+##### `roleId`<sup>Required</sup> <a name="roleId" id="cdk-comprehend-s3olap.GeneralRole.property.roleId"></a>
+
+```typescript
+public readonly roleId: string;
+```
+
+- *Type:* string
+
+The unique string identifying the role.
+
+---
+
+##### `roleName`<sup>Required</sup> <a name="roleName" id="cdk-comprehend-s3olap.GeneralRole.property.roleName"></a>
+
+```typescript
+public readonly roleName: string;
+```
+
+- *Type:* string
+
+The name of the IAM role.
+
+---
 
 
+### LambdaArnCaptorCustomResource <a name="LambdaArnCaptorCustomResource" id="cdk-comprehend-s3olap.LambdaArnCaptorCustomResource"></a>
 
-### Properties
+#### Initializers <a name="Initializers" id="cdk-comprehend-s3olap.LambdaArnCaptorCustomResource.Initializer"></a>
 
+```typescript
+import { LambdaArnCaptorCustomResource } from 'cdk-comprehend-s3olap'
 
-Name | Type | Description 
------|------|-------------
-**roleArn** | <code>string</code> | The ARN of the IAM role.
-**roleId** | <code>string</code> | The unique string identifying the role.
-**roleName** | <code>string</code> | The name of the IAM role.
-
-
-
-## class LambdaArnCaptorCustomResource  <a id="cdk-comprehend-s3olap-lambdaarncaptorcustomresource"></a>
-
-
-
-__Implements__: [IConstruct](#constructs-iconstruct), [IDependable](#constructs-idependable)
-__Extends__: [Construct](#constructs-construct)
-
-### Initializer
-
-
-
-
-```ts
 new LambdaArnCaptorCustomResource(scope: Construct, id: string, props: LambdaArnCaptorResourceProps)
 ```
 
-* **scope** (<code>[Construct](#constructs-construct)</code>)  *No description*
-* **id** (<code>string</code>)  *No description*
-* **props** (<code>[LambdaArnCaptorResourceProps](#cdk-comprehend-s3olap-lambdaarncaptorresourceprops)</code>)  *No description*
-  * **partialLambdaName** (<code>string</code>)  The partial fixed name of the gemeral Lambda function created from the serverless application. 
-  * **roleName** (<code>string</code>)  the name of the corresponding IAM role. 
+| **Name** | **Type** | **Description** |
+| --- | --- | --- |
+| <code><a href="#cdk-comprehend-s3olap.LambdaArnCaptorCustomResource.Initializer.parameter.scope">scope</a></code> | <code>constructs.Construct</code> | *No description.* |
+| <code><a href="#cdk-comprehend-s3olap.LambdaArnCaptorCustomResource.Initializer.parameter.id">id</a></code> | <code>string</code> | *No description.* |
+| <code><a href="#cdk-comprehend-s3olap.LambdaArnCaptorCustomResource.Initializer.parameter.props">props</a></code> | <code><a href="#cdk-comprehend-s3olap.LambdaArnCaptorResourceProps">LambdaArnCaptorResourceProps</a></code> | *No description.* |
+
+---
+
+##### `scope`<sup>Required</sup> <a name="scope" id="cdk-comprehend-s3olap.LambdaArnCaptorCustomResource.Initializer.parameter.scope"></a>
+
+- *Type:* constructs.Construct
+
+---
+
+##### `id`<sup>Required</sup> <a name="id" id="cdk-comprehend-s3olap.LambdaArnCaptorCustomResource.Initializer.parameter.id"></a>
+
+- *Type:* string
+
+---
+
+##### `props`<sup>Required</sup> <a name="props" id="cdk-comprehend-s3olap.LambdaArnCaptorCustomResource.Initializer.parameter.props"></a>
+
+- *Type:* <a href="#cdk-comprehend-s3olap.LambdaArnCaptorResourceProps">LambdaArnCaptorResourceProps</a>
+
+---
+
+#### Methods <a name="Methods" id="Methods"></a>
+
+| **Name** | **Description** |
+| --- | --- |
+| <code><a href="#cdk-comprehend-s3olap.LambdaArnCaptorCustomResource.toString">toString</a></code> | Returns a string representation of this construct. |
+
+---
+
+##### `toString` <a name="toString" id="cdk-comprehend-s3olap.LambdaArnCaptorCustomResource.toString"></a>
+
+```typescript
+public toString(): string
+```
+
+Returns a string representation of this construct.
+
+#### Static Functions <a name="Static Functions" id="Static Functions"></a>
+
+| **Name** | **Description** |
+| --- | --- |
+| <code><a href="#cdk-comprehend-s3olap.LambdaArnCaptorCustomResource.isConstruct">isConstruct</a></code> | Checks if `x` is a construct. |
+
+---
+
+##### `isConstruct` <a name="isConstruct" id="cdk-comprehend-s3olap.LambdaArnCaptorCustomResource.isConstruct"></a>
+
+```typescript
+import { LambdaArnCaptorCustomResource } from 'cdk-comprehend-s3olap'
+
+LambdaArnCaptorCustomResource.isConstruct(x: any)
+```
+
+Checks if `x` is a construct.
+
+Use this method instead of `instanceof` to properly detect `Construct`
+instances, even when the construct library is symlinked.
+
+Explanation: in JavaScript, multiple copies of the `constructs` library on
+disk are seen as independent, completely different libraries. As a
+consequence, the class `Construct` in each copy of the `constructs` library
+is seen as a different class, and an instance of one class will not test as
+`instanceof` the other class. `npm install` will not create installations
+like this, but users may manually symlink construct libraries together or
+use a monorepo tool: in those cases, multiple copies of the `constructs`
+library can be accidentally installed, and `instanceof` will behave
+unpredictably. It is safest to avoid using `instanceof`, and using
+this type-testing method instead.
+
+###### `x`<sup>Required</sup> <a name="x" id="cdk-comprehend-s3olap.LambdaArnCaptorCustomResource.isConstruct.parameter.x"></a>
+
+- *Type:* any
+
+Any object.
+
+---
+
+#### Properties <a name="Properties" id="Properties"></a>
+
+| **Name** | **Type** | **Description** |
+| --- | --- | --- |
+| <code><a href="#cdk-comprehend-s3olap.LambdaArnCaptorCustomResource.property.node">node</a></code> | <code>constructs.Node</code> | The tree node. |
+| <code><a href="#cdk-comprehend-s3olap.LambdaArnCaptorCustomResource.property.lambdaArn">lambdaArn</a></code> | <code>string</code> | The ARN of the general Lambda function created from the serverless application. |
+
+---
+
+##### `node`<sup>Required</sup> <a name="node" id="cdk-comprehend-s3olap.LambdaArnCaptorCustomResource.property.node"></a>
+
+```typescript
+public readonly node: Node;
+```
+
+- *Type:* constructs.Node
+
+The tree node.
+
+---
+
+##### `lambdaArn`<sup>Required</sup> <a name="lambdaArn" id="cdk-comprehend-s3olap.LambdaArnCaptorCustomResource.property.lambdaArn"></a>
+
+```typescript
+public readonly lambdaArn: string;
+```
+
+- *Type:* string
+
+The ARN of the general Lambda function created from the serverless application.
+
+> [https://github.com/aws/aws-cdk/issues/8760](https://github.com/aws/aws-cdk/issues/8760)
+
+---
 
 
+### RedactionLambda <a name="RedactionLambda" id="cdk-comprehend-s3olap.RedactionLambda"></a>
 
-### Properties
+#### Initializers <a name="Initializers" id="cdk-comprehend-s3olap.RedactionLambda.Initializer"></a>
 
+```typescript
+import { RedactionLambda } from 'cdk-comprehend-s3olap'
 
-Name | Type | Description 
------|------|-------------
-**lambdaArn** | <code>string</code> | The ARN of the general Lambda function created from the serverless application.
-
-
-
-## class RedactionLambda  <a id="cdk-comprehend-s3olap-redactionlambda"></a>
-
-
-
-__Implements__: [IConstruct](#constructs-iconstruct), [IDependable](#constructs-idependable)
-__Extends__: [Construct](#constructs-construct)
-
-### Initializer
-
-
-
-
-```ts
 new RedactionLambda(scope: Construct, id: string, props?: RedactionLambdaProps)
 ```
 
-* **scope** (<code>[Construct](#constructs-construct)</code>)  *No description*
-* **id** (<code>string</code>)  *No description*
-* **props** (<code>[RedactionLambdaProps](#cdk-comprehend-s3olap-redactionlambdaprops)</code>)  *No description*
-  * **confidenceThreshold** (<code>string</code>)  The minimum prediction confidence score above which PII classification and detection would be considered as final answer. __*Default*__: '0.5'
-  * **containsPiiEntitiesThreadCount** (<code>string</code>)  Number of threads to use for calling Comprehend's ContainsPiiEntities API. __*Default*__: '20'
-  * **defaultLanguageCode** (<code>string</code>)  Default language of the text to be processed. __*Default*__: 'en'
-  * **detectPiiEntitiesThreadCount** (<code>string</code>)  Number of threads to use for calling Comprehend's DetectPiiEntities API. __*Default*__: '8'
-  * **documentMaxSize** (<code>string</code>)  Default maximum document size (in bytes) that this function can process otherwise will throw exception for too large document size. __*Default*__: '102400'
-  * **documentMaxSizeContainsPiiEntities** (<code>string</code>)  Maximum document size (in bytes) to be used for making calls to Comprehend's ContainsPiiEntities API. __*Default*__: '50000'
-  * **documentMaxSizeDetectPiiEntities** (<code>string</code>)  Maximum document size (in bytes) to be used for making calls to Comprehend's DetectPiiEntities API. __*Default*__: '5000'
-  * **isPartialObjectSupported** (<code>string</code>)  Whether to support partial objects or not. __*Default*__: 'false'
-  * **logLevel** (<code>string</code>)  Log level for Lambda function logging, e.g., ERROR, INFO, DEBUG, etc. __*Default*__: 'INFO'
-  * **maskCharacter** (<code>string</code>)  A character that replaces each character in the redacted PII entity. __*Default*__: '*'
-  * **maskMode** (<code>string</code>)  Specifies whether the PII entity is redacted with the mask character or the entity type. __*Optional*__
-  * **maxCharsOverlap** (<code>string</code>)  Maximum characters to overlap among segments of a document in case chunking is needed because of maximum document size limit. __*Default*__: '200'
-  * **piiEntityTypes** (<code>string</code>)  List of comma separated PII entity types to be considered for redaction. __*Default*__: 'ALL'
-  * **publishCloudWatchMetrics** (<code>string</code>)  True if publish metrics to Cloudwatch, false otherwise. __*Default*__: 'true'
-  * **semanticVersion** (<code>string</code>)  The version of the serverless application. __*Default*__: '1.0.2'
-  * **subsegmentOverlappingTokens** (<code>string</code>)  Number of tokens/words to overlap among segments of a document in case chunking is needed because of maximum document size limit. __*Default*__: '20'
-  * **unsupportedFileHandling** (<code>string</code>)  Handling logic for Unsupported files. __*Default*__: 'FAIL'
+| **Name** | **Type** | **Description** |
+| --- | --- | --- |
+| <code><a href="#cdk-comprehend-s3olap.RedactionLambda.Initializer.parameter.scope">scope</a></code> | <code>constructs.Construct</code> | *No description.* |
+| <code><a href="#cdk-comprehend-s3olap.RedactionLambda.Initializer.parameter.id">id</a></code> | <code>string</code> | *No description.* |
+| <code><a href="#cdk-comprehend-s3olap.RedactionLambda.Initializer.parameter.props">props</a></code> | <code><a href="#cdk-comprehend-s3olap.RedactionLambdaProps">RedactionLambdaProps</a></code> | *No description.* |
 
+---
 
+##### `scope`<sup>Required</sup> <a name="scope" id="cdk-comprehend-s3olap.RedactionLambda.Initializer.parameter.scope"></a>
 
-### Properties
+- *Type:* constructs.Construct
 
+---
 
-Name | Type | Description 
------|------|-------------
-**stackName** | <code>string</code> | The name of the underlying resoure in the serverless application.
+##### `id`<sup>Required</sup> <a name="id" id="cdk-comprehend-s3olap.RedactionLambda.Initializer.parameter.id"></a>
 
+- *Type:* string
 
+---
 
-## struct AccessConrtolLambdaProps  <a id="cdk-comprehend-s3olap-accessconrtollambdaprops"></a>
+##### `props`<sup>Optional</sup> <a name="props" id="cdk-comprehend-s3olap.RedactionLambda.Initializer.parameter.props"></a>
 
+- *Type:* <a href="#cdk-comprehend-s3olap.RedactionLambdaProps">RedactionLambdaProps</a>
 
+---
 
+#### Methods <a name="Methods" id="Methods"></a>
 
+| **Name** | **Description** |
+| --- | --- |
+| <code><a href="#cdk-comprehend-s3olap.RedactionLambda.toString">toString</a></code> | Returns a string representation of this construct. |
 
+---
 
-Name | Type | Description 
------|------|-------------
-**confidenceThreshold**? | <code>string</code> | The minimum prediction confidence score above which PII classification and detection would be considered as final answer.<br/>__*Default*__: '0.5'
-**containsPiiEntitiesThreadCount**? | <code>string</code> | Number of threads to use for calling Comprehend's ContainsPiiEntities API.<br/>__*Default*__: '20'
-**defaultLanguageCode**? | <code>string</code> | Default language of the text to be processed.<br/>__*Default*__: 'en'
-**documentMaxSize**? | <code>string</code> | Default maximum document size (in bytes) that this function can process otherwise will throw exception for too large document size.<br/>__*Default*__: '102400'
-**documentMaxSizeContainsPiiEntities**? | <code>string</code> | Maximum document size (in bytes) to be used for making calls to Comprehend's ContainsPiiEntities API.<br/>__*Default*__: '50000'
-**isPartialObjectSupported**? | <code>string</code> | Whether to support partial objects or not.<br/>__*Default*__: 'false'
-**logLevel**? | <code>string</code> | Log level for Lambda function logging, e.g., ERROR, INFO, DEBUG, etc.<br/>__*Default*__: 'INFO'
-**maxCharsOverlap**? | <code>string</code> | Maximum characters to overlap among segments of a document in case chunking is needed because of maximum document size limit.<br/>__*Default*__: '200'
-**piiEntityTypes**? | <code>string</code> | List of comma separated PII entity types to be considered for access control.<br/>__*Default*__: 'ALL'
-**publishCloudWatchMetrics**? | <code>string</code> | True if publish metrics to Cloudwatch, false otherwise.<br/>__*Default*__: 'true'
-**semanticVersion**? | <code>string</code> | The version of the serverless application.<br/>__*Default*__: '1.0.2'
-**subsegmentOverlappingTokens**? | <code>string</code> | Number of tokens/words to overlap among segments of a document in case chunking is needed because of maximum document size limit.<br/>__*Default*__: '20'
-**unsupportedFileHandling**? | <code>string</code> | Handling logic for Unsupported files.<br/>__*Default*__: 'FAIL'
+##### `toString` <a name="toString" id="cdk-comprehend-s3olap.RedactionLambda.toString"></a>
 
+```typescript
+public toString(): string
+```
 
+Returns a string representation of this construct.
 
-## struct AdminRoleProps  <a id="cdk-comprehend-s3olap-adminroleprops"></a>
+#### Static Functions <a name="Static Functions" id="Static Functions"></a>
 
+| **Name** | **Description** |
+| --- | --- |
+| <code><a href="#cdk-comprehend-s3olap.RedactionLambda.isConstruct">isConstruct</a></code> | Checks if `x` is a construct. |
 
+---
 
+##### `isConstruct` <a name="isConstruct" id="cdk-comprehend-s3olap.RedactionLambda.isConstruct"></a>
 
+```typescript
+import { RedactionLambda } from 'cdk-comprehend-s3olap'
 
+RedactionLambda.isConstruct(x: any)
+```
 
-Name | Type | Description 
------|------|-------------
-**iamRoleName**? | <code>string</code> | The name of the IAM role.<br/>__*Default*__: 'RedactionAdminRole'
-**objectLambdaAccessPointName**? | <code>string</code> | The name of the object Lambda access point, which will be the same as the S3 acceess point for the S3 bucket in the demostration.<br/>__*Default*__: 'admin-s3olap-call-transcripts-known-pii'
-**policyName**? | <code>string</code> | The name of the IAM policy for the IAM role.<br/>__*Default*__: 'admin-role-s3olap-policy'
+Checks if `x` is a construct.
 
+Use this method instead of `instanceof` to properly detect `Construct`
+instances, even when the construct library is symlinked.
 
+Explanation: in JavaScript, multiple copies of the `constructs` library on
+disk are seen as independent, completely different libraries. As a
+consequence, the class `Construct` in each copy of the `constructs` library
+is seen as a different class, and an instance of one class will not test as
+`instanceof` the other class. `npm install` will not create installations
+like this, but users may manually symlink construct libraries together or
+use a monorepo tool: in those cases, multiple copies of the `constructs`
+library can be accidentally installed, and `instanceof` will behave
+unpredictably. It is safest to avoid using `instanceof`, and using
+this type-testing method instead.
 
-## struct BillingRoleProps  <a id="cdk-comprehend-s3olap-billingroleprops"></a>
+###### `x`<sup>Required</sup> <a name="x" id="cdk-comprehend-s3olap.RedactionLambda.isConstruct.parameter.x"></a>
 
+- *Type:* any
 
+Any object.
 
+---
 
+#### Properties <a name="Properties" id="Properties"></a>
 
+| **Name** | **Type** | **Description** |
+| --- | --- | --- |
+| <code><a href="#cdk-comprehend-s3olap.RedactionLambda.property.node">node</a></code> | <code>constructs.Node</code> | The tree node. |
+| <code><a href="#cdk-comprehend-s3olap.RedactionLambda.property.stackName">stackName</a></code> | <code>string</code> | The name of the underlying resoure in the serverless application. |
 
-Name | Type | Description 
------|------|-------------
-**iamRoleName**? | <code>string</code> | The name of the IAM role.<br/>__*Default*__: 'RedactionBillingRole'
-**objectLambdaAccessPointName**? | <code>string</code> | The name of the object Lambda access point, which will be the same as the S3 acceess point for the S3 bucket in the demostration.<br/>__*Default*__: 'billing-s3olap-call-transcripts-known-pii'
-**policyName**? | <code>string</code> | The name of the IAM policy for the IAM role.<br/>__*Default*__: 'billing-role-s3olap-policy'
+---
 
+##### `node`<sup>Required</sup> <a name="node" id="cdk-comprehend-s3olap.RedactionLambda.property.node"></a>
 
+```typescript
+public readonly node: Node;
+```
 
-## struct ComprehendS3olabProps  <a id="cdk-comprehend-s3olap-comprehends3olabprops"></a>
+- *Type:* constructs.Node
 
+The tree node.
 
+---
 
+##### `stackName`<sup>Required</sup> <a name="stackName" id="cdk-comprehend-s3olap.RedactionLambda.property.stackName"></a>
 
+```typescript
+public readonly stackName: string;
+```
 
+- *Type:* string
 
-Name | Type | Description 
------|------|-------------
-**accessControlLambdaConfig**? | <code>[AccessConrtolLambdaProps](#cdk-comprehend-s3olap-accessconrtollambdaprops)</code> | The parameters needed for the `ComprehendPiiAccessControlS3ObjectLambda` function.<br/>__*Optional*__
-**adminRedactionLambdaConfig**? | <code>[RedactionLambdaProps](#cdk-comprehend-s3olap-redactionlambdaprops)</code> | The parameters of the `ComprehendPiiRedactionS3ObjectLambda` function for the `AdminRole`.<br/>__*Optional*__
-**adminRoleConfig**? | <code>[AdminRoleProps](#cdk-comprehend-s3olap-adminroleprops)</code> | The manageable properties for the administrator IAM role in the redaction case.<br/>__*Optional*__
-**billingRedactionLambdaConfig**? | <code>[RedactionLambdaProps](#cdk-comprehend-s3olap-redactionlambdaprops)</code> | The parameters of the `ComprehendPiiRedactionS3ObjectLambda` function for the `BillingRole`.<br/>__*Optional*__
-**billingRoleConfig**? | <code>[BillingRoleProps](#cdk-comprehend-s3olap-billingroleprops)</code> | The manageable properties for the billing IAM role in the redaction case.<br/>__*Optional*__
-**cusrtSupportRedactionLambdaConfig**? | <code>[RedactionLambdaProps](#cdk-comprehend-s3olap-redactionlambdaprops)</code> | The parameters of the `ComprehendPiiRedactionS3ObjectLambda` function for the `CustSupportRole`.<br/>__*Optional*__
-**custSupportRoleConfig**? | <code>[CustSupportRoleProps](#cdk-comprehend-s3olap-custsupportroleprops)</code> | The manageable properties for the customer support IAM role in the redaction case.<br/>__*Optional*__
-**exampleFileDir**? | <code>string</code> | The directory path where `files/access_control/*.txt` and `files/redaction/*.txt` will be put.<br/>__*Default*__: __dirname
-**generalRoleConfig**? | <code>[GeneralRoleProps](#cdk-comprehend-s3olap-generalroleprops)</code> | The manageable properties for the IAM role used to access the `survey-results.txt` data.<br/>__*Optional*__
-**generateRandomCharacters**? | <code>boolean</code> | For distinguish test and normal deployment.<br/>__*Default*__: true
-**s3AccessPointNames**? | <code>[S3AccessPointNames](#cdk-comprehend-s3olap-s3accesspointnames)</code> | The names of the S3 access points for the access control case and redaction case.<br/>__*Optional*__
-**surveyBucketPrefix**? | <code>string</code> | The prefix attached to the name of the S3 bucket where you are going to explore the S3 Object Lambda pertaining to the access control case.<br/>__*Default*__: 6 random words
-**transcriptsBucketPrefix**? | <code>string</code> | The prefix attached to the name of the S3 bucket where you are going to explore the S3 Object Lambda pertaining to the redaction case.<br/>__*Default*__: 6 random words
+The name of the underlying resoure in the serverless application.
 
+---
 
 
-## struct CustSupportRoleProps  <a id="cdk-comprehend-s3olap-custsupportroleprops"></a>
+## Structs <a name="Structs" id="Structs"></a>
 
+### AccessConrtolLambdaProps <a name="AccessConrtolLambdaProps" id="cdk-comprehend-s3olap.AccessConrtolLambdaProps"></a>
 
+#### Initializer <a name="Initializer" id="cdk-comprehend-s3olap.AccessConrtolLambdaProps.Initializer"></a>
 
+```typescript
+import { AccessConrtolLambdaProps } from 'cdk-comprehend-s3olap'
 
+const accessConrtolLambdaProps: AccessConrtolLambdaProps = { ... }
+```
 
+#### Properties <a name="Properties" id="Properties"></a>
 
-Name | Type | Description 
------|------|-------------
-**iamRoleName**? | <code>string</code> | The name of the IAM role.<br/>__*Default*__: 'RedactionCustSupportRole'
-**objectLambdaAccessPointName**? | <code>string</code> | The name of the object Lambda access point, which will be the same as the S3 acceess point for the S3 bucket in the demostration.<br/>__*Default*__: 'custsupport-s3olap-call-transcripts-known-pii'
-**policyName**? | <code>string</code> | The name of the IAM policy for the IAM role.<br/>__*Default*__: 'customersupport-role-s3olap-policy'
+| **Name** | **Type** | **Description** |
+| --- | --- | --- |
+| <code><a href="#cdk-comprehend-s3olap.AccessConrtolLambdaProps.property.confidenceThreshold">confidenceThreshold</a></code> | <code>string</code> | The minimum prediction confidence score above which PII classification and detection would be considered as final answer. |
+| <code><a href="#cdk-comprehend-s3olap.AccessConrtolLambdaProps.property.containsPiiEntitiesThreadCount">containsPiiEntitiesThreadCount</a></code> | <code>string</code> | Number of threads to use for calling Comprehend's ContainsPiiEntities API. |
+| <code><a href="#cdk-comprehend-s3olap.AccessConrtolLambdaProps.property.defaultLanguageCode">defaultLanguageCode</a></code> | <code>string</code> | Default language of the text to be processed. |
+| <code><a href="#cdk-comprehend-s3olap.AccessConrtolLambdaProps.property.documentMaxSize">documentMaxSize</a></code> | <code>string</code> | Default maximum document size (in bytes) that this function can process otherwise will throw exception for too large document size. |
+| <code><a href="#cdk-comprehend-s3olap.AccessConrtolLambdaProps.property.documentMaxSizeContainsPiiEntities">documentMaxSizeContainsPiiEntities</a></code> | <code>string</code> | Maximum document size (in bytes) to be used for making calls to Comprehend's ContainsPiiEntities API. |
+| <code><a href="#cdk-comprehend-s3olap.AccessConrtolLambdaProps.property.isPartialObjectSupported">isPartialObjectSupported</a></code> | <code>string</code> | Whether to support partial objects or not. |
+| <code><a href="#cdk-comprehend-s3olap.AccessConrtolLambdaProps.property.logLevel">logLevel</a></code> | <code>string</code> | Log level for Lambda function logging, e.g., ERROR, INFO, DEBUG, etc. |
+| <code><a href="#cdk-comprehend-s3olap.AccessConrtolLambdaProps.property.maxCharsOverlap">maxCharsOverlap</a></code> | <code>string</code> | Maximum characters to overlap among segments of a document in case chunking is needed because of maximum document size limit. |
+| <code><a href="#cdk-comprehend-s3olap.AccessConrtolLambdaProps.property.piiEntityTypes">piiEntityTypes</a></code> | <code>string</code> | List of comma separated PII entity types to be considered for access control. |
+| <code><a href="#cdk-comprehend-s3olap.AccessConrtolLambdaProps.property.publishCloudWatchMetrics">publishCloudWatchMetrics</a></code> | <code>string</code> | True if publish metrics to Cloudwatch, false otherwise. |
+| <code><a href="#cdk-comprehend-s3olap.AccessConrtolLambdaProps.property.semanticVersion">semanticVersion</a></code> | <code>string</code> | The version of the serverless application. |
+| <code><a href="#cdk-comprehend-s3olap.AccessConrtolLambdaProps.property.subsegmentOverlappingTokens">subsegmentOverlappingTokens</a></code> | <code>string</code> | Number of tokens/words to overlap among segments of a document in case chunking is needed because of maximum document size limit. |
+| <code><a href="#cdk-comprehend-s3olap.AccessConrtolLambdaProps.property.unsupportedFileHandling">unsupportedFileHandling</a></code> | <code>string</code> | Handling logic for Unsupported files. |
 
+---
 
+##### `confidenceThreshold`<sup>Optional</sup> <a name="confidenceThreshold" id="cdk-comprehend-s3olap.AccessConrtolLambdaProps.property.confidenceThreshold"></a>
 
-## struct GeneralRoleProps  <a id="cdk-comprehend-s3olap-generalroleprops"></a>
+```typescript
+public readonly confidenceThreshold: string;
+```
 
+- *Type:* string
+- *Default:* '0.5'
 
+The minimum prediction confidence score above which PII classification and detection would be considered as final answer.
 
+Valid range (0.5 to 1.0).
 
+---
 
+##### `containsPiiEntitiesThreadCount`<sup>Optional</sup> <a name="containsPiiEntitiesThreadCount" id="cdk-comprehend-s3olap.AccessConrtolLambdaProps.property.containsPiiEntitiesThreadCount"></a>
 
-Name | Type | Description 
------|------|-------------
-**iamRoleName**? | <code>string</code> | The name of the IAM role.<br/>__*Default*__: 'GeneralRole'
-**objectLambdaAccessPointName**? | <code>string</code> | The name of the object Lambda access point, which will be the same as the S3 acceess point for the S3 bucket in the demostration.<br/>__*Default*__: 'accessctl-s3olap-survey-results-unknown-pii'
-**policyName**? | <code>string</code> | The name of the IAM policy for the IAM role.<br/>__*Default*__: 'general-role-s3olap-policy'
+```typescript
+public readonly containsPiiEntitiesThreadCount: string;
+```
 
+- *Type:* string
+- *Default:* '20'
 
+Number of threads to use for calling Comprehend's ContainsPiiEntities API.
 
-## struct LambdaArnCaptorResourceProps  <a id="cdk-comprehend-s3olap-lambdaarncaptorresourceprops"></a>
+This controls the number of simultaneous calls that will be made from this Lambda.
 
+---
 
+##### `defaultLanguageCode`<sup>Optional</sup> <a name="defaultLanguageCode" id="cdk-comprehend-s3olap.AccessConrtolLambdaProps.property.defaultLanguageCode"></a>
 
+```typescript
+public readonly defaultLanguageCode: string;
+```
 
+- *Type:* string
+- *Default:* 'en'
 
+Default language of the text to be processed.
 
-Name | Type | Description 
------|------|-------------
-**partialLambdaName** | <code>string</code> | The partial fixed name of the gemeral Lambda function created from the serverless application.
-**roleName** | <code>string</code> | the name of the corresponding IAM role.
+This code will be used for interacting with Comprehend.
 
+---
 
+##### `documentMaxSize`<sup>Optional</sup> <a name="documentMaxSize" id="cdk-comprehend-s3olap.AccessConrtolLambdaProps.property.documentMaxSize"></a>
 
-## struct RedactionLambdaProps  <a id="cdk-comprehend-s3olap-redactionlambdaprops"></a>
+```typescript
+public readonly documentMaxSize: string;
+```
 
+- *Type:* string
+- *Default:* '102400'
 
+Default maximum document size (in bytes) that this function can process otherwise will throw exception for too large document size.
 
+---
 
+##### `documentMaxSizeContainsPiiEntities`<sup>Optional</sup> <a name="documentMaxSizeContainsPiiEntities" id="cdk-comprehend-s3olap.AccessConrtolLambdaProps.property.documentMaxSizeContainsPiiEntities"></a>
 
+```typescript
+public readonly documentMaxSizeContainsPiiEntities: string;
+```
 
-Name | Type | Description 
------|------|-------------
-**confidenceThreshold**? | <code>string</code> | The minimum prediction confidence score above which PII classification and detection would be considered as final answer.<br/>__*Default*__: '0.5'
-**containsPiiEntitiesThreadCount**? | <code>string</code> | Number of threads to use for calling Comprehend's ContainsPiiEntities API.<br/>__*Default*__: '20'
-**defaultLanguageCode**? | <code>string</code> | Default language of the text to be processed.<br/>__*Default*__: 'en'
-**detectPiiEntitiesThreadCount**? | <code>string</code> | Number of threads to use for calling Comprehend's DetectPiiEntities API.<br/>__*Default*__: '8'
-**documentMaxSize**? | <code>string</code> | Default maximum document size (in bytes) that this function can process otherwise will throw exception for too large document size.<br/>__*Default*__: '102400'
-**documentMaxSizeContainsPiiEntities**? | <code>string</code> | Maximum document size (in bytes) to be used for making calls to Comprehend's ContainsPiiEntities API.<br/>__*Default*__: '50000'
-**documentMaxSizeDetectPiiEntities**? | <code>string</code> | Maximum document size (in bytes) to be used for making calls to Comprehend's DetectPiiEntities API.<br/>__*Default*__: '5000'
-**isPartialObjectSupported**? | <code>string</code> | Whether to support partial objects or not.<br/>__*Default*__: 'false'
-**logLevel**? | <code>string</code> | Log level for Lambda function logging, e.g., ERROR, INFO, DEBUG, etc.<br/>__*Default*__: 'INFO'
-**maskCharacter**? | <code>string</code> | A character that replaces each character in the redacted PII entity.<br/>__*Default*__: '*'
-**maskMode**? | <code>string</code> | Specifies whether the PII entity is redacted with the mask character or the entity type.<br/>__*Optional*__
-**maxCharsOverlap**? | <code>string</code> | Maximum characters to overlap among segments of a document in case chunking is needed because of maximum document size limit.<br/>__*Default*__: '200'
-**piiEntityTypes**? | <code>string</code> | List of comma separated PII entity types to be considered for redaction.<br/>__*Default*__: 'ALL'
-**publishCloudWatchMetrics**? | <code>string</code> | True if publish metrics to Cloudwatch, false otherwise.<br/>__*Default*__: 'true'
-**semanticVersion**? | <code>string</code> | The version of the serverless application.<br/>__*Default*__: '1.0.2'
-**subsegmentOverlappingTokens**? | <code>string</code> | Number of tokens/words to overlap among segments of a document in case chunking is needed because of maximum document size limit.<br/>__*Default*__: '20'
-**unsupportedFileHandling**? | <code>string</code> | Handling logic for Unsupported files.<br/>__*Default*__: 'FAIL'
+- *Type:* string
+- *Default:* '50000'
 
+Maximum document size (in bytes) to be used for making calls to Comprehend's ContainsPiiEntities API.
 
+---
 
-## struct S3AccessPointNames  <a id="cdk-comprehend-s3olap-s3accesspointnames"></a>
+##### `isPartialObjectSupported`<sup>Optional</sup> <a name="isPartialObjectSupported" id="cdk-comprehend-s3olap.AccessConrtolLambdaProps.property.isPartialObjectSupported"></a>
 
+```typescript
+public readonly isPartialObjectSupported: string;
+```
 
+- *Type:* string
+- *Default:* 'false'
 
+Whether to support partial objects or not.
 
+Accessing partial object through http headers such byte-range can corrupt the object and/or affect PII detection accuracy.
 
+---
 
-Name | Type | Description 
------|------|-------------
-**admin** | <code>string</code> | The name of the S3 aceess point for the admin role in the redaction case.
-**billing** | <code>string</code> | The name of the S3 aceess point for the billing role in the redaction case.
-**customerSupport** | <code>string</code> | The name of the S3 aceess point for the customer support role in the redaction case.
-**general** | <code>string</code> | The name of the S3 aceess point for the general role in the access control case.
+##### `logLevel`<sup>Optional</sup> <a name="logLevel" id="cdk-comprehend-s3olap.AccessConrtolLambdaProps.property.logLevel"></a>
 
+```typescript
+public readonly logLevel: string;
+```
 
+- *Type:* string
+- *Default:* 'INFO'
 
-## enum IamRoleName  <a id="cdk-comprehend-s3olap-iamrolename"></a>
+Log level for Lambda function logging, e.g., ERROR, INFO, DEBUG, etc.
 
+---
 
+##### `maxCharsOverlap`<sup>Optional</sup> <a name="maxCharsOverlap" id="cdk-comprehend-s3olap.AccessConrtolLambdaProps.property.maxCharsOverlap"></a>
 
-Name | Description
------|-----
-**GENERAL** |
-**ADMIN** |
-**BILLING** |
-**CUST_SUPPORT** |
+```typescript
+public readonly maxCharsOverlap: string;
+```
 
+- *Type:* string
+- *Default:* '200'
+
+Maximum characters to overlap among segments of a document in case chunking is needed because of maximum document size limit.
+
+---
+
+##### `piiEntityTypes`<sup>Optional</sup> <a name="piiEntityTypes" id="cdk-comprehend-s3olap.AccessConrtolLambdaProps.property.piiEntityTypes"></a>
+
+```typescript
+public readonly piiEntityTypes: string;
+```
+
+- *Type:* string
+- *Default:* 'ALL'
+
+List of comma separated PII entity types to be considered for access control.
+
+Refer Comprehend's documentation page for list of supported PII entity types.
+
+---
+
+##### `publishCloudWatchMetrics`<sup>Optional</sup> <a name="publishCloudWatchMetrics" id="cdk-comprehend-s3olap.AccessConrtolLambdaProps.property.publishCloudWatchMetrics"></a>
+
+```typescript
+public readonly publishCloudWatchMetrics: string;
+```
+
+- *Type:* string
+- *Default:* 'true'
+
+True if publish metrics to Cloudwatch, false otherwise.
+
+See README.md for details on CloudWatch metrics.
+
+---
+
+##### `semanticVersion`<sup>Optional</sup> <a name="semanticVersion" id="cdk-comprehend-s3olap.AccessConrtolLambdaProps.property.semanticVersion"></a>
+
+```typescript
+public readonly semanticVersion: string;
+```
+
+- *Type:* string
+- *Default:* '1.0.2'
+
+The version of the serverless application.
+
+---
+
+##### `subsegmentOverlappingTokens`<sup>Optional</sup> <a name="subsegmentOverlappingTokens" id="cdk-comprehend-s3olap.AccessConrtolLambdaProps.property.subsegmentOverlappingTokens"></a>
+
+```typescript
+public readonly subsegmentOverlappingTokens: string;
+```
+
+- *Type:* string
+- *Default:* '20'
+
+Number of tokens/words to overlap among segments of a document in case chunking is needed because of maximum document size limit.
+
+---
+
+##### `unsupportedFileHandling`<sup>Optional</sup> <a name="unsupportedFileHandling" id="cdk-comprehend-s3olap.AccessConrtolLambdaProps.property.unsupportedFileHandling"></a>
+
+```typescript
+public readonly unsupportedFileHandling: string;
+```
+
+- *Type:* string
+- *Default:* 'FAIL'
+
+Handling logic for Unsupported files.
+
+Valid values are PASS and FAIL.
+
+---
+
+### AdminRoleProps <a name="AdminRoleProps" id="cdk-comprehend-s3olap.AdminRoleProps"></a>
+
+#### Initializer <a name="Initializer" id="cdk-comprehend-s3olap.AdminRoleProps.Initializer"></a>
+
+```typescript
+import { AdminRoleProps } from 'cdk-comprehend-s3olap'
+
+const adminRoleProps: AdminRoleProps = { ... }
+```
+
+#### Properties <a name="Properties" id="Properties"></a>
+
+| **Name** | **Type** | **Description** |
+| --- | --- | --- |
+| <code><a href="#cdk-comprehend-s3olap.AdminRoleProps.property.iamRoleName">iamRoleName</a></code> | <code>string</code> | The name of the IAM role. |
+| <code><a href="#cdk-comprehend-s3olap.AdminRoleProps.property.objectLambdaAccessPointName">objectLambdaAccessPointName</a></code> | <code>string</code> | The name of the object Lambda access point, which will be the same as the S3 acceess point for the S3 bucket in the demostration. |
+| <code><a href="#cdk-comprehend-s3olap.AdminRoleProps.property.policyName">policyName</a></code> | <code>string</code> | The name of the IAM policy for the IAM role. |
+
+---
+
+##### `iamRoleName`<sup>Optional</sup> <a name="iamRoleName" id="cdk-comprehend-s3olap.AdminRoleProps.property.iamRoleName"></a>
+
+```typescript
+public readonly iamRoleName: string;
+```
+
+- *Type:* string
+- *Default:* 'RedactionAdminRole'
+
+The name of the IAM role.
+
+---
+
+##### `objectLambdaAccessPointName`<sup>Optional</sup> <a name="objectLambdaAccessPointName" id="cdk-comprehend-s3olap.AdminRoleProps.property.objectLambdaAccessPointName"></a>
+
+```typescript
+public readonly objectLambdaAccessPointName: string;
+```
+
+- *Type:* string
+- *Default:* 'admin-s3olap-call-transcripts-known-pii'
+
+The name of the object Lambda access point, which will be the same as the S3 acceess point for the S3 bucket in the demostration.
+
+---
+
+##### `policyName`<sup>Optional</sup> <a name="policyName" id="cdk-comprehend-s3olap.AdminRoleProps.property.policyName"></a>
+
+```typescript
+public readonly policyName: string;
+```
+
+- *Type:* string
+- *Default:* 'admin-role-s3olap-policy'
+
+The name of the IAM policy for the IAM role.
+
+---
+
+### BillingRoleProps <a name="BillingRoleProps" id="cdk-comprehend-s3olap.BillingRoleProps"></a>
+
+#### Initializer <a name="Initializer" id="cdk-comprehend-s3olap.BillingRoleProps.Initializer"></a>
+
+```typescript
+import { BillingRoleProps } from 'cdk-comprehend-s3olap'
+
+const billingRoleProps: BillingRoleProps = { ... }
+```
+
+#### Properties <a name="Properties" id="Properties"></a>
+
+| **Name** | **Type** | **Description** |
+| --- | --- | --- |
+| <code><a href="#cdk-comprehend-s3olap.BillingRoleProps.property.iamRoleName">iamRoleName</a></code> | <code>string</code> | The name of the IAM role. |
+| <code><a href="#cdk-comprehend-s3olap.BillingRoleProps.property.objectLambdaAccessPointName">objectLambdaAccessPointName</a></code> | <code>string</code> | The name of the object Lambda access point, which will be the same as the S3 acceess point for the S3 bucket in the demostration. |
+| <code><a href="#cdk-comprehend-s3olap.BillingRoleProps.property.policyName">policyName</a></code> | <code>string</code> | The name of the IAM policy for the IAM role. |
+
+---
+
+##### `iamRoleName`<sup>Optional</sup> <a name="iamRoleName" id="cdk-comprehend-s3olap.BillingRoleProps.property.iamRoleName"></a>
+
+```typescript
+public readonly iamRoleName: string;
+```
+
+- *Type:* string
+- *Default:* 'RedactionBillingRole'
+
+The name of the IAM role.
+
+---
+
+##### `objectLambdaAccessPointName`<sup>Optional</sup> <a name="objectLambdaAccessPointName" id="cdk-comprehend-s3olap.BillingRoleProps.property.objectLambdaAccessPointName"></a>
+
+```typescript
+public readonly objectLambdaAccessPointName: string;
+```
+
+- *Type:* string
+- *Default:* 'billing-s3olap-call-transcripts-known-pii'
+
+The name of the object Lambda access point, which will be the same as the S3 acceess point for the S3 bucket in the demostration.
+
+---
+
+##### `policyName`<sup>Optional</sup> <a name="policyName" id="cdk-comprehend-s3olap.BillingRoleProps.property.policyName"></a>
+
+```typescript
+public readonly policyName: string;
+```
+
+- *Type:* string
+- *Default:* 'billing-role-s3olap-policy'
+
+The name of the IAM policy for the IAM role.
+
+---
+
+### ComprehendS3olabProps <a name="ComprehendS3olabProps" id="cdk-comprehend-s3olap.ComprehendS3olabProps"></a>
+
+#### Initializer <a name="Initializer" id="cdk-comprehend-s3olap.ComprehendS3olabProps.Initializer"></a>
+
+```typescript
+import { ComprehendS3olabProps } from 'cdk-comprehend-s3olap'
+
+const comprehendS3olabProps: ComprehendS3olabProps = { ... }
+```
+
+#### Properties <a name="Properties" id="Properties"></a>
+
+| **Name** | **Type** | **Description** |
+| --- | --- | --- |
+| <code><a href="#cdk-comprehend-s3olap.ComprehendS3olabProps.property.accessControlLambdaConfig">accessControlLambdaConfig</a></code> | <code><a href="#cdk-comprehend-s3olap.AccessConrtolLambdaProps">AccessConrtolLambdaProps</a></code> | The parameters needed for the `ComprehendPiiAccessControlS3ObjectLambda` function. |
+| <code><a href="#cdk-comprehend-s3olap.ComprehendS3olabProps.property.adminRedactionLambdaConfig">adminRedactionLambdaConfig</a></code> | <code><a href="#cdk-comprehend-s3olap.RedactionLambdaProps">RedactionLambdaProps</a></code> | The parameters of the `ComprehendPiiRedactionS3ObjectLambda` function for the `AdminRole`. |
+| <code><a href="#cdk-comprehend-s3olap.ComprehendS3olabProps.property.adminRoleConfig">adminRoleConfig</a></code> | <code><a href="#cdk-comprehend-s3olap.AdminRoleProps">AdminRoleProps</a></code> | The manageable properties for the administrator IAM role in the redaction case. |
+| <code><a href="#cdk-comprehend-s3olap.ComprehendS3olabProps.property.billingRedactionLambdaConfig">billingRedactionLambdaConfig</a></code> | <code><a href="#cdk-comprehend-s3olap.RedactionLambdaProps">RedactionLambdaProps</a></code> | The parameters of the `ComprehendPiiRedactionS3ObjectLambda` function for the `BillingRole`. |
+| <code><a href="#cdk-comprehend-s3olap.ComprehendS3olabProps.property.billingRoleConfig">billingRoleConfig</a></code> | <code><a href="#cdk-comprehend-s3olap.BillingRoleProps">BillingRoleProps</a></code> | The manageable properties for the billing IAM role in the redaction case. |
+| <code><a href="#cdk-comprehend-s3olap.ComprehendS3olabProps.property.cusrtSupportRedactionLambdaConfig">cusrtSupportRedactionLambdaConfig</a></code> | <code><a href="#cdk-comprehend-s3olap.RedactionLambdaProps">RedactionLambdaProps</a></code> | The parameters of the `ComprehendPiiRedactionS3ObjectLambda` function for the `CustSupportRole`. |
+| <code><a href="#cdk-comprehend-s3olap.ComprehendS3olabProps.property.custSupportRoleConfig">custSupportRoleConfig</a></code> | <code><a href="#cdk-comprehend-s3olap.CustSupportRoleProps">CustSupportRoleProps</a></code> | The manageable properties for the customer support IAM role in the redaction case. |
+| <code><a href="#cdk-comprehend-s3olap.ComprehendS3olabProps.property.exampleFileDir">exampleFileDir</a></code> | <code>string</code> | The directory path where `files/access_control/*.txt` and `files/redaction/*.txt` will be put. |
+| <code><a href="#cdk-comprehend-s3olap.ComprehendS3olabProps.property.generalRoleConfig">generalRoleConfig</a></code> | <code><a href="#cdk-comprehend-s3olap.GeneralRoleProps">GeneralRoleProps</a></code> | The manageable properties for the IAM role used to access the `survey-results.txt` data. |
+| <code><a href="#cdk-comprehend-s3olap.ComprehendS3olabProps.property.generateRandomCharacters">generateRandomCharacters</a></code> | <code>boolean</code> | For distinguish test and normal deployment. |
+| <code><a href="#cdk-comprehend-s3olap.ComprehendS3olabProps.property.s3AccessPointNames">s3AccessPointNames</a></code> | <code><a href="#cdk-comprehend-s3olap.S3AccessPointNames">S3AccessPointNames</a></code> | The names of the S3 access points for the access control case and redaction case. |
+| <code><a href="#cdk-comprehend-s3olap.ComprehendS3olabProps.property.surveyBucketPrefix">surveyBucketPrefix</a></code> | <code>string</code> | The prefix attached to the name of the S3 bucket where you are going to explore the S3 Object Lambda pertaining to the access control case. |
+| <code><a href="#cdk-comprehend-s3olap.ComprehendS3olabProps.property.transcriptsBucketPrefix">transcriptsBucketPrefix</a></code> | <code>string</code> | The prefix attached to the name of the S3 bucket where you are going to explore the S3 Object Lambda pertaining to the redaction case. |
+
+---
+
+##### `accessControlLambdaConfig`<sup>Optional</sup> <a name="accessControlLambdaConfig" id="cdk-comprehend-s3olap.ComprehendS3olabProps.property.accessControlLambdaConfig"></a>
+
+```typescript
+public readonly accessControlLambdaConfig: AccessConrtolLambdaProps;
+```
+
+- *Type:* <a href="#cdk-comprehend-s3olap.AccessConrtolLambdaProps">AccessConrtolLambdaProps</a>
+
+The parameters needed for the `ComprehendPiiAccessControlS3ObjectLambda` function.
+
+---
+
+##### `adminRedactionLambdaConfig`<sup>Optional</sup> <a name="adminRedactionLambdaConfig" id="cdk-comprehend-s3olap.ComprehendS3olabProps.property.adminRedactionLambdaConfig"></a>
+
+```typescript
+public readonly adminRedactionLambdaConfig: RedactionLambdaProps;
+```
+
+- *Type:* <a href="#cdk-comprehend-s3olap.RedactionLambdaProps">RedactionLambdaProps</a>
+
+The parameters of the `ComprehendPiiRedactionS3ObjectLambda` function for the `AdminRole`.
+
+---
+
+##### `adminRoleConfig`<sup>Optional</sup> <a name="adminRoleConfig" id="cdk-comprehend-s3olap.ComprehendS3olabProps.property.adminRoleConfig"></a>
+
+```typescript
+public readonly adminRoleConfig: AdminRoleProps;
+```
+
+- *Type:* <a href="#cdk-comprehend-s3olap.AdminRoleProps">AdminRoleProps</a>
+
+The manageable properties for the administrator IAM role in the redaction case.
+
+---
+
+##### `billingRedactionLambdaConfig`<sup>Optional</sup> <a name="billingRedactionLambdaConfig" id="cdk-comprehend-s3olap.ComprehendS3olabProps.property.billingRedactionLambdaConfig"></a>
+
+```typescript
+public readonly billingRedactionLambdaConfig: RedactionLambdaProps;
+```
+
+- *Type:* <a href="#cdk-comprehend-s3olap.RedactionLambdaProps">RedactionLambdaProps</a>
+
+The parameters of the `ComprehendPiiRedactionS3ObjectLambda` function for the `BillingRole`.
+
+---
+
+##### `billingRoleConfig`<sup>Optional</sup> <a name="billingRoleConfig" id="cdk-comprehend-s3olap.ComprehendS3olabProps.property.billingRoleConfig"></a>
+
+```typescript
+public readonly billingRoleConfig: BillingRoleProps;
+```
+
+- *Type:* <a href="#cdk-comprehend-s3olap.BillingRoleProps">BillingRoleProps</a>
+
+The manageable properties for the billing IAM role in the redaction case.
+
+---
+
+##### `cusrtSupportRedactionLambdaConfig`<sup>Optional</sup> <a name="cusrtSupportRedactionLambdaConfig" id="cdk-comprehend-s3olap.ComprehendS3olabProps.property.cusrtSupportRedactionLambdaConfig"></a>
+
+```typescript
+public readonly cusrtSupportRedactionLambdaConfig: RedactionLambdaProps;
+```
+
+- *Type:* <a href="#cdk-comprehend-s3olap.RedactionLambdaProps">RedactionLambdaProps</a>
+
+The parameters of the `ComprehendPiiRedactionS3ObjectLambda` function for the `CustSupportRole`.
+
+---
+
+##### `custSupportRoleConfig`<sup>Optional</sup> <a name="custSupportRoleConfig" id="cdk-comprehend-s3olap.ComprehendS3olabProps.property.custSupportRoleConfig"></a>
+
+```typescript
+public readonly custSupportRoleConfig: CustSupportRoleProps;
+```
+
+- *Type:* <a href="#cdk-comprehend-s3olap.CustSupportRoleProps">CustSupportRoleProps</a>
+
+The manageable properties for the customer support IAM role in the redaction case.
+
+---
+
+##### `exampleFileDir`<sup>Optional</sup> <a name="exampleFileDir" id="cdk-comprehend-s3olap.ComprehendS3olabProps.property.exampleFileDir"></a>
+
+```typescript
+public readonly exampleFileDir: string;
+```
+
+- *Type:* string
+- *Default:* __dirname
+
+The directory path where `files/access_control/*.txt` and `files/redaction/*.txt` will be put.
+
+DO NOT INCLUDE `/` in the end.
+
+---
+
+##### `generalRoleConfig`<sup>Optional</sup> <a name="generalRoleConfig" id="cdk-comprehend-s3olap.ComprehendS3olabProps.property.generalRoleConfig"></a>
+
+```typescript
+public readonly generalRoleConfig: GeneralRoleProps;
+```
+
+- *Type:* <a href="#cdk-comprehend-s3olap.GeneralRoleProps">GeneralRoleProps</a>
+
+The manageable properties for the IAM role used to access the `survey-results.txt` data.
+
+---
+
+##### `generateRandomCharacters`<sup>Optional</sup> <a name="generateRandomCharacters" id="cdk-comprehend-s3olap.ComprehendS3olabProps.property.generateRandomCharacters"></a>
+
+```typescript
+public readonly generateRandomCharacters: boolean;
+```
+
+- *Type:* boolean
+- *Default:* true
+
+For distinguish test and normal deployment.
+
+---
+
+##### `s3AccessPointNames`<sup>Optional</sup> <a name="s3AccessPointNames" id="cdk-comprehend-s3olap.ComprehendS3olabProps.property.s3AccessPointNames"></a>
+
+```typescript
+public readonly s3AccessPointNames: S3AccessPointNames;
+```
+
+- *Type:* <a href="#cdk-comprehend-s3olap.S3AccessPointNames">S3AccessPointNames</a>
+
+The names of the S3 access points for the access control case and redaction case.
+
+---
+
+##### `surveyBucketPrefix`<sup>Optional</sup> <a name="surveyBucketPrefix" id="cdk-comprehend-s3olap.ComprehendS3olabProps.property.surveyBucketPrefix"></a>
+
+```typescript
+public readonly surveyBucketPrefix: string;
+```
+
+- *Type:* string
+- *Default:* 6 random words
+
+The prefix attached to the name of the S3 bucket where you are going to explore the S3 Object Lambda pertaining to the access control case.
+
+---
+
+##### `transcriptsBucketPrefix`<sup>Optional</sup> <a name="transcriptsBucketPrefix" id="cdk-comprehend-s3olap.ComprehendS3olabProps.property.transcriptsBucketPrefix"></a>
+
+```typescript
+public readonly transcriptsBucketPrefix: string;
+```
+
+- *Type:* string
+- *Default:* 6 random words
+
+The prefix attached to the name of the S3 bucket where you are going to explore the S3 Object Lambda pertaining to the redaction case.
+
+---
+
+### CustSupportRoleProps <a name="CustSupportRoleProps" id="cdk-comprehend-s3olap.CustSupportRoleProps"></a>
+
+#### Initializer <a name="Initializer" id="cdk-comprehend-s3olap.CustSupportRoleProps.Initializer"></a>
+
+```typescript
+import { CustSupportRoleProps } from 'cdk-comprehend-s3olap'
+
+const custSupportRoleProps: CustSupportRoleProps = { ... }
+```
+
+#### Properties <a name="Properties" id="Properties"></a>
+
+| **Name** | **Type** | **Description** |
+| --- | --- | --- |
+| <code><a href="#cdk-comprehend-s3olap.CustSupportRoleProps.property.iamRoleName">iamRoleName</a></code> | <code>string</code> | The name of the IAM role. |
+| <code><a href="#cdk-comprehend-s3olap.CustSupportRoleProps.property.objectLambdaAccessPointName">objectLambdaAccessPointName</a></code> | <code>string</code> | The name of the object Lambda access point, which will be the same as the S3 acceess point for the S3 bucket in the demostration. |
+| <code><a href="#cdk-comprehend-s3olap.CustSupportRoleProps.property.policyName">policyName</a></code> | <code>string</code> | The name of the IAM policy for the IAM role. |
+
+---
+
+##### `iamRoleName`<sup>Optional</sup> <a name="iamRoleName" id="cdk-comprehend-s3olap.CustSupportRoleProps.property.iamRoleName"></a>
+
+```typescript
+public readonly iamRoleName: string;
+```
+
+- *Type:* string
+- *Default:* 'RedactionCustSupportRole'
+
+The name of the IAM role.
+
+---
+
+##### `objectLambdaAccessPointName`<sup>Optional</sup> <a name="objectLambdaAccessPointName" id="cdk-comprehend-s3olap.CustSupportRoleProps.property.objectLambdaAccessPointName"></a>
+
+```typescript
+public readonly objectLambdaAccessPointName: string;
+```
+
+- *Type:* string
+- *Default:* 'custsupport-s3olap-call-transcripts-known-pii'
+
+The name of the object Lambda access point, which will be the same as the S3 acceess point for the S3 bucket in the demostration.
+
+---
+
+##### `policyName`<sup>Optional</sup> <a name="policyName" id="cdk-comprehend-s3olap.CustSupportRoleProps.property.policyName"></a>
+
+```typescript
+public readonly policyName: string;
+```
+
+- *Type:* string
+- *Default:* 'customersupport-role-s3olap-policy'
+
+The name of the IAM policy for the IAM role.
+
+---
+
+### GeneralRoleProps <a name="GeneralRoleProps" id="cdk-comprehend-s3olap.GeneralRoleProps"></a>
+
+#### Initializer <a name="Initializer" id="cdk-comprehend-s3olap.GeneralRoleProps.Initializer"></a>
+
+```typescript
+import { GeneralRoleProps } from 'cdk-comprehend-s3olap'
+
+const generalRoleProps: GeneralRoleProps = { ... }
+```
+
+#### Properties <a name="Properties" id="Properties"></a>
+
+| **Name** | **Type** | **Description** |
+| --- | --- | --- |
+| <code><a href="#cdk-comprehend-s3olap.GeneralRoleProps.property.iamRoleName">iamRoleName</a></code> | <code>string</code> | The name of the IAM role. |
+| <code><a href="#cdk-comprehend-s3olap.GeneralRoleProps.property.objectLambdaAccessPointName">objectLambdaAccessPointName</a></code> | <code>string</code> | The name of the object Lambda access point, which will be the same as the S3 acceess point for the S3 bucket in the demostration. |
+| <code><a href="#cdk-comprehend-s3olap.GeneralRoleProps.property.policyName">policyName</a></code> | <code>string</code> | The name of the IAM policy for the IAM role. |
+
+---
+
+##### `iamRoleName`<sup>Optional</sup> <a name="iamRoleName" id="cdk-comprehend-s3olap.GeneralRoleProps.property.iamRoleName"></a>
+
+```typescript
+public readonly iamRoleName: string;
+```
+
+- *Type:* string
+- *Default:* 'GeneralRole'
+
+The name of the IAM role.
+
+---
+
+##### `objectLambdaAccessPointName`<sup>Optional</sup> <a name="objectLambdaAccessPointName" id="cdk-comprehend-s3olap.GeneralRoleProps.property.objectLambdaAccessPointName"></a>
+
+```typescript
+public readonly objectLambdaAccessPointName: string;
+```
+
+- *Type:* string
+- *Default:* 'accessctl-s3olap-survey-results-unknown-pii'
+
+The name of the object Lambda access point, which will be the same as the S3 acceess point for the S3 bucket in the demostration.
+
+---
+
+##### `policyName`<sup>Optional</sup> <a name="policyName" id="cdk-comprehend-s3olap.GeneralRoleProps.property.policyName"></a>
+
+```typescript
+public readonly policyName: string;
+```
+
+- *Type:* string
+- *Default:* 'general-role-s3olap-policy'
+
+The name of the IAM policy for the IAM role.
+
+---
+
+### LambdaArnCaptorResourceProps <a name="LambdaArnCaptorResourceProps" id="cdk-comprehend-s3olap.LambdaArnCaptorResourceProps"></a>
+
+#### Initializer <a name="Initializer" id="cdk-comprehend-s3olap.LambdaArnCaptorResourceProps.Initializer"></a>
+
+```typescript
+import { LambdaArnCaptorResourceProps } from 'cdk-comprehend-s3olap'
+
+const lambdaArnCaptorResourceProps: LambdaArnCaptorResourceProps = { ... }
+```
+
+#### Properties <a name="Properties" id="Properties"></a>
+
+| **Name** | **Type** | **Description** |
+| --- | --- | --- |
+| <code><a href="#cdk-comprehend-s3olap.LambdaArnCaptorResourceProps.property.partialLambdaName">partialLambdaName</a></code> | <code>string</code> | The partial fixed name of the gemeral Lambda function created from the serverless application. |
+| <code><a href="#cdk-comprehend-s3olap.LambdaArnCaptorResourceProps.property.roleName">roleName</a></code> | <code>string</code> | the name of the corresponding IAM role. |
+
+---
+
+##### `partialLambdaName`<sup>Required</sup> <a name="partialLambdaName" id="cdk-comprehend-s3olap.LambdaArnCaptorResourceProps.property.partialLambdaName"></a>
+
+```typescript
+public readonly partialLambdaName: string;
+```
+
+- *Type:* string
+
+The partial fixed name of the gemeral Lambda function created from the serverless application.
+
+---
+
+##### `roleName`<sup>Required</sup> <a name="roleName" id="cdk-comprehend-s3olap.LambdaArnCaptorResourceProps.property.roleName"></a>
+
+```typescript
+public readonly roleName: string;
+```
+
+- *Type:* string
+
+the name of the corresponding IAM role.
+
+---
+
+### RedactionLambdaProps <a name="RedactionLambdaProps" id="cdk-comprehend-s3olap.RedactionLambdaProps"></a>
+
+#### Initializer <a name="Initializer" id="cdk-comprehend-s3olap.RedactionLambdaProps.Initializer"></a>
+
+```typescript
+import { RedactionLambdaProps } from 'cdk-comprehend-s3olap'
+
+const redactionLambdaProps: RedactionLambdaProps = { ... }
+```
+
+#### Properties <a name="Properties" id="Properties"></a>
+
+| **Name** | **Type** | **Description** |
+| --- | --- | --- |
+| <code><a href="#cdk-comprehend-s3olap.RedactionLambdaProps.property.confidenceThreshold">confidenceThreshold</a></code> | <code>string</code> | The minimum prediction confidence score above which PII classification and detection would be considered as final answer. |
+| <code><a href="#cdk-comprehend-s3olap.RedactionLambdaProps.property.containsPiiEntitiesThreadCount">containsPiiEntitiesThreadCount</a></code> | <code>string</code> | Number of threads to use for calling Comprehend's ContainsPiiEntities API. |
+| <code><a href="#cdk-comprehend-s3olap.RedactionLambdaProps.property.defaultLanguageCode">defaultLanguageCode</a></code> | <code>string</code> | Default language of the text to be processed. |
+| <code><a href="#cdk-comprehend-s3olap.RedactionLambdaProps.property.detectPiiEntitiesThreadCount">detectPiiEntitiesThreadCount</a></code> | <code>string</code> | Number of threads to use for calling Comprehend's DetectPiiEntities API. |
+| <code><a href="#cdk-comprehend-s3olap.RedactionLambdaProps.property.documentMaxSize">documentMaxSize</a></code> | <code>string</code> | Default maximum document size (in bytes) that this function can process otherwise will throw exception for too large document size. |
+| <code><a href="#cdk-comprehend-s3olap.RedactionLambdaProps.property.documentMaxSizeContainsPiiEntities">documentMaxSizeContainsPiiEntities</a></code> | <code>string</code> | Maximum document size (in bytes) to be used for making calls to Comprehend's ContainsPiiEntities API. |
+| <code><a href="#cdk-comprehend-s3olap.RedactionLambdaProps.property.documentMaxSizeDetectPiiEntities">documentMaxSizeDetectPiiEntities</a></code> | <code>string</code> | Maximum document size (in bytes) to be used for making calls to Comprehend's DetectPiiEntities API. |
+| <code><a href="#cdk-comprehend-s3olap.RedactionLambdaProps.property.isPartialObjectSupported">isPartialObjectSupported</a></code> | <code>string</code> | Whether to support partial objects or not. |
+| <code><a href="#cdk-comprehend-s3olap.RedactionLambdaProps.property.logLevel">logLevel</a></code> | <code>string</code> | Log level for Lambda function logging, e.g., ERROR, INFO, DEBUG, etc. |
+| <code><a href="#cdk-comprehend-s3olap.RedactionLambdaProps.property.maskCharacter">maskCharacter</a></code> | <code>string</code> | A character that replaces each character in the redacted PII entity. |
+| <code><a href="#cdk-comprehend-s3olap.RedactionLambdaProps.property.maskMode">maskMode</a></code> | <code>string</code> | Specifies whether the PII entity is redacted with the mask character or the entity type. |
+| <code><a href="#cdk-comprehend-s3olap.RedactionLambdaProps.property.maxCharsOverlap">maxCharsOverlap</a></code> | <code>string</code> | Maximum characters to overlap among segments of a document in case chunking is needed because of maximum document size limit. |
+| <code><a href="#cdk-comprehend-s3olap.RedactionLambdaProps.property.piiEntityTypes">piiEntityTypes</a></code> | <code>string</code> | List of comma separated PII entity types to be considered for redaction. |
+| <code><a href="#cdk-comprehend-s3olap.RedactionLambdaProps.property.publishCloudWatchMetrics">publishCloudWatchMetrics</a></code> | <code>string</code> | True if publish metrics to Cloudwatch, false otherwise. |
+| <code><a href="#cdk-comprehend-s3olap.RedactionLambdaProps.property.semanticVersion">semanticVersion</a></code> | <code>string</code> | The version of the serverless application. |
+| <code><a href="#cdk-comprehend-s3olap.RedactionLambdaProps.property.subsegmentOverlappingTokens">subsegmentOverlappingTokens</a></code> | <code>string</code> | Number of tokens/words to overlap among segments of a document in case chunking is needed because of maximum document size limit. |
+| <code><a href="#cdk-comprehend-s3olap.RedactionLambdaProps.property.unsupportedFileHandling">unsupportedFileHandling</a></code> | <code>string</code> | Handling logic for Unsupported files. |
+
+---
+
+##### `confidenceThreshold`<sup>Optional</sup> <a name="confidenceThreshold" id="cdk-comprehend-s3olap.RedactionLambdaProps.property.confidenceThreshold"></a>
+
+```typescript
+public readonly confidenceThreshold: string;
+```
+
+- *Type:* string
+- *Default:* '0.5'
+
+The minimum prediction confidence score above which PII classification and detection would be considered as final answer.
+
+Valid range (0.5 to 1.0).
+
+---
+
+##### `containsPiiEntitiesThreadCount`<sup>Optional</sup> <a name="containsPiiEntitiesThreadCount" id="cdk-comprehend-s3olap.RedactionLambdaProps.property.containsPiiEntitiesThreadCount"></a>
+
+```typescript
+public readonly containsPiiEntitiesThreadCount: string;
+```
+
+- *Type:* string
+- *Default:* '20'
+
+Number of threads to use for calling Comprehend's ContainsPiiEntities API.
+
+This controls the number of simultaneous calls that will be made from this Lambda.
+
+---
+
+##### `defaultLanguageCode`<sup>Optional</sup> <a name="defaultLanguageCode" id="cdk-comprehend-s3olap.RedactionLambdaProps.property.defaultLanguageCode"></a>
+
+```typescript
+public readonly defaultLanguageCode: string;
+```
+
+- *Type:* string
+- *Default:* 'en'
+
+Default language of the text to be processed.
+
+This code will be used for interacting with Comprehend.
+
+---
+
+##### `detectPiiEntitiesThreadCount`<sup>Optional</sup> <a name="detectPiiEntitiesThreadCount" id="cdk-comprehend-s3olap.RedactionLambdaProps.property.detectPiiEntitiesThreadCount"></a>
+
+```typescript
+public readonly detectPiiEntitiesThreadCount: string;
+```
+
+- *Type:* string
+- *Default:* '8'
+
+Number of threads to use for calling Comprehend's DetectPiiEntities API.
+
+This controls the number of simultaneous calls that will be made from this Lambda.
+
+---
+
+##### `documentMaxSize`<sup>Optional</sup> <a name="documentMaxSize" id="cdk-comprehend-s3olap.RedactionLambdaProps.property.documentMaxSize"></a>
+
+```typescript
+public readonly documentMaxSize: string;
+```
+
+- *Type:* string
+- *Default:* '102400'
+
+Default maximum document size (in bytes) that this function can process otherwise will throw exception for too large document size.
+
+---
+
+##### `documentMaxSizeContainsPiiEntities`<sup>Optional</sup> <a name="documentMaxSizeContainsPiiEntities" id="cdk-comprehend-s3olap.RedactionLambdaProps.property.documentMaxSizeContainsPiiEntities"></a>
+
+```typescript
+public readonly documentMaxSizeContainsPiiEntities: string;
+```
+
+- *Type:* string
+- *Default:* '50000'
+
+Maximum document size (in bytes) to be used for making calls to Comprehend's ContainsPiiEntities API.
+
+---
+
+##### `documentMaxSizeDetectPiiEntities`<sup>Optional</sup> <a name="documentMaxSizeDetectPiiEntities" id="cdk-comprehend-s3olap.RedactionLambdaProps.property.documentMaxSizeDetectPiiEntities"></a>
+
+```typescript
+public readonly documentMaxSizeDetectPiiEntities: string;
+```
+
+- *Type:* string
+- *Default:* '5000'
+
+Maximum document size (in bytes) to be used for making calls to Comprehend's DetectPiiEntities API.
+
+---
+
+##### `isPartialObjectSupported`<sup>Optional</sup> <a name="isPartialObjectSupported" id="cdk-comprehend-s3olap.RedactionLambdaProps.property.isPartialObjectSupported"></a>
+
+```typescript
+public readonly isPartialObjectSupported: string;
+```
+
+- *Type:* string
+- *Default:* 'false'
+
+Whether to support partial objects or not.
+
+Accessing partial object through http headers such byte-range can corrupt the object and/or affect PII detection accuracy.
+
+---
+
+##### `logLevel`<sup>Optional</sup> <a name="logLevel" id="cdk-comprehend-s3olap.RedactionLambdaProps.property.logLevel"></a>
+
+```typescript
+public readonly logLevel: string;
+```
+
+- *Type:* string
+- *Default:* 'INFO'
+
+Log level for Lambda function logging, e.g., ERROR, INFO, DEBUG, etc.
+
+---
+
+##### `maskCharacter`<sup>Optional</sup> <a name="maskCharacter" id="cdk-comprehend-s3olap.RedactionLambdaProps.property.maskCharacter"></a>
+
+```typescript
+public readonly maskCharacter: string;
+```
+
+- *Type:* string
+- *Default:* '*'
+
+A character that replaces each character in the redacted PII entity.
+
+---
+
+##### `maskMode`<sup>Optional</sup> <a name="maskMode" id="cdk-comprehend-s3olap.RedactionLambdaProps.property.maskMode"></a>
+
+```typescript
+public readonly maskMode: string;
+```
+
+- *Type:* string
+
+Specifies whether the PII entity is redacted with the mask character or the entity type.
+
+Valid values - REPLACE_WITH_PII_ENTITY_TYPE and MASK.
+
+---
+
+##### `maxCharsOverlap`<sup>Optional</sup> <a name="maxCharsOverlap" id="cdk-comprehend-s3olap.RedactionLambdaProps.property.maxCharsOverlap"></a>
+
+```typescript
+public readonly maxCharsOverlap: string;
+```
+
+- *Type:* string
+- *Default:* '200'
+
+Maximum characters to overlap among segments of a document in case chunking is needed because of maximum document size limit.
+
+---
+
+##### `piiEntityTypes`<sup>Optional</sup> <a name="piiEntityTypes" id="cdk-comprehend-s3olap.RedactionLambdaProps.property.piiEntityTypes"></a>
+
+```typescript
+public readonly piiEntityTypes: string;
+```
+
+- *Type:* string
+- *Default:* 'ALL'
+
+List of comma separated PII entity types to be considered for redaction.
+
+Refer Comprehend's documentation page for list of supported PII entity types.
+
+---
+
+##### `publishCloudWatchMetrics`<sup>Optional</sup> <a name="publishCloudWatchMetrics" id="cdk-comprehend-s3olap.RedactionLambdaProps.property.publishCloudWatchMetrics"></a>
+
+```typescript
+public readonly publishCloudWatchMetrics: string;
+```
+
+- *Type:* string
+- *Default:* 'true'
+
+True if publish metrics to Cloudwatch, false otherwise.
+
+See README.md for details on CloudWatch metrics.
+
+---
+
+##### `semanticVersion`<sup>Optional</sup> <a name="semanticVersion" id="cdk-comprehend-s3olap.RedactionLambdaProps.property.semanticVersion"></a>
+
+```typescript
+public readonly semanticVersion: string;
+```
+
+- *Type:* string
+- *Default:* '1.0.2'
+
+The version of the serverless application.
+
+---
+
+##### `subsegmentOverlappingTokens`<sup>Optional</sup> <a name="subsegmentOverlappingTokens" id="cdk-comprehend-s3olap.RedactionLambdaProps.property.subsegmentOverlappingTokens"></a>
+
+```typescript
+public readonly subsegmentOverlappingTokens: string;
+```
+
+- *Type:* string
+- *Default:* '20'
+
+Number of tokens/words to overlap among segments of a document in case chunking is needed because of maximum document size limit.
+
+---
+
+##### `unsupportedFileHandling`<sup>Optional</sup> <a name="unsupportedFileHandling" id="cdk-comprehend-s3olap.RedactionLambdaProps.property.unsupportedFileHandling"></a>
+
+```typescript
+public readonly unsupportedFileHandling: string;
+```
+
+- *Type:* string
+- *Default:* 'FAIL'
+
+Handling logic for Unsupported files.
+
+Valid values are PASS and FAIL.
+
+---
+
+### S3AccessPointNames <a name="S3AccessPointNames" id="cdk-comprehend-s3olap.S3AccessPointNames"></a>
+
+#### Initializer <a name="Initializer" id="cdk-comprehend-s3olap.S3AccessPointNames.Initializer"></a>
+
+```typescript
+import { S3AccessPointNames } from 'cdk-comprehend-s3olap'
+
+const s3AccessPointNames: S3AccessPointNames = { ... }
+```
+
+#### Properties <a name="Properties" id="Properties"></a>
+
+| **Name** | **Type** | **Description** |
+| --- | --- | --- |
+| <code><a href="#cdk-comprehend-s3olap.S3AccessPointNames.property.admin">admin</a></code> | <code>string</code> | The name of the S3 aceess point for the admin role in the redaction case. |
+| <code><a href="#cdk-comprehend-s3olap.S3AccessPointNames.property.billing">billing</a></code> | <code>string</code> | The name of the S3 aceess point for the billing role in the redaction case. |
+| <code><a href="#cdk-comprehend-s3olap.S3AccessPointNames.property.customerSupport">customerSupport</a></code> | <code>string</code> | The name of the S3 aceess point for the customer support role in the redaction case. |
+| <code><a href="#cdk-comprehend-s3olap.S3AccessPointNames.property.general">general</a></code> | <code>string</code> | The name of the S3 aceess point for the general role in the access control case. |
+
+---
+
+##### `admin`<sup>Required</sup> <a name="admin" id="cdk-comprehend-s3olap.S3AccessPointNames.property.admin"></a>
+
+```typescript
+public readonly admin: string;
+```
+
+- *Type:* string
+- *Default:* 'admin-s3-access-point-call-transcripts-known-pii'
+
+The name of the S3 aceess point for the admin role in the redaction case.
+
+---
+
+##### `billing`<sup>Required</sup> <a name="billing" id="cdk-comprehend-s3olap.S3AccessPointNames.property.billing"></a>
+
+```typescript
+public readonly billing: string;
+```
+
+- *Type:* string
+- *Default:* 'bill-s3-access-point-call-transcripts-known-pii'
+
+The name of the S3 aceess point for the billing role in the redaction case.
+
+---
+
+##### `customerSupport`<sup>Required</sup> <a name="customerSupport" id="cdk-comprehend-s3olap.S3AccessPointNames.property.customerSupport"></a>
+
+```typescript
+public readonly customerSupport: string;
+```
+
+- *Type:* string
+- *Default:* 'cs-s3-access-point-call-transcripts-known-pii'
+
+The name of the S3 aceess point for the customer support role in the redaction case.
+
+---
+
+##### `general`<sup>Required</sup> <a name="general" id="cdk-comprehend-s3olap.S3AccessPointNames.property.general"></a>
+
+```typescript
+public readonly general: string;
+```
+
+- *Type:* string
+- *Default:* 'accessctl-s3-ap-survey-results-unknown-pii'
+
+The name of the S3 aceess point for the general role in the access control case.
+
+---
+
+
+
+## Enums <a name="Enums" id="Enums"></a>
+
+### IamRoleName <a name="IamRoleName" id="cdk-comprehend-s3olap.IamRoleName"></a>
+
+#### Members <a name="Members" id="Members"></a>
+
+| **Name** | **Description** |
+| --- | --- |
+| <code><a href="#cdk-comprehend-s3olap.IamRoleName.GENERAL">GENERAL</a></code> | *No description.* |
+| <code><a href="#cdk-comprehend-s3olap.IamRoleName.ADMIN">ADMIN</a></code> | *No description.* |
+| <code><a href="#cdk-comprehend-s3olap.IamRoleName.BILLING">BILLING</a></code> | *No description.* |
+| <code><a href="#cdk-comprehend-s3olap.IamRoleName.CUST_SUPPORT">CUST_SUPPORT</a></code> | *No description.* |
+
+---
+
+##### `GENERAL` <a name="GENERAL" id="cdk-comprehend-s3olap.IamRoleName.GENERAL"></a>
+
+---
+
+
+##### `ADMIN` <a name="ADMIN" id="cdk-comprehend-s3olap.IamRoleName.ADMIN"></a>
+
+---
+
+
+##### `BILLING` <a name="BILLING" id="cdk-comprehend-s3olap.IamRoleName.BILLING"></a>
+
+---
+
+
+##### `CUST_SUPPORT` <a name="CUST_SUPPORT" id="cdk-comprehend-s3olap.IamRoleName.CUST_SUPPORT"></a>
+
+---
 
