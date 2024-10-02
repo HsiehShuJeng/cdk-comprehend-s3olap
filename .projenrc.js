@@ -31,10 +31,6 @@ const project = new projen.awscdk.AwsCdkConstructLibrary({
     'constructs@^10.0.5',
     'esbuild',
   ],
-  peerDeps: [
-    'aws-cdk-lib',
-    'constructs@^10.0.5',
-  ],
   bundledDeps: ['aws-sdk', 'esbuild'],
   eslint: true,
   jsiiVersion: '5.4.x',
